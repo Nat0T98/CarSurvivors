@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CarMoveController : MonoBehaviour
 {
+    [Header("Wheel References")]
     [SerializeField] WheelCollider frontRight;
     [SerializeField] WheelCollider frontLeft;
     [SerializeField] WheelCollider backLeft;
     [SerializeField] WheelCollider backRight;
+    [Space(30)]
 
-
+    [Header("Car Settings")]
     public float acceleration = 500f;
     public float brakingForce = 300f;
     public float maxTurnAngle = 15f;
