@@ -47,6 +47,9 @@ public class PauseMenu : MonoBehaviour
     public void MainMenuButton()
     { 
         AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        PauseMenuCanvas.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
         Invoke("LoadMainMenu", 1);
               
     }
