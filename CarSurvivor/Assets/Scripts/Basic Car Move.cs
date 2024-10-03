@@ -48,4 +48,13 @@ public class CarMoveController : MonoBehaviour
         frontRight.steerAngle = currTurnAngle;
 
     }
+
+
+    private void Update()
+    {
+        if(Input.GetKeyDown (KeyCode.B))
+        {
+            AudioManager.GlobalAudioManager.PlaySFX("Beep");
+        }
+    }
 }
