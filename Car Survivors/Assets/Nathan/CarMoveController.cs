@@ -29,7 +29,7 @@ public class CarMoveController : MonoBehaviour
 
         currAccelleration = acceleration * Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.Space))
             currBrakingForce = brakingForce;
         else 
             currBrakingForce = 0f;
