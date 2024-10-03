@@ -45,8 +45,16 @@ public class PauseMenu : MonoBehaviour
 
 
     public void MainMenuButton()
+    { 
+        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        Invoke("LoadMainMenu", 1);
+              
+    }
+
+
+    public void LoadMainMenu()
     {
         SceneManager.LoadScene("Main Menu");
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
+    
 }

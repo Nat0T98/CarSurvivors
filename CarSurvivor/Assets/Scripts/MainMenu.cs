@@ -8,15 +8,13 @@ public class MainMenu : MonoBehaviour
     public void PlayButton()
     { 
         AudioManager.GlobalAudioManager.PlaySFX("Play Button");
-        Invoke("StartDelay", 2);
-
-        //SceneManager.LoadScene("Level 1");
+        Invoke("LoadLevel1", 2); //wait 2 seconds so that SFX can play
     }
 
     public void GaragaeButton()
     {
-        //SceneManager.LoadScene("Garage");
         AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        Invoke("LoadGarage", 1);
 
     }
 
@@ -34,8 +32,14 @@ public class MainMenu : MonoBehaviour
         AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
 
-    public void StartDelay()
+    public void LoadLevel1()
     {
         SceneManager.LoadScene("Level 1");
+    }
+
+
+    public void LoadGarage()
+    {
+        SceneManager.LoadScene("Garage");
     }
 }
