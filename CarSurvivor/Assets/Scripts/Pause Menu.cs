@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PauseMenu : MonoBehaviour
+{
+    public static bool isPaused = false;
+    public GameObject PauseMenuCanvas;
+
+
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (isPaused) 
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
+    void Pause() 
+    {
+        PauseMenuCanvas.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public void Resume()
+    {
+        PauseMenuCanvas.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+    } 
+
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+}
