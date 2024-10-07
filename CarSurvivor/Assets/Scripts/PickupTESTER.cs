@@ -2,24 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class PickupTESTER : MonoBehaviour
 {
-    private GameObject PlayerObject;
-    public float speed = 1;
 
-    private Rigidbody rb;
+    private GameObject PlayerObject;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         PlayerObject = GameManager.Instance.player;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (PlayerObject.transform.position - transform.position).normalized;
-        rb.velocity = direction * speed;
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player") 
+        {
+            PlayerObject.GetComponent<MainCar>().MelleUpgradeTest();
+        }
     }
 }

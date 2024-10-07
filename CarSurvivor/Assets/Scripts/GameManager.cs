@@ -1,27 +1,29 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private GameObject PlayerObject;
-    public float speed = 1;
+    public static GameManager Instance;
 
-    private Rigidbody rb;
+    public GameObject player;
+
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) Destroy(gameObject);
+        else Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        PlayerObject = GameManager.Instance.player;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (PlayerObject.transform.position - transform.position).normalized;
-        rb.velocity = direction * speed;
+
     }
 }
-*/
