@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainCar : MonoBehaviour
@@ -32,13 +33,26 @@ public class MainCar : MonoBehaviour
 
     void Update()
     {
-        print(rb.velocity.magnitude);
+        //print(rb.velocity.magnitude);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //print("reset");
+            SceneManager.LoadScene("Level 1");
+        }
     }
 
     void FixedUpdate()
     {
         HandleMovement();
         SpinWheels();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            print("those who know");
+        }
     }
 
     void HandleMovement()
