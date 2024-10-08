@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0" version="24.7.17">
   <diagram id="pvwwQUrMOcKolIaD9RjZ" name="Page-1">
-    <mxGraphModel dx="1393" dy="788" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2033" dy="1156" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,7 +10,7 @@
         <mxCell id="buFqJGUQjfIV5JwptgsI-1" value="1 Programming" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="60" y="120" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="buFqJGUQjfIV5JwptgsI-2" target="tWt80_bKlkRKH3--Gsll-2">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="buFqJGUQjfIV5JwptgsI-2" target="tWt80_bKlkRKH3--Gsll-2" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="630" y="1321" as="targetPoint" />
           </mxGeometry>
@@ -19,10 +19,10 @@
           <mxGeometry x="570" y="120" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="buFqJGUQjfIV5JwptgsI-3" value="3 Sound" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="760" y="120" width="120" height="60" as="geometry" />
+          <mxGeometry x="900" y="120" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="buFqJGUQjfIV5JwptgsI-4" value="4 Design" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="950" y="120" width="120" height="60" as="geometry" />
+          <mxGeometry x="1060" y="120" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="buFqJGUQjfIV5JwptgsI-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="buFqJGUQjfIV5JwptgsI-5" target="buFqJGUQjfIV5JwptgsI-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -246,28 +246,36 @@
         <mxCell id="2qCj0dNmz67mReh1wG9u-30" value="2.3.4 Tyre Tracks" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="740" y="1170" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tWt80_bKlkRKH3--Gsll-2" target="tWt80_bKlkRKH3--Gsll-5">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tWt80_bKlkRKH3--Gsll-2" target="tWt80_bKlkRKH3--Gsll-5" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tWt80_bKlkRKH3--Gsll-2" target="tWt80_bKlkRKH3--Gsll-8">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tWt80_bKlkRKH3--Gsll-2" target="tWt80_bKlkRKH3--Gsll-8" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tWt80_bKlkRKH3--Gsll-2" target="tWt80_bKlkRKH3--Gsll-11">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tWt80_bKlkRKH3--Gsll-2" target="tWt80_bKlkRKH3--Gsll-11" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="720" y="1540" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-2" value="2.4 Buildings" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-2" value="2.4 Buildings" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="660" y="1280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-5" value="10 Different meshes&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-5" value="2.4.1 Different meshes&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="740" y="1360" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-8" value="5 trim sheets per building&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-8" value="2.4.2 trim sheets per building&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="740" y="1430" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tWt80_bKlkRKH3--Gsll-11" value="Add lighting to buildings" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="tWt80_bKlkRKH3--Gsll-11" value="2.4.3 Add lighting to buildings" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="740" y="1500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="I1aEzilDOxCqesVj3jfa-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" target="I1aEzilDOxCqesVj3jfa-2" source="buFqJGUQjfIV5JwptgsI-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="130" y="1020" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="I1aEzilDOxCqesVj3jfa-2" value="1.2 Camera Mechanics" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1030" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
