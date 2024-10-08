@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,11 +9,19 @@ public class MainCar : MonoBehaviour
     public float accelerationForce = 50f; 
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
-    public float turnSpeed = 100f;
-    public GameObject wheelSpinner;
+    public float turnSpeed = 150f;
+    public GameObject wheelSpinnerL;
+    public GameObject wheelSpinnerR;
+    public GameObject rammer;
+
+    public GameObject wheel1;
+    public GameObject wheel2;
+    public GameObject wheel3;
+    public GameObject wheel4;
 
     private bool firstUpgrade;
     private float upgradeScale;
+    private float wheelRadius = 0.38f;
 
     private Rigidbody rb;
 
@@ -21,9 +30,15 @@ public class MainCar : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    void Update()
+    {
+        print(rb.velocity.magnitude);
+    }
+
     void FixedUpdate()
     {
         HandleMovement();
+        SpinWheels();
     }
 
     void HandleMovement()
@@ -46,11 +61,12 @@ public class MainCar : MonoBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
 
         
-        if (rb.velocity.magnitude > 0.1f) //could interpolate turning speed based off car speed. e.g: turn speed = 0.1 if car speed = 10, turn speed = 1 if car speed = 100
+        if (rb.velocity.magnitude > 0.1f) 
         {
-            float turn = turnInput * turnSpeed * Time.deltaTime;
+            float turn = turnInput * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
             rb.MoveRotation(rb.rotation * turnRotation);
+
         }
     }
 
@@ -59,15 +75,38 @@ public class MainCar : MonoBehaviour
         print("COLLECTED");
         if (firstUpgrade == false)
         {
-            wheelSpinner.SetActive(true);
+            wheelSpinnerL.SetActive(true);
+            wheelSpinnerR.SetActive(true);
+            rammer.SetActive(true);
             firstUpgrade = true;
-            upgradeScale = wheelSpinner.transform.localScale.x;
+            upgradeScale = wheelSpinnerL.transform.localScale.x;
         }
         else
         {
             upgradeScale += 0.01f;
-            wheelSpinner.transform.localScale = new Vector3(upgradeScale, wheelSpinner.transform.localScale.y, wheelSpinner.transform.localScale.z);
-            print(upgradeScale);
+            wheelSpinnerL.transform.localScale = new Vector3(upgradeScale, wheelSpinnerL.transform.localScale.y, wheelSpinnerL.transform.localScale.z);
+            wheelSpinnerR.transform.localScale = new Vector3(upgradeScale, wheelSpinnerR.transform.localScale.y, wheelSpinnerR.transform.localScale.z);
         }
     }
+
+    void SpinWheels()
+    {
+        // Calculate how much the wheels should rotate based on car's velocity
+        float distanceTraveled = rb.velocity.magnitude * Time.deltaTime;
+        float rotationAngle = (distanceTraveled / (2 * Mathf.PI * wheelRadius)) * 360f;
+
+        // Rotate the wheels around their local X-axis (forward axis)
+        RotateWheel(wheel1, rotationAngle);
+        RotateWheel(wheel2, rotationAngle);
+        RotateWheel(wheel3, rotationAngle);
+        RotateWheel(wheel4, rotationAngle);
+    }
+
+    void RotateWheel(GameObject wheel, float rotationAngle)
+    {
+        // Apply the rotation to the wheel
+        wheel.transform.Rotate(Vector3.right, rotationAngle, Space.Self);
+    }
+
+
 }
