@@ -11,7 +11,7 @@ public class MainCar : MonoBehaviour
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
-    public float maxDamage = 100f;
+    public float maxDamage = 120f;
     public int pointsToUpgrade = 3;
     public GameObject wheelSpinnerL;
     public GameObject wheelSpinnerR;
@@ -77,6 +77,7 @@ public class MainCar : MonoBehaviour
         else if (forwardInput < 0)
         {
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
+            turnInput = 0 - turnInput;
         }
 
         
@@ -164,5 +165,6 @@ public class MainCar : MonoBehaviour
         }
     }
 
+    //Vector3.SmoothDamp()
 
 }
