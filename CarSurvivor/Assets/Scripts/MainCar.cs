@@ -11,6 +11,8 @@ public class MainCar : MonoBehaviour
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
+    public float maxDamage = 100f;
+    public int pointsToUpgrade = 3;
     public GameObject wheelSpinnerL;
     public GameObject wheelSpinnerR;
     public GameObject rammer;
@@ -23,6 +25,7 @@ public class MainCar : MonoBehaviour
     private bool firstUpgrade;
     private float upgradeScale;
     private float wheelRadius = 0.38f;
+    private int points;
 
     private Rigidbody rb;
 
@@ -39,6 +42,7 @@ public class MainCar : MonoBehaviour
             //print("reset");
             SceneManager.LoadScene("Level 1");
         }
+
     }
 
     void FixedUpdate()
@@ -51,7 +55,11 @@ public class MainCar : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            print("those who know");
+            print("Damaged Enemy");
+            if (other.GetComponent<Enemy>() != null)
+            {
+                DamageEnemy(other.GetComponent<Enemy>());
+            }
         }
     }
 
@@ -105,11 +113,11 @@ public class MainCar : MonoBehaviour
 
     void SpinWheels()
     {
-        // Calculate how much the wheels should rotate based on car's velocity
+        
         float distanceTraveled = rb.velocity.magnitude * Time.deltaTime;
         float rotationAngle = (distanceTraveled / (2 * Mathf.PI * wheelRadius)) * 360f;
 
-        // Rotate the wheels around their local X-axis (forward axis)
+        
         RotateWheel(wheel1, rotationAngle);
         RotateWheel(wheel2, rotationAngle);
         RotateWheel(wheel3, rotationAngle);
@@ -118,8 +126,42 @@ public class MainCar : MonoBehaviour
 
     void RotateWheel(GameObject wheel, float rotationAngle)
     {
-        // Apply the rotation to the wheel
+        
         wheel.transform.Rotate(Vector3.right, rotationAngle, Space.Self);
+    }
+
+    void DamageEnemy(Enemy enemyScript)
+    {
+        //other.GetComponent<Enemy>().Damage(60f);
+
+        float damage = rb.velocity.magnitude / maxSpeed * maxDamage;
+
+        enemyScript.health -= damage;
+        if (enemyScript.health <= 0)
+        {
+            StartCoroutine(EnemyDeath(enemyScript));
+        }
+    }
+
+    IEnumerator EnemyDeath(Enemy enemyScript)
+    {
+        enemyScript.gameObject.SetActive(false);
+        AddPoints();
+        print("respawning");
+        yield return new WaitForSeconds(enemyScript.respawnTime);
+        enemyScript.gameObject.transform.position = enemyScript.spawnLoc;
+        enemyScript.gameObject.SetActive(true);
+        enemyScript.health = enemyScript.maxHealth;
+    }
+
+    void AddPoints()
+    {
+        points += 1;
+        if (points >= pointsToUpgrade)
+        {
+            MelleUpgradeTest();
+            points = 0;
+        }
     }
 
 
