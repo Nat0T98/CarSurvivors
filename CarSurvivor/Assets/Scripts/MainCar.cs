@@ -12,7 +12,7 @@ public class MainCar : MonoBehaviour
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
     public float maxDamage = 120f;
-    public int pointsToUpgrade = 3;
+    //public int pointsToUpgrade = 3;
     public GameObject wheelSpinnerL;
     public GameObject wheelSpinnerR;
     public GameObject rammer;
@@ -25,9 +25,11 @@ public class MainCar : MonoBehaviour
     private bool firstUpgrade;
     private float upgradeScale;
     private float wheelRadius = 0.38f;
-    private int points;
+    //public int points;
 
     private Rigidbody rb;
+    public UpgradeManager Upgrades;
+    
 
     void Start()
     {
@@ -141,29 +143,34 @@ public class MainCar : MonoBehaviour
         if (enemyScript.health <= 0)
         {
             StartCoroutine(EnemyDeath(enemyScript));
+            
         }
     }
 
     IEnumerator EnemyDeath(Enemy enemyScript)
     {
         enemyScript.gameObject.SetActive(false);
-        AddPoints();
         print("respawning");
+        Upgrades.AddUpgradePoints();
         yield return new WaitForSeconds(enemyScript.respawnTime);
         enemyScript.gameObject.transform.position = enemyScript.spawnLoc;
         enemyScript.gameObject.SetActive(true);
         enemyScript.health = enemyScript.maxHealth;
     }
 
-    void AddPoints()
-    {
-        points += 1;
-        if (points >= pointsToUpgrade)
-        {
-            MelleUpgradeTest();
-            points = 0;
-        }
-    }
+
+
+    //void AddPoints()
+    //{
+    //    points += 1;
+    //    /*if (points >= pointsToUpgrade)
+    //    {
+            
+    //        MelleUpgradeTest();
+    //        points = 0;
+    //    }*/
+    
+
 
     //Vector3.SmoothDamp()
 
