@@ -1,52 +1,78 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class MainCar : MonoBehaviour
 {
+    [Header("Car Stats")]
     public float accelerationForce = 50f; 
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
     public float maxDamage = 120f;
-    //public int pointsToUpgrade = 3;
+    [Space(10)]
+
+    [Header("Upgrade  References")]
+    public UpgradeManager Upgrades;
     public GameObject wheelSpinnerL;
     public GameObject wheelSpinnerR;
     public GameObject rammer;
+    [Space(10)]
 
+
+    //[Space(10)]
+    [Header("Wheel References")]
     public GameObject wheel1;
     public GameObject wheel2;
     public GameObject wheel3;
     public GameObject wheel4;
+    [Space(10)]
 
-    private bool firstUpgrade;
-    private float upgradeScale;
-    private float wheelRadius = 0.38f;
-    //public int points;
-
-    private Rigidbody rb;
-    public UpgradeManager Upgrades;
-
+    [Header("Camera References")]
     public GameObject camStillRotObject;
     public GameObject camLockRotObject;
     public GameObject camLookAtObject;
     private GameObject currentCamLock;
     public float camSmoothSpeed = 1.0f;
     private bool camFlipFlop;
-    
+
+    [Header("Boost Parameters")]
+    public float boostMulitiplier = 1.25f;    
+    [Range(0, 50)] public float maxBoostAmount;
+    [Range(0, 10)] public float boostRechargeRate;
+    public Slider boostUI;
+    private float currentBoostAmount;
+    private float lastBoostTime;    
+    private bool isBoosting = false;
+
+    private bool firstUpgrade;
+    private float upgradeScale;
+    private float wheelRadius = 0.38f;
+    private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
-    }
 
+
+        /*boostUI.maxValue = maxBoostAmount;
+        boostUI.value = 0;*/
+
+        if (boostUI != null)
+        {
+            boostUI.maxValue = maxBoostAmount;
+            boostUI.value = 0;
+        }
+    }
     void Update()
     {
         //print(rb.velocity.magnitude);
@@ -82,11 +108,47 @@ public class MainCar : MonoBehaviour
             camSmoothSpeed += 0.5f;
         }
 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            AudioManager.GlobalAudioManager.PlaySFX("Beep");
+        }
+
+        if (Input.GetKey(KeyCode.Space) && currentBoostAmount > 0)
+        {
+            ActivateBoost();
+        }
+        else
+        {
+            RechargeBoost();
+        }
+
+        UpdateBoostSlider();
     }
 
-    private void LateUpdate()
+    void ActivateBoost()
     {
-        
+        isBoosting = true;
+        currentBoostAmount -= Time.deltaTime;
+        if (currentBoostAmount <= 0)
+        {
+            isBoosting = false;
+        }
+    }
+    void RechargeBoost()
+    {
+        isBoosting = false;
+        if (currentBoostAmount < maxBoostAmount)
+        {
+            currentBoostAmount += boostRechargeRate * Time.deltaTime; 
+            currentBoostAmount = Mathf.Clamp(currentBoostAmount, 0, maxBoostAmount);
+        }
+    }
+    void UpdateBoostSlider()
+    {
+        if (boostUI != null)
+        {
+            boostUI.value = currentBoostAmount;
+        }
     }
 
     void FixedUpdate()
@@ -115,13 +177,14 @@ public class MainCar : MonoBehaviour
         Camera.main.transform.LookAt(camLookAtObject.transform);
     }
 
-    void HandleMovement()
-    {
-        
-        float forwardInput = Input.GetAxis("Vertical"); 
-        float turnInput = Input.GetAxis("Horizontal"); 
+    
 
-        
+    void HandleMovement()
+    {        
+        float forwardInput = Input.GetAxis("Vertical"); 
+        float turnInput = Input.GetAxis("Horizontal");
+        float currentSpeed = maxSpeed * (isBoosting ? boostMulitiplier : 1f);
+
         if (forwardInput > 0)
         {
             rb.AddForce(transform.forward * forwardInput * accelerationForce, ForceMode.Acceleration);
@@ -131,19 +194,16 @@ public class MainCar : MonoBehaviour
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
             turnInput = 0 - turnInput;
         }
-
         
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
-
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
         
         if (rb.velocity.magnitude > 0.1f) 
         {
             float turn = turnInput * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
             rb.MoveRotation(rb.rotation * turnRotation);
-
         }
-    }
+    }   
 
     public void MelleUpgradeTest()
     {
