@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class MainCar : MonoBehaviour
 {
@@ -29,11 +31,20 @@ public class MainCar : MonoBehaviour
 
     private Rigidbody rb;
     public UpgradeManager Upgrades;
+
+    public GameObject camStillRotObject;
+    public GameObject camLockRotObject;
+    public GameObject camLookAtObject;
+    private GameObject currentCamLock;
+    public float camSmoothSpeed = 1.0f;
+    private bool camFlipFlop;
     
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
+        currentCamLock = camStillRotObject;
     }
 
     void Update()
@@ -45,12 +56,44 @@ public class MainCar : MonoBehaviour
             SceneManager.LoadScene("Level 1");
         }
 
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (camFlipFlop == false)
+            {
+                currentCamLock = camLockRotObject;
+            }
+            else
+            {
+                currentCamLock = camStillRotObject;
+            }
+            camFlipFlop = !camFlipFlop;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            if (camSmoothSpeed > 0.5f)
+            {
+                camSmoothSpeed -= 0.5f;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            camSmoothSpeed += 0.5f;
+        }
+
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     void FixedUpdate()
     {
         HandleMovement();
         SpinWheels();
+        CameraPosition();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -63,6 +106,13 @@ public class MainCar : MonoBehaviour
                 DamageEnemy(other.GetComponent<Enemy>());
             }
         }
+    }
+
+    void CameraPosition()
+    {
+        Vector3 desiredPosition = currentCamLock.transform.position;
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, desiredPosition, camSmoothSpeed * Time.deltaTime);
+        Camera.main.transform.LookAt(camLookAtObject.transform);
     }
 
     void HandleMovement()
