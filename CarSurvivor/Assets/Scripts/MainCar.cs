@@ -45,17 +45,20 @@ public class MainCar : MonoBehaviour
 
     [Header("Boost Parameters")]
     public float boostMulitiplier = 1.25f;    
-    [Range(0, 50)] public float maxBoostAmount;
-    [Range(0, 10)] public float boostRechargeRate;
+    public float maxBoostAmount;
+    public float boostRechargeRate;
     public Slider boostUI;
     private float currentBoostAmount;
-    private float lastBoostTime;    
     private bool isBoosting = false;
+    private float boostUpgradeVal = 1;
 
     private bool firstUpgrade;
     private float upgradeScale;
     private float wheelRadius = 0.38f;
     private Rigidbody rb;
+
+    [Header("Other")]
+    public TimeRushTimer RushTimer;
 
     void Start()
     {
@@ -151,6 +154,12 @@ public class MainCar : MonoBehaviour
         }
     }
 
+    public void BoostUpgrade()
+    {
+        currentBoostAmount = maxBoostAmount;
+    }
+
+
     void FixedUpdate()
     {
         HandleMovement();
@@ -245,19 +254,42 @@ public class MainCar : MonoBehaviour
 
     void DamageEnemy(Enemy enemyScript)
     {
+       
+        Scene currentScene = SceneManager.GetActiveScene(); 
+        float damage = rb.velocity.magnitude / maxSpeed * maxDamage; 
+        enemyScript.health -= damage;
+
+       
+       
+
+
+
         //other.GetComponent<Enemy>().Damage(60f);
 
-        float damage = rb.velocity.magnitude / maxSpeed * maxDamage;
+       
 
-        enemyScript.health -= damage;
+       
         if (enemyScript.health <= 0)
         {
-            StartCoroutine(EnemyDeath(enemyScript));
+            if (currentScene.name == "EndlessTest")
+            {
+                StartCoroutine(EndlessEnemyDeath(enemyScript));
+           
+            }
+        else if (currentScene.name == "TimeRushTest")
+            {
+                StartCoroutine(TimeRushEnemyDeath(enemyScript));
+            }
+        else
+            {
+                Debug.Log("NULL SCENE");
+            }
+           
             
         }
     }
 
-    IEnumerator EnemyDeath(Enemy enemyScript)
+    IEnumerator EndlessEnemyDeath(Enemy enemyScript)
     {
         enemyScript.gameObject.SetActive(false);
         print("respawning");
@@ -268,6 +300,18 @@ public class MainCar : MonoBehaviour
         enemyScript.health = enemyScript.maxHealth;
     }
 
+    IEnumerator TimeRushEnemyDeath(Enemy enemyScript)
+    {
+        enemyScript.gameObject.SetActive(false);
+        print("respawning");
+        Upgrades.AddUpgradePoints();
+        RushTimer.AddTime(RushTimer.KillBonus);
+        yield return new WaitForSeconds(enemyScript.respawnTime);
+        enemyScript.gameObject.transform.position = enemyScript.spawnLoc;
+        enemyScript.gameObject.SetActive(true);
+        enemyScript.health = enemyScript.maxHealth;
+
+    }
 
 
     //void AddPoints()

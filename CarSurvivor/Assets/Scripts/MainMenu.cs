@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayButton()
+    public void EndlessModeButton()
     { 
         AudioManager.GlobalAudioManager.PlaySFX("Play Button");
-        Invoke("LoadLevel1", 2); //wait 2 seconds so that SFX can play
+        Invoke("LoadEndlessMode", 2); //wait 2 seconds so that SFX can play
     }
+    public void TimeRushModeButton()
+    {
+        AudioManager.GlobalAudioManager.PlaySFX("Play Button");
+        Invoke("LoadTimeRushMode", 2); //wait 2 seconds so that SFX can play
+    }
+
 
     public void GaragaeButton()
     {
@@ -32,9 +38,13 @@ public class MainMenu : MonoBehaviour
         AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
 
-    public void LoadLevel1()
+    public void LoadEndlessMode()
     {
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene("EndlessTest");
+    }
+    public void LoadTimeRushMode()
+    {
+        SceneManager.LoadScene("TimeRushTest");
     }
 
 

@@ -26,7 +26,7 @@ public class UpgradeManager : MonoBehaviour
         {
             if (isMenuActive)
             {
-                CloseButton();
+                CloseMenu();
             }
             else
             {
@@ -57,13 +57,13 @@ public class UpgradeManager : MonoBehaviour
     }
 
 
-    public void CloseButton()
+    public void CloseMenu()
     {
-        //UpgradeCanvas.SetActive(false);
+        UpgradeCanvas.SetActive(false);
         Time.timeScale = 1f;
         isMenuActive = false;
-        //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
-        Debug.Log(UpgradeCanvas.active);
+        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        //Debug.Log(UpgradeCanvas.active);
     }
 
     public void UpgradeSelected()
@@ -93,6 +93,7 @@ public class UpgradeManager : MonoBehaviour
     public void ChooseUpgrade3()
     {
         Debug.Log("Upgrade 3");
+        Car.BoostUpgrade();
         UpgradeSelected();
     }
 }
