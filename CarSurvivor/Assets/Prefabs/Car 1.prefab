@@ -1985,6 +1985,7 @@ MonoBehaviour:
   maxSpeed: 20
   turnSpeed: 150
   maxDamage: 100
+  Upgrades: {fileID: 0}
   wheelSpinnerL: {fileID: 8483587241401501607}
   wheelSpinnerR: {fileID: 4384326475178450887}
   rammer: {fileID: 5518744140635650286}
@@ -1992,11 +1993,15 @@ MonoBehaviour:
   wheel2: {fileID: 775509872821271086}
   wheel3: {fileID: 2723964796149659021}
   wheel4: {fileID: 1301484691140181033}
-  Upgrades: {fileID: 0}
   camStillRotObject: {fileID: 1121879771018260881}
   camLockRotObject: {fileID: 6217748464430986216}
   camLookAtObject: {fileID: 5585765649032472296}
   camSmoothSpeed: 5
+  boostMulitiplier: 2
+  maxBoostAmount: 5
+  boostRechargeRate: 1
+  boostUI: {fileID: 0}
+  RushTimer: {fileID: 0}
 --- !u!1 &7638014280177820096
 GameObject:
   m_ObjectHideFlags: 0
