@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float damage = 10f; 
     public float lifetime = 5f;
-    public bool punchthrough = true;
+    public bool punchthrough = false;
 
     void Start()
     {
@@ -22,12 +22,8 @@ public class Bullet : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
-            if (punchthrough == false)
-            {
-                Destroy(gameObject);
-            }
         }
-
+        print("bullet hit");
         if (punchthrough == false)
         {
             Destroy(gameObject);

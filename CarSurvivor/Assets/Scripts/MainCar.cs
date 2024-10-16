@@ -176,7 +176,7 @@ public class MainCar : MonoBehaviour
         CameraPosition();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
@@ -186,6 +186,14 @@ public class MainCar : MonoBehaviour
                 DamageEnemy(other.GetComponent<Enemy>(), 0);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (collision.collider.CompareTag("Building"))
+        //{
+        //    rb.AddForce()
+        //}
     }
 
     void CameraPosition()
