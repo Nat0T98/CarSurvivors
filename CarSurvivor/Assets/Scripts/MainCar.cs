@@ -57,6 +57,8 @@ public class MainCar : MonoBehaviour
     private float wheelRadius = 0.38f;
     private Rigidbody rb;
 
+    
+
     [Header("Other")]
     public TimeRushTimer RushTimer;
 
@@ -66,6 +68,7 @@ public class MainCar : MonoBehaviour
         Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
 
+        
 
         /*boostUI.maxValue = maxBoostAmount;
         boostUI.value = 0;*/
@@ -82,7 +85,13 @@ public class MainCar : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             //print("reset");
-            SceneManager.LoadScene("Level 1");
+            //SceneManager.LoadScene(resetToScene.name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SceneManager.LoadScene("Level 1 Design");
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -174,7 +183,7 @@ public class MainCar : MonoBehaviour
             print("Damaged Enemy");
             if (other.GetComponent<Enemy>() != null)
             {
-                DamageEnemy(other.GetComponent<Enemy>());
+                DamageEnemy(other.GetComponent<Enemy>(), 0);
             }
         }
     }
@@ -252,12 +261,20 @@ public class MainCar : MonoBehaviour
         wheel.transform.Rotate(Vector3.right, rotationAngle, Space.Self);
     }
 
-    void DamageEnemy(Enemy enemyScript)
+    public void DamageEnemy(Enemy enemyScript, float otherDamage)
     {
        
         Scene currentScene = SceneManager.GetActiveScene(); 
-        float damage = rb.velocity.magnitude / maxSpeed * maxDamage; 
-        enemyScript.health -= damage;
+        float damage = rb.velocity.magnitude / maxSpeed * maxDamage;
+        if (otherDamage > 0)
+        {
+            enemyScript.health -= otherDamage;
+        }
+        else
+        {
+            enemyScript.health -= damage;
+        }
+        
 
        
        

@@ -30,6 +30,11 @@ public class Enemy : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
+    public void TakeDamage(float damage)
+    {
+        PlayerObject.GetComponent<MainCar>().DamageEnemy(gameObject.GetComponent<Enemy>(), damage);
+    }
+
     //public void Damage(float damage)
     //{
     //    health -= damage;
