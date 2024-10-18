@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class CountdownTimer : MonoBehaviour
+public class EndlessTimer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float elapsedTime;
+
+
+    private void Start()
+    {
+        AudioManager.GlobalAudioManager.LoopMusic("Endless Music");
+    }
+
 
     // Update is called once per frame
     void Update()

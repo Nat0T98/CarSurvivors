@@ -57,6 +57,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        AudioManager.GlobalAudioManager.StopMusic();
         SceneManager.LoadScene("Main Menu");
     }
     

@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
 
 
     public GameObject SFX_Prefab;
-
+    public AudioSource MusicSource;
     public static AudioManager GlobalAudioManager;
 
     private void Start()
@@ -43,4 +43,20 @@ public class AudioManager : MonoBehaviour
             Destroy(TheSFX.gameObject, SFX_Lib[CLipName].length);
         }
     }
+
+    public void LoopMusic(string clipName)
+    {
+        if (SFX_Lib.ContainsKey(clipName))
+        {
+            MusicSource.clip = SFX_Lib[clipName];
+            MusicSource.loop = true; // Enable looping
+            MusicSource.Play(); // Play the music
+        }
+    }
+
+    public void StopMusic()
+    {
+        MusicSource.Stop(); // Stop the music
+    }
+
 }

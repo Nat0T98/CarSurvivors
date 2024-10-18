@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        AudioManager.GlobalAudioManager.LoopMusic("Menu Music");
+    }
+
     public void EndlessModeButton()
     { 
         AudioManager.GlobalAudioManager.PlaySFX("Play Button");
@@ -40,16 +46,19 @@ public class MainMenu : MonoBehaviour
 
     public void LoadEndlessMode()
     {
+        AudioManager.GlobalAudioManager.StopMusic();
         SceneManager.LoadScene("EndlessTest");
     }
     public void LoadTimeRushMode()
     {
+        AudioManager.GlobalAudioManager.StopMusic();
         SceneManager.LoadScene("TimeRushTest");
     }
 
 
     public void LoadGarage()
     {
+        AudioManager.GlobalAudioManager.StopMusic();
         SceneManager.LoadScene("Garage");
     }
 }

@@ -13,12 +13,13 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody rb;
     public Vector3 spawnLoc;
+    MainCar car;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        PlayerObject = GameManager.Instance.player;
+        PlayerObject = 
         spawnLoc = gameObject.transform.position;
         health = maxHealth;
     }

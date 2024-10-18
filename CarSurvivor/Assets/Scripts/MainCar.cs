@@ -56,7 +56,7 @@ public class MainCar : MonoBehaviour
     private float upgradeScale;
     private float wheelRadius = 0.38f;
     private Rigidbody rb;
-
+    GameManager gameManager;
     
 
     [Header("Other")]
@@ -67,7 +67,7 @@ public class MainCar : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
-
+        gameManager.player = gameObject;
         
 
         /*boostUI.maxValue = maxBoostAmount;

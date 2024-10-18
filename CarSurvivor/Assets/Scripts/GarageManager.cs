@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GarageManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        AudioManager.GlobalAudioManager.LoopMusic("Garage Music");
+    }
+
     public void BackButton()
     {
         AudioManager.GlobalAudioManager.PlaySFX("UI Button");
@@ -14,6 +19,7 @@ public class GarageManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        AudioManager.GlobalAudioManager.StopMusic();
         SceneManager.LoadScene("Main Menu");
     }
 }
