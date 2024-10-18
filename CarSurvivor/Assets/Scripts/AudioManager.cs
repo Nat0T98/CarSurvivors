@@ -15,12 +15,24 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        GlobalAudioManager = this;
+        
 
         for (int i = 0; i < ClipNames.Count; i++)
             SFX_Lib.Add(ClipNames[i], ClipList[i]);
     }
 
+    private void Awake()
+    {
+        if (GlobalAudioManager != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            GlobalAudioManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     public void PlaySFX(string CLipName)
     {
