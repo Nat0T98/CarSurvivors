@@ -67,7 +67,7 @@ public class MainCar : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
-        gameManager.player = gameObject;
+       
         
 
         /*boostUI.maxValue = maxBoostAmount;

@@ -11,7 +11,7 @@ public class PickupTESTER : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerObject = OldManager.Instance.player;
+        PlayerObject = GameManager.Instance.player;
     }
 
     // Update is called once per frame

@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        PlayerObject = 
+        PlayerObject = GameManager.Instance.player;
         spawnLoc = gameObject.transform.position;
         health = maxHealth;
     }
