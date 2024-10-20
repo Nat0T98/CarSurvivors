@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7450618659637352546}
   - component: {fileID: 3692024884991438683}
   - component: {fileID: 1417906459336308662}
-  - component: {fileID: 6872911752932985126}
+  - component: {fileID: 306012616311040036}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Enemy
@@ -136,7 +136,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &6872911752932985126
+--- !u!114 &306012616311040036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,11 +145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6419964132030586930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11111cd442d745a4685200e7e0a1b9e9, type: 3}
+  m_Script: {fileID: 11500000, guid: b92fdcc761d048045b26c34efcdbf9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  PlayerObject: {fileID: 0}
   respawnTime: 3
   maxHealth: 100
   health: 0
   spawnLoc: {x: 0, y: 0, z: 0}
+  speed: 2

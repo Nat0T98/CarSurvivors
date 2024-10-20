@@ -283,27 +283,18 @@ public class MainCar : MonoBehaviour
             enemyScript.health -= damage;
         }
         
-
-       
-       
-
-
-
-        //other.GetComponent<Enemy>().Damage(60f);
-
-       
-
-       
         if (enemyScript.health <= 0)
         {
             if (currentScene.name == "EndlessTest")
             {
-                StartCoroutine(EndlessEnemyDeath(enemyScript));
+                TestEndlessEnemyDeath(enemyScript);
+               // StartCoroutine(EndlessEnemyDeath(enemyScript));
            
             }
         else if (currentScene.name == "TimeRushTest")
             {
-                StartCoroutine(TimeRushEnemyDeath(enemyScript));
+                TestRushEnemyDeath(enemyScript);
+                //StartCoroutine(TimeRushEnemyDeath(enemyScript));
             }
         else
             {
@@ -314,7 +305,7 @@ public class MainCar : MonoBehaviour
         }
     }
 
-    IEnumerator EndlessEnemyDeath(Enemy enemyScript)
+    /*IEnumerator EndlessEnemyDeath(Enemy enemyScript)
     {
         enemyScript.gameObject.SetActive(false);
         print("respawning");
@@ -336,7 +327,23 @@ public class MainCar : MonoBehaviour
         enemyScript.gameObject.SetActive(true);
         enemyScript.health = enemyScript.maxHealth;
 
+    }*/
+
+
+    void TestRushEnemyDeath(Enemy enemy)
+    {
+        Destroy(enemy.gameObject);
+        Upgrades.AddUpgradePoints();
+        RushTimer.AddTime(RushTimer.KillBonus);
+
     }
+
+    void TestEndlessEnemyDeath(Enemy enemy)
+    {
+        Destroy(enemy.gameObject);
+        Upgrades.AddUpgradePoints();
+    }
+
 
 
     //void AddPoints()
@@ -344,11 +351,11 @@ public class MainCar : MonoBehaviour
     //    points += 1;
     //    /*if (points >= pointsToUpgrade)
     //    {
-            
+
     //        MelleUpgradeTest();
     //        points = 0;
     //    }*/
-    
+
 
 
     //Vector3.SmoothDamp()

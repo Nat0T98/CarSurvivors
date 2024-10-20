@@ -5,30 +5,28 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    private GameObject PlayerObject;
+    [Header("Enemy Stats")]
+    protected GameObject PlayerObject;
+    protected Transform PlayerTransform;
     public float speed = 1f;
-    public float respawnTime = 3f;
+    //public float respawnTime = 3f;
     public float maxHealth = 100;
     public float health;
 
-    private Rigidbody rb;
-    public Vector3 spawnLoc;
-    MainCar car;
-
+    //public Vector3 spawnLoc;
+   
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        PlayerObject = GameManager.Instance.player;
-        spawnLoc = gameObject.transform.position;
+        SetPlayerObj(PlayerObject);
+        SetPlayerTransform(PlayerTransform);
+        //spawnLoc = gameObject.transform.position;
         health = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 direction = (PlayerObject.transform.position - transform.position).normalized;
-        rb.velocity = direction * speed;
+        SetPlayerTransform(PlayerTransform);
     }
 
     public void TakeDamage(float damage)
@@ -36,22 +34,14 @@ public class Enemy : MonoBehaviour
         PlayerObject.GetComponent<MainCar>().DamageEnemy(gameObject.GetComponent<Enemy>(), damage);
     }
 
-    //public void Damage(float damage)
-    //{
-    //    health -= damage;
-    //    if (health <= 0)
-    //    {
-    //        StartCoroutine(Death());
-    //    }
-    //}
 
-    //IEnumerator Death()
-    //{
-    //    //gameObject.SetActive(false);
-    //    print("respawning");
-    //    yield return new WaitForSeconds(respawnTime);
-    //    transform.position = spawnLoc;
-    //    gameObject.SetActive(true);
-    //    health = maxHealth;
-    //}
+    public void SetPlayerObj(GameObject player)
+    {
+        player = GameManager.Instance.player;   
+    }
+    public void SetPlayerTransform(Transform playerTransform)
+    {
+        playerTransform = GameManager.Instance.playerTransform.transform;
+    }
+    
 }
