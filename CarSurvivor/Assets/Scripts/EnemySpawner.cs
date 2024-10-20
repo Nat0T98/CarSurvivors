@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemyScript != null)
         {
             enemyScript.SetPlayerObj(GameManager.Instance.player);
+            enemyScript.SetPlayerTransform(GameManager.Instance.playerTransform);
         }
 
     }
