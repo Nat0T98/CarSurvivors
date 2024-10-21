@@ -35,4 +35,13 @@ public class Firing : MonoBehaviour
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.damage = damage;
     }
+
+    public void TurretFire()
+    {
+        if (Time.time >= nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + fireRate;
+        }
+    }
 }

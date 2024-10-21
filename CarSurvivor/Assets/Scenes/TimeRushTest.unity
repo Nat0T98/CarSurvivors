@@ -2784,20 +2784,10 @@ PrefabInstance:
       propertyPath: RushTimer
       value: 
       objectReference: {fileID: 277399746}
-    - target: {fileID: 5912513686714424236, guid: b039e24608bbfb444b7be36590ed0b29,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7210827406301329631, guid: b039e24608bbfb444b7be36590ed0b29,
         type: 3}
       propertyPath: m_Name
       value: Car
-      objectReference: {fileID: 0}
-    - target: {fileID: 7210827406301329631, guid: b039e24608bbfb444b7be36590ed0b29,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

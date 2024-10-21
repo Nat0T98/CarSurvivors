@@ -31,7 +31,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        PlayerObject.GetComponent<MainCar>().DamageEnemy(gameObject.GetComponent<Enemy>(), damage);
+        //PlayerObject.GetComponent<MainCar>().DamageEnemy(gameObject.GetComponent<Enemy>(), damage);
+        health -= damage;
+        if (health <= 0 )
+        {
+            Destroy(gameObject);
+        }
     }
 
 

@@ -13,17 +13,40 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifetime); 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        if (collision.gameObject.GetComponent<Enemy>() != null)
+    //        {
+    //            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+    //        }
+    //        //else if(collision.gameObject.GetComponent<RunnerEnemy>() != null)
+    //        //{
+    //        //    collision.gameObject.GetComponent<RunnerEnemy>().TakeDamage(damage);
+    //        //}
+    //    }
+    //    print("bullet hit");
+    //    if (punchthrough == false)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
+            if (other.gameObject.GetComponent<Enemy>() != null)
             {
-                enemy.TakeDamage(damage);
+                other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             }
+            //else if(collision.gameObject.GetComponent<RunnerEnemy>() != null)
+            //{
+            //    collision.gameObject.GetComponent<RunnerEnemy>().TakeDamage(damage);
+            //}
         }
-        print("bullet hit");
+        print(other.name);
         if (punchthrough == false)
         {
             Destroy(gameObject);

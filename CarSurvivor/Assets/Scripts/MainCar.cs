@@ -57,6 +57,11 @@ public class MainCar : MonoBehaviour
     private float wheelRadius = 0.38f;
     private Rigidbody rb;
     GameManager gameManager;
+
+    [Header("Turret")]
+    public GameObject turretMain;
+    private List<GameObject> targetedObjects = new List<GameObject>();
+    public float turretRotSpeed = 1;
     
 
     [Header("Other")]
@@ -135,6 +140,8 @@ public class MainCar : MonoBehaviour
         }
 
         UpdateBoostSlider();
+
+        Turret();
     }
 
     void ActivateBoost()
@@ -176,15 +183,43 @@ public class MainCar : MonoBehaviour
         CameraPosition();
     }
 
-    void OnTriggerEnter(Collider other)
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        print("Damaged Enemy");
+    //        if (other.GetComponent<Enemy>() != null)
+    //        {
+    //            DamageEnemy(other.GetComponent<Enemy>(), 0);
+    //        }
+    //    }
+    //}
+
+    public void ramTriggerEnter(Collider otherCol)
     {
-        if (other.CompareTag("Enemy"))
+        if (otherCol.CompareTag("Enemy"))
         {
             print("Damaged Enemy");
-            if (other.GetComponent<Enemy>() != null)
+            if (otherCol.GetComponent<Enemy>() != null)
             {
-                DamageEnemy(other.GetComponent<Enemy>(), 0);
+                DamageEnemy(otherCol.GetComponent<Enemy>(), 0);
             }
+        }
+    }
+
+    public void areaTriggerEnter(Collider otherCol)
+    {
+        if (otherCol.CompareTag("Enemy"))
+        {
+            targetedObjects.Add(otherCol.gameObject);
+        }
+    }
+    public void areaTriggerExit(Collider otherCol)
+    {
+        if (otherCol.CompareTag("Enemy"))
+        {
+            targetedObjects.Remove(otherCol.gameObject);
+            print(otherCol.gameObject.name);
         }
     }
 
@@ -359,5 +394,36 @@ public class MainCar : MonoBehaviour
 
 
     //Vector3.SmoothDamp()
+
+    void Turret()
+    {
+        float closestDistance = 9999999f;
+        GameObject nearestEnemy = null;
+
+        foreach (GameObject enemy in targetedObjects)
+        {
+            if (enemy != null)
+            {
+                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    nearestEnemy = enemy;
+                }
+            }
+        }
+
+        if (nearestEnemy != null)
+        {
+            Vector3 targDir = nearestEnemy.transform.position - turretMain.transform.position;
+            Quaternion targRot = Quaternion.LookRotation(targDir);
+            turretMain.transform.rotation = Quaternion.Slerp(turretMain.transform.rotation, targRot, turretRotSpeed * Time.deltaTime);
+                //LookAt(nearestEnemy.transform.position);
+            GetComponent<Firing>().TurretFire();
+        }
+    }
+
+
 
 }
