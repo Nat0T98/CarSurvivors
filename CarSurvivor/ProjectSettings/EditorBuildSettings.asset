@@ -18,6 +18,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TimeRushTest.unity
     guid: eca1c2d0f3e65324ea530ca37e649768
   - enabled: 1
-    path: Assets/Scenes/Level Blockout test.unity
+    path: Assets/Scenes/Showcase.unity
     guid: 3537252f0977c024e93aa83d1b479707
   m_configObjects: {}
