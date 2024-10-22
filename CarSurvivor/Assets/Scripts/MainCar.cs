@@ -320,7 +320,14 @@ public class MainCar : MonoBehaviour
         
         if (enemyScript.health <= 0)
         {
-            if (currentScene.name == "EndlessTest")
+            enemyScript.health = 0;
+            if (currentScene.name == "Showcase")
+            {
+                TestEndlessEnemyDeath(enemyScript);
+                // StartCoroutine(EndlessEnemyDeath(enemyScript));
+
+            }
+        else if (currentScene.name == "EndlessTest")
             {
                 TestEndlessEnemyDeath(enemyScript);
                // StartCoroutine(EndlessEnemyDeath(enemyScript));
@@ -375,8 +382,9 @@ public class MainCar : MonoBehaviour
 
     void TestEndlessEnemyDeath(Enemy enemy)
     {
-        Destroy(enemy.gameObject);
         Upgrades.AddUpgradePoints();
+        Destroy(enemy.gameObject);
+        
     }
 
 

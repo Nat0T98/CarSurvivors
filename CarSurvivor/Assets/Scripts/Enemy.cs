@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     //public float respawnTime = 3f;
     public float maxHealth = 100;
     public float health;
-
+    private UpgradeManager upgradeManager;
     //public Vector3 spawnLoc;
    
     // Start is called before the first frame update
@@ -35,10 +35,11 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0 )
         {
+           /* health = 0;
+            upgradeManager.AddUpgradePoints();*/
             Destroy(gameObject);
         }
     }
-
 
     public void SetPlayerObj(GameObject player)
     {

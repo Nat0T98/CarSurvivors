@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         AudioManager.GlobalAudioManager.LoopMusic("Menu Music");
     }
@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
     public void LoadEndlessMode()
     {
         AudioManager.GlobalAudioManager.StopMusic();
-        SceneManager.LoadScene("EndlessTest");
+        SceneManager.LoadScene("Showcase");
     }
     public void LoadTimeRushMode()
     {

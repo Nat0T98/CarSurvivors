@@ -18,10 +18,10 @@ public class RangedEnemy : Enemy
     private bool isShooting = false;
     private Rigidbody rb;
     //private GameObject Target;
-    private GameObject Target = GameManager.Instance.player;
+    private GameObject Target;
     void Awake()
     {
-       
+        Target = GameManager.Instance.player;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -29,26 +29,26 @@ public class RangedEnemy : Enemy
     {
 
         MoveTowards();
-        //if (PlayerObject != null)
-        //{
-        //    float distanceToPlayer = Vector3.Distance(transform.position, Target.transform.position);
+        if (Target != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, Target.transform.position);
 
-        //    if (distanceToPlayer <= shootingRange)
-        //    {
-        //        rb.velocity = Vector3.zero;
+            if (distanceToPlayer <= shootingRange)
+            {
+                rb.velocity = Vector3.zero;
 
-        //        if (Time.time >= nextShot)
-        //        {
-        //            Debug.Log("FIRING");
-        //            ShootAtPlayer();
-        //        }
-        //    }
-        //    else if (distanceToPlayer > followRange)
-        //    {
-        //        MoveTowards();
-        //        isShooting = false;
-        //    }
-        //}
+                if (Time.time >= nextShot)
+                {
+                    Debug.Log("FIRING");
+                    ShootAtPlayer();
+                }
+            }
+            else if (distanceToPlayer > followRange)
+            {
+                MoveTowards();
+                isShooting = false;
+            }
+        }
     }
 
    
