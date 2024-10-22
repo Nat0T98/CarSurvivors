@@ -17,7 +17,8 @@ public class RangedEnemy : Enemy
 
     private bool isShooting = false;
     private Rigidbody rb;
-    private GameObject Target;
+    //private GameObject Target;
+    private GameObject Target = GameManager.Instance.player;
     void Awake()
     {
        
@@ -26,44 +27,44 @@ public class RangedEnemy : Enemy
 
     void Update()
     {
-        Target = GameManager.Instance.player;
 
-        if (PlayerObject != null)
-        {
-            float distanceToPlayer = Vector3.Distance(transform.position, Target.transform.position);
+        MoveTowards();
+        //if (PlayerObject != null)
+        //{
+        //    float distanceToPlayer = Vector3.Distance(transform.position, Target.transform.position);
 
-            if (distanceToPlayer <= shootingRange)
-            {
-                rb.velocity = Vector3.zero;
+        //    if (distanceToPlayer <= shootingRange)
+        //    {
+        //        rb.velocity = Vector3.zero;
 
-                if (Time.time >= nextShot)
-                {
-                    Debug.Log("FIRING");
-                    ShootAtPlayer();
-                }
-            }
-            else if (distanceToPlayer > followRange)
-            {
-                MoveTowards();
-                isShooting = false;
-            }
-        }
+        //        if (Time.time >= nextShot)
+        //        {
+        //            Debug.Log("FIRING");
+        //            ShootAtPlayer();
+        //        }
+        //    }
+        //    else if (distanceToPlayer > followRange)
+        //    {
+        //        MoveTowards();
+        //        isShooting = false;
+        //    }
+        //}
     }
 
    
 
     public void MoveTowards()
     {
-       
+        //Target = GameManager.Instance.player;
         Vector3 direction = (Target.transform.position - transform.position).normalized;
         rb.velocity = direction * speed;
-        transform.LookAt(Target.transform);
+        //transform.LookAt(Target.transform);
     }
 
 
     void ShootAtPlayer()
     {
-        
+        //Target = GameManager.Instance.player;
         GameObject bullet = Instantiate(bulletPrefab, firingPos.position, firingPos.rotation);
         
         Vector3 directionToPlayer = (Target.transform.position - firingPos.position).normalized;

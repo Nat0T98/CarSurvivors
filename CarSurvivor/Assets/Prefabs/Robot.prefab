@@ -148,8 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92fdcc761d048045b26c34efcdbf9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 3
+  speed: 4
   maxHealth: 100
   health: 0
-  spawnLoc: {x: 0, y: 0, z: 0}
-  speed: 4

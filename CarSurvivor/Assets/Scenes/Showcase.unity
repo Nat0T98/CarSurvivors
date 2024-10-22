@@ -98611,6 +98611,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 40.6
       objectReference: {fileID: 0}
+    - target: {fileID: 5646670409185114134, guid: dc879449da6e13c45a6c44fbc106bedb,
+        type: 3}
+      propertyPath: rangedPrefab
+      value: 
+      objectReference: {fileID: 5347925807942082324, guid: 8e811e0f0d41aa5469c39452feb6fed8,
+        type: 3}
+    - target: {fileID: 5646670409185114134, guid: dc879449da6e13c45a6c44fbc106bedb,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646670409185114134, guid: dc879449da6e13c45a6c44fbc106bedb,
+        type: 3}
+      propertyPath: runnerProbability
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8553248530597268553, guid: dc879449da6e13c45a6c44fbc106bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
