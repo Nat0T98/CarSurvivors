@@ -375,12 +375,12 @@ MonoBehaviour:
   speed: 5
   maxHealth: 100
   health: 0
-  shootingRange: 10
+  shootingRange: 20
   followRange: 15
   bulletPrefab: {fileID: 4757854522929569940, guid: ae9e8d3537cbdcf489c1d17b842e39e9,
     type: 3}
   firingPos: {fileID: 2757472979737168849}
-  bulletSpeed: 20
+  bulletSpeed: 10.87
   bulletSpread: 0.1
   damage: 10
   fireRate: 1

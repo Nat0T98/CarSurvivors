@@ -14,6 +14,8 @@ public class UpgradeManager : MonoBehaviour
     public int PointsToUpgrade = 5;
     public int EnemyPointWorth = 1;
 
+    private bool canOpenMenu;
+
     private void Start()
     {
         Time.timeScale = 1.0f;
@@ -28,7 +30,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 CloseMenu();
             }
-            else
+            else if (canOpenMenu)
             {
                 OpenUpgradeMenu();
             }
@@ -40,12 +42,13 @@ public class UpgradeManager : MonoBehaviour
     public void AddUpgradePoints()
     {
         UpgradePoints += EnemyPointWorth;
+        GameManager.Instance.upgradePointsRef = UpgradePoints;
     }
     public void CheckLevelUp()
     {
         if (UpgradePoints >= PointsToUpgrade)
         {
-            OpenUpgradeMenu();            
+            canOpenMenu = true;           
         }
     }
 
@@ -68,16 +71,22 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpgradeSelected()
     {
-        UpgradeCanvas.SetActive(false);
-        Time.timeScale = 1f;
-        isMenuActive = false;
-        UpgradePoints = 0;  
+        UpgradePoints -= PointsToUpgrade;
+        GameManager.Instance.upgradePointsRef = UpgradePoints;
+        if (UpgradePoints < PointsToUpgrade)
+        {
+            UpgradeCanvas.SetActive(false);
+            canOpenMenu = false;
+            Time.timeScale = 1f;
+            isMenuActive = false;
+        }
+        
         //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
     public void ChooseUpgrade1()
     {
         Debug.Log("Upgrade 1");
-        
+        Car.CarMiniGunUpgrade();
         UpgradeSelected();
     }
 

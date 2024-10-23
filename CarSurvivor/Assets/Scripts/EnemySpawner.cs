@@ -26,6 +26,10 @@ public class EnemySpawner : MonoBehaviour
             nextSpawnTime = Time.time + spawnInterval;
             Debug.Log("Trying to spawn an enemy...");
         }
+        if (spawnInterval > 0.1f)
+        {
+
+        }
     }
 
     void SpawnEnemy()

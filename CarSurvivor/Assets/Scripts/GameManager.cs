@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject player;
     public Transform playerTransform;
+    public int upgradePointsRef;
     private void Awake()
     {
         if (Instance == null)

@@ -39,7 +39,8 @@ public class Bullet : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Enemy>() != null)
             {
-                other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+                //other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+                GameManager.Instance.player.GetComponent<MainCar>().DamageEnemy(other.GetComponent<Enemy>(), damage);
             }
             //else if(collision.gameObject.GetComponent<RunnerEnemy>() != null)
             //{

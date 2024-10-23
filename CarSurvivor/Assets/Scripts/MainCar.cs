@@ -62,18 +62,28 @@ public class MainCar : MonoBehaviour
     public GameObject turretMain;
     private List<GameObject> targetedObjects = new List<GameObject>();
     public float turretRotSpeed = 1;
-    
+    public bool turretActive;
+    public float turretFireRateUpgrade = 0.05f;
+    public float turretFireRateLimit = 0.02f;
+
 
     [Header("Other")]
     public TimeRushTimer RushTimer;
+    public Slider healthUI;
+    public float maxHealth = 100f;
+    public float health;
+    public GameObject gameOverScreen;
+    private Vector3 spawnPos;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
-       
-        
+
+        spawnPos = transform.position;
+
+        health = maxHealth;
 
         /*boostUI.maxValue = maxBoostAmount;
         boostUI.value = 0;*/
@@ -91,7 +101,9 @@ public class MainCar : MonoBehaviour
         {
             //print("reset");
             //SceneManager.LoadScene(resetToScene.name);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            transform.position = spawnPos;
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -141,7 +153,17 @@ public class MainCar : MonoBehaviour
 
         UpdateBoostSlider();
 
-        Turret();
+        if (turretActive)
+        {
+            Turret();
+        }
+        
+
+        if (healthUI != null)
+        {
+            healthUI.maxValue = maxHealth;
+            healthUI.value = health;
+        }
     }
 
     void ActivateBoost()
@@ -432,6 +454,27 @@ public class MainCar : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            if (gameOverScreen != null)
+            {
+                gameOverScreen.GetComponent<GameOver>().GameOverScreen();
+            }
+        }
+    }
 
+    public void CarMiniGunUpgrade()
+    {
+        turretMain.SetActive(true);
+        turretActive = true;
+        GetComponent<Firing>().fireRate -= turretFireRateUpgrade;
+        if (GetComponent<Firing>().fireRate < turretFireRateLimit)
+        {
+            GetComponent<Firing>().fireRate = turretFireRateLimit;
+        }
+    }
 
 }
