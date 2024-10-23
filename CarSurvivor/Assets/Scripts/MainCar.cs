@@ -71,7 +71,8 @@ public class MainCar : MonoBehaviour
 
     [Header("Other")]
     public TimeRushTimer RushTimer;
-    
+    public Vector3 rotationPointOffset = new Vector3(0, 0, 2f);
+
     public GameObject gameOverScreen;
     private Vector3 spawnPos;
 
@@ -108,7 +109,7 @@ public class MainCar : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            SceneManager.LoadScene("Level 1 Design");
+            //SceneManager.LoadScene("Level 1 Design");
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -269,8 +270,17 @@ public class MainCar : MonoBehaviour
         {
             float turn = turnInput * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+
+            Vector3 rotationPointWorld = transform.TransformPoint(rotationPointOffset);
+            //Quaternion rotation = Quaternion.Euler(0f, turn, 0f);
+
             rb.MoveRotation(rb.rotation * turnRotation);
+
+            Vector3 directionToCar = transform.position - rotationPointWorld;
+            Vector3 newCarPosition = turnRotation * directionToCar + rotationPointWorld;
+            rb.MovePosition(newCarPosition);
         }
+
     }   
 
     public void MelleUpgradeTest()
