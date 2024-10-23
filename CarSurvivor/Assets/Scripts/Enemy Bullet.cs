@@ -13,16 +13,14 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            MainCar player = collision.gameObject.GetComponent<MainCar>();
-            if (player != null)
+            if (other.gameObject.GetComponent<MainCar>() != null)
             {
-                player.TakeDamage(damage);
+                GameManager.Instance.player.GetComponent<MainCar>().TakeDamage(damage);
             }
         }
-        
     }
 }

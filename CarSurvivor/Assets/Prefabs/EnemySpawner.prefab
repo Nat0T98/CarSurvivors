@@ -84,7 +84,7 @@ MonoBehaviour:
   - {fileID: 3236286553888608738}
   - {fileID: 3698682612825814004}
   - {fileID: 9210597044226997227}
-  spawnInterval: 2
+  spawnInterval: 0
   runnerProbability: 0.5
 --- !u!1 &363776455690560887
 GameObject:

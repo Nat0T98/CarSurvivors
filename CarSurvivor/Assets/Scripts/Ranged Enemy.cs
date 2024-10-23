@@ -27,8 +27,6 @@ public class RangedEnemy : Enemy
 
     void Update()
     {
-
-        MoveTowards();
         if (Target != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, Target.transform.position);

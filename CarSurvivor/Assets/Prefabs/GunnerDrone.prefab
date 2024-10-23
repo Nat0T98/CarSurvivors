@@ -380,7 +380,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7,
     type: 3}
   firingPos: {fileID: 2757472979737168849}
-  bulletSpeed: 10
-  bulletSpread: 0.1
-  damage: 5
-  fireRate: 2
+  bulletSpeed: 6
+  bulletSpread: 0.5
+  damage: 2
+  fireRate: 3
