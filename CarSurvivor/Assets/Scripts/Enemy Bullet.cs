@@ -20,7 +20,7 @@ public class EnemyBullet : MonoBehaviour
             MainCar player = collision.gameObject.GetComponent<MainCar>();
             if (player != null)
             {
-                //player.takedamage()
+                player.TakeDamage(damage);
             }
         }
         

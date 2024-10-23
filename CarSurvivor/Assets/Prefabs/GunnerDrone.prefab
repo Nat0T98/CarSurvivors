@@ -175,7 +175,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
@@ -185,12 +185,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
@@ -200,7 +200,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
@@ -376,11 +376,11 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   shootingRange: 20
-  followRange: 15
-  bulletPrefab: {fileID: 4757854522929569940, guid: ae9e8d3537cbdcf489c1d17b842e39e9,
+  followRange: 25
+  bulletPrefab: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7,
     type: 3}
   firingPos: {fileID: 2757472979737168849}
-  bulletSpeed: 10.87
+  bulletSpeed: 10
   bulletSpread: 0.1
-  damage: 10
-  fireRate: 1
+  damage: 5
+  fireRate: 2

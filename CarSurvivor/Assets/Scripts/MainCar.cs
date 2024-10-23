@@ -17,6 +17,9 @@ public class MainCar : MonoBehaviour
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
     public float maxDamage = 120f;
+    public float maxHealth = 100f;
+    public float health;  
+    public Slider healthUI;
     [Space(10)]
 
     [Header("Upgrade  References")]
@@ -25,23 +28,6 @@ public class MainCar : MonoBehaviour
     public GameObject wheelSpinnerR;
     public GameObject rammer;
     [Space(10)]
-
-
-    //[Space(10)]
-    [Header("Wheel References")]
-    public GameObject wheel1;
-    public GameObject wheel2;
-    public GameObject wheel3;
-    public GameObject wheel4;
-    [Space(10)]
-
-    [Header("Camera References")]
-    public GameObject camStillRotObject;
-    public GameObject camLockRotObject;
-    public GameObject camLookAtObject;
-    private GameObject currentCamLock;
-    public float camSmoothSpeed = 1.0f;
-    private bool camFlipFlop;
 
     [Header("Boost Parameters")]
     public float boostMulitiplier = 1.25f;    
@@ -57,6 +43,7 @@ public class MainCar : MonoBehaviour
     private float wheelRadius = 0.38f;
     private Rigidbody rb;
     GameManager gameManager;
+    [Space(10)]
 
     [Header("Turret")]
     public GameObject turretMain;
@@ -65,13 +52,26 @@ public class MainCar : MonoBehaviour
     public bool turretActive;
     public float turretFireRateUpgrade = 0.05f;
     public float turretFireRateLimit = 0.02f;
+    [Space(10)]
+    [Header("Wheel References")]
+    public GameObject wheel1;
+    public GameObject wheel2;
+    public GameObject wheel3;
+    public GameObject wheel4;
+    [Space(10)]
 
+    [Header("Camera References")]
+    public GameObject camStillRotObject;
+    public GameObject camLockRotObject;
+    public GameObject camLookAtObject;
+    private GameObject currentCamLock;
+    public float camSmoothSpeed = 1.0f;
+    private bool camFlipFlop;
+    [Space(10)]
 
     [Header("Other")]
     public TimeRushTimer RushTimer;
-    public Slider healthUI;
-    public float maxHealth = 100f;
-    public float health;
+    
     public GameObject gameOverScreen;
     private Vector3 spawnPos;
 
@@ -205,18 +205,6 @@ public class MainCar : MonoBehaviour
         CameraPosition();
     }
 
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Enemy"))
-    //    {
-    //        print("Damaged Enemy");
-    //        if (other.GetComponent<Enemy>() != null)
-    //        {
-    //            DamageEnemy(other.GetComponent<Enemy>(), 0);
-    //        }
-    //    }
-    //}
-
     public void ramTriggerEnter(Collider otherCol)
     {
         if (otherCol.CompareTag("Enemy"))
@@ -243,14 +231,6 @@ public class MainCar : MonoBehaviour
             targetedObjects.Remove(otherCol.gameObject);
             print(otherCol.gameObject.name);
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.collider.CompareTag("Building"))
-        //{
-        //    rb.AddForce()
-        //}
     }
 
     void CameraPosition()
@@ -368,8 +348,8 @@ public class MainCar : MonoBehaviour
             
         }
     }
-
-    /*IEnumerator EndlessEnemyDeath(Enemy enemyScript)
+    #region Old Enumerators
+/*IEnumerator EndlessEnemyDeath(Enemy enemyScript)
     {
         enemyScript.gameObject.SetActive(false);
         print("respawning");
@@ -392,6 +372,9 @@ public class MainCar : MonoBehaviour
         enemyScript.health = enemyScript.maxHealth;
 
     }*/
+    #endregion
+
+    
 
 
     void TestRushEnemyDeath(Enemy enemy)
@@ -409,21 +392,6 @@ public class MainCar : MonoBehaviour
         
     }
 
-
-
-    //void AddPoints()
-    //{
-    //    points += 1;
-    //    /*if (points >= pointsToUpgrade)
-    //    {
-
-    //        MelleUpgradeTest();
-    //        points = 0;
-    //    }*/
-
-
-
-    //Vector3.SmoothDamp()
 
     void Turret()
     {

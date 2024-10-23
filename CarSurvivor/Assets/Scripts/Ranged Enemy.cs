@@ -58,7 +58,7 @@ public class RangedEnemy : Enemy
         //Target = GameManager.Instance.player;
         Vector3 direction = (Target.transform.position - transform.position).normalized;
         rb.velocity = direction * speed;
-        //transform.LookAt(Target.transform);
+        transform.LookAt(Target.transform);
     }
 
 
@@ -77,7 +77,7 @@ public class RangedEnemy : Enemy
 
         nextShot = Time.time + fireRate;
 
-        //EnemyBullet eBulletScript = bullet.GetComponent<EnemyBullet>();
-        //eBulletScript.damage = damage;
+        EnemyBullet eBulletScript = bullet.GetComponent<EnemyBullet>();
+        eBulletScript.damage = damage;
     }
 }

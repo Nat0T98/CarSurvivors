@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6576716075400119983}
   - component: {fileID: 1257509879974409691}
   - component: {fileID: 3701883896587445552}
-  - component: {fileID: 5962637651581516091}
   - component: {fileID: 5286885127849455787}
   - component: {fileID: 2116423863543022504}
+  - component: {fileID: 20443232494630729}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Untagged
@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 8967282007738410105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.5078945, y: 4.4328, z: -6.9529}
-  m_LocalScale: {x: 0.19, y: 0.08715297, z: 0.44829488}
+  m_LocalPosition: {x: -15.5078945, y: 4.4328, z: -6.8249}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fc66b940dce4fd54891ed77ae09a5ca0, type: 2}
+  - {fileID: 2100000, guid: e1afd3dc569b213479a65bc1f4b02d65, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,7 +107,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.08
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3701883896587445552
 Rigidbody:
@@ -136,21 +136,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5962637651581516091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8967282007738410105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1113d89571b76b40a15b320be4ed3e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  lifetime: 5
-  punchthrough: 0
 --- !u!108 &5286885127849455787
 Light:
   m_ObjectHideFlags: 0
@@ -163,8 +148,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0.06054926, a: 1}
-  m_Intensity: 82.4
-  m_Range: 10
+  m_Intensity: 60
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -236,3 +221,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &20443232494630729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8967282007738410105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2c06609232b364b9add687c00607ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  lifetime: 10
+  hasMissed: 0
