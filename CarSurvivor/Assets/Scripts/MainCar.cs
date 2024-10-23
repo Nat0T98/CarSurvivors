@@ -164,6 +164,11 @@ public class MainCar : MonoBehaviour
             healthUI.maxValue = maxHealth;
             healthUI.value = health;
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            health += 99999999f;
+        }
     }
 
     void ActivateBoost()

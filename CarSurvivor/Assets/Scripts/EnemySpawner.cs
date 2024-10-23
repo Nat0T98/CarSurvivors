@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class EnemySpawner : MonoBehaviour
         if (spawnInterval > 0.1f)
         {
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            spawnInterval = 0f;
         }
     }
 
