@@ -16,6 +16,7 @@ public class MainCar : MonoBehaviour
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
+    public float steeringSpeed = 0.1f;
     public float maxDamage = 120f;
     public float maxHealth = 100f;
     public float health;  
@@ -75,6 +76,8 @@ public class MainCar : MonoBehaviour
 
     public GameObject gameOverScreen;
     private Vector3 spawnPos;
+
+    private float steeringObj;
 
     void Start()
     {
@@ -254,6 +257,7 @@ public class MainCar : MonoBehaviour
         float turnInput = Input.GetAxis("Horizontal");
         float currentSpeed = maxSpeed * (isBoosting ? boostMulitiplier : 1f);
 
+        //forward and backward movement
         if (forwardInput > 0)
         {
             rb.AddForce(transform.forward * forwardInput * accelerationForce, ForceMode.Acceleration);
@@ -261,14 +265,30 @@ public class MainCar : MonoBehaviour
         else if (forwardInput < 0)
         {
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
-            turnInput = 0 - turnInput;
+            //turnInput = 0 - turnInput;
         }
-        
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
         
+        //turn movement
+        if (Input.GetKey(KeyCode.A))
+        {
+            steeringObj = Mathf.MoveTowards(steeringObj, -1, steeringSpeed * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            steeringObj = Mathf.MoveTowards(steeringObj, 1, steeringSpeed * Time.deltaTime);
+        }
+        else
+        {
+            steeringObj = Mathf.MoveTowards(steeringObj, 0, steeringSpeed * Time.deltaTime);
+        }
+        
+
+        steeringObj = Mathf.Clamp(steeringObj, -1, 1);
+
         if (rb.velocity.magnitude > 0.1f) 
         {
-            float turn = turnInput * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
+            float turn = steeringObj * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
             Vector3 rotationPointWorld = transform.TransformPoint(rotationPointOffset);

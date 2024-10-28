@@ -118408,6 +118408,11 @@ PrefabInstance:
       objectReference: {fileID: 1204811162}
     - target: {fileID: 4391908391870493270, guid: b039e24608bbfb444b7be36590ed0b29,
         type: 3}
+      propertyPath: steeringSpeed
+      value: 1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391908391870493270, guid: b039e24608bbfb444b7be36590ed0b29,
+        type: 3}
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 1265349167}
