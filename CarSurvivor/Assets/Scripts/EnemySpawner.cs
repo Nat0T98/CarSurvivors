@@ -53,11 +53,11 @@ public class EnemySpawner : MonoBehaviour
         Debug.Log("Spawning enemy at: " + spawnPoint.position);
 
         Enemy enemyScript = enemyType.GetComponent<Enemy>();
-        if (enemyScript != null)
+       /* if (enemyScript != null)
         {
             enemyScript.SetPlayerObj(GameManager.Instance.player);
             enemyScript.SetPlayerTransform(GameManager.Instance.playerTransform);
-        }
+        }*/
 
     }
 

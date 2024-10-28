@@ -69,10 +69,11 @@ public class RangedEnemy : Enemy
     private void AttackPlayer()
     {
       
-        transform.LookAt(Target);      
+        transform.LookAt(Target);    //keep aiming at player  
  
         if (!hasAttacked)
         {
+            //add sfx and visuals here
             Rigidbody rigb = Instantiate(Laser, firingPos.position, Quaternion.identity).GetComponent<Rigidbody>();
             rigb.AddForce(transform.forward * LaserSpeed, ForceMode.Impulse);
         

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a136bad156592164faa52cc6296a9cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runnerPrefab: {fileID: 5862294416274150896, guid: 56ddd729d47a85044bad7f56db8d9fb8,
+  runnerPrefab: {fileID: 5862294416274150896, guid: 3ab1e25c7ecd2e44f9c6bc6c3a7ad950,
     type: 3}
   rangedPrefab: {fileID: 5347925807942082324, guid: 8e811e0f0d41aa5469c39452feb6fed8,
     type: 3}
@@ -84,7 +84,7 @@ MonoBehaviour:
   - {fileID: 3236286553888608738}
   - {fileID: 3698682612825814004}
   - {fileID: 9210597044226997227}
-  spawnInterval: 0
+  spawnInterval: 1
   runnerProbability: 0.5
 --- !u!1 &363776455690560887
 GameObject:
