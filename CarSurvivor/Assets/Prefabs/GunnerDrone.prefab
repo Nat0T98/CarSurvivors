@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 7370047928297269056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.71648467, z: 0, w: 0.6976029}
-  m_LocalPosition: {x: -0.539, y: -0.112, z: -0.015}
+  m_LocalPosition: {x: -0.575, y: -0.112, z: -0.016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,17 +160,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -110.68
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -45.47
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
@@ -245,6 +245,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -4841541377017975237}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8199264278493562402}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       insertIndex: -1
@@ -360,6 +364,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4555893, y: 1.7677405, z: 1.542923}
   m_Center: {x: 0.007938385, y: -0.38387036, z: 0.017486572}
+--- !u!195 &8199264278493562402
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347925807942082324}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 2
+  m_Speed: 8
+  m_Acceleration: 4
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 10
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.04
+  m_BaseOffset: 1.73
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &3733640510462509156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,15 +398,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54461c39747bff44cb88811e10d23c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   maxHealth: 100
   health: 0
-  shootingRange: 20
-  followRange: 25
-  bulletPrefab: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7,
-    type: 3}
   firingPos: {fileID: 2757472979737168849}
-  bulletSpeed: 6
-  bulletSpread: 0.5
+  Laser: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7, type: 3}
+  LaserSpeed: 8
   damage: 2
-  fireRate: 3
+  timeBetweenAttacks: 2
+  StoppingRange: 10
+  AttackingRange: 20
+  isInAttackRange: 0
+  isInStoppingRange: 0
+  hasAttacked: 0
+  agent: {fileID: 8199264278493562402}
+  player: {fileID: 810731362967932891, guid: 21016c46274600b418387d4ffc1f0a73, type: 3}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 256

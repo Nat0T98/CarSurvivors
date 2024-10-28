@@ -28,7 +28,7 @@ public class RunnerEnemy : Enemy
     {
         Target = GameManager.Instance.player;
         Vector3 direction = (Target.transform.position - transform.position).normalized;
-        rb.velocity = direction * speed;
+        //rb.velocity = direction * speed;
         //transform.LookAt(Target.transform);
     }
 

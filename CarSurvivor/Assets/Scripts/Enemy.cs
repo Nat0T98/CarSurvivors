@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Stats")]
     protected GameObject PlayerObject;
     protected Transform PlayerTransform;
-    public float speed = 1f;
+    //public float speed = 1f;
     //public float respawnTime = 3f;
     public float maxHealth = 100;
     public float health;
