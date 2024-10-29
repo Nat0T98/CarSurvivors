@@ -44,9 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e66f3dd82cb9d4eb6ae5fdd86efbd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 810731362967932891, guid: 21016c46274600b418387d4ffc1f0a73,
-    type: 3}
-  player: {fileID: 810731362967932891, guid: 21016c46274600b418387d4ffc1f0a73, type: 3}
-  playerTransform: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
-    type: 3}
-  upgradePointsRef: 0
+  player: {fileID: 0}

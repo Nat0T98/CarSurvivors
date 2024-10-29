@@ -28,15 +28,14 @@ public class RunnerEnemy : Enemy
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //player = GameManager.Instance.player;
+        player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
         playerScript = GameManager.Instance.player.GetComponent<MainCar>();
 
     }
     void Update()
     {
-        Target = GameManager.Instance.player.transform.position;
-        //Target = player.transform.position;
+        Target = player.transform.position;
         isInAttackRange = Physics.CheckSphere(transform.position, AttackingRange, whatIsPlayer);
 
 

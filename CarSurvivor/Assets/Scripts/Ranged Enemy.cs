@@ -19,7 +19,7 @@ public class RangedEnemy : Enemy
 
     [Header("NavMesh References")]
     public NavMeshAgent agent;
-    //public GameObject player;
+    public GameObject player;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
@@ -28,14 +28,14 @@ public class RangedEnemy : Enemy
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //player = GameManager.Instance.player;
+        player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
         
     }
 
     void Update()
     {
-        Target = GameManager.Instance.player.transform.position;
+        Target = player.transform.position;
         //Constant checking of attack radius
         isInAttackRange = Physics.CheckSphere(transform.position, AttackingRange, whatIsPlayer);
         isInStoppingRange = Physics.CheckSphere(transform.position, StoppingRange, whatIsPlayer);
