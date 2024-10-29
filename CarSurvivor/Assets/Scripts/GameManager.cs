@@ -19,8 +19,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-
-
+    public void InitializeCar()
+    {
+        player = GameObject.FindWithTag("Player");
     }
 }

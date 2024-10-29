@@ -79,6 +79,11 @@ public class MainCar : MonoBehaviour
 
     private float steeringObj;
 
+    private void Awake()
+    {
+        GameManager.Instance.InitializeCar();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
