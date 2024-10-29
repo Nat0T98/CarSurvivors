@@ -13,6 +13,7 @@ public class RunnerEnemy : Enemy
     public float damageRadius;
     [HideInInspector] public bool isInAttackRange;
     private bool isCharging;
+    public GameObject ExplosionEffect;
 
     [Header("NavMesh References")]
     public NavMeshAgent agent;
@@ -73,6 +74,7 @@ public class RunnerEnemy : Enemy
             }
         }
         //Add Explosion sfx, particles and whatever else here
+       Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
       
         Destroy(gameObject); 
     }

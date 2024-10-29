@@ -179,6 +179,8 @@ MonoBehaviour:
   damage: 10
   damageRadius: 5
   isInAttackRange: 0
+  ExplosionEffect: {fileID: 4956222297010266826, guid: a4a030f1159df7d4cbaeff4b31d4f626,
+    type: 3}
   agent: {fileID: -8148526284554539315}
   player: {fileID: 0}
   whatIsGround:

@@ -20,6 +20,6 @@ public class GarageManager : MonoBehaviour
     public void LoadMainMenu()
     {
         AudioManager.GlobalAudioManager.StopMusic();
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 }

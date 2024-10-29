@@ -17,12 +17,13 @@ public class AudioManager : MonoBehaviour
     {
         
 
-        for (int i = 0; i < ClipNames.Count; i++)
-            SFX_Lib.Add(ClipNames[i], ClipList[i]);
+        
     }
 
     private void Awake()
     {
+        for (int i = 0; i < ClipNames.Count; i++)
+            SFX_Lib.Add(ClipNames[i], ClipList[i]);
         if (GlobalAudioManager != null)
         {
             Destroy(gameObject);

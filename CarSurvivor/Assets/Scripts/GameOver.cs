@@ -38,7 +38,7 @@ public class GameOver : MonoBehaviour
     public void PlayAgainButton()
     {
         AudioManager.GlobalAudioManager.PlaySFX("UI Button");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
 
@@ -49,13 +49,13 @@ public class GameOver : MonoBehaviour
         GameOverCanvas.SetActive(false);
         Time.timeScale = 1f;
         AudioManager.GlobalAudioManager.StopMusic();
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 
 
-    public void LoadMainMenu()
-    {
-        AudioManager.GlobalAudioManager.StopMusic();
-        SceneManager.LoadScene("Main Menu");
-    }
+    //public void LoadMainMenu()
+    //{
+    //    AudioManager.GlobalAudioManager.StopMusic();
+    //    //SceneManager.LoadScene("Main Menu");
+    //}
 }

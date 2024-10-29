@@ -402,7 +402,7 @@ MonoBehaviour:
   health: 0
   firingPos: {fileID: 2757472979737168849}
   Laser: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7, type: 3}
-  LaserSpeed: 8
+  LaserSpeed: 15
   damage: 2
   timeBetweenAttacks: 2
   StoppingRange: 10
