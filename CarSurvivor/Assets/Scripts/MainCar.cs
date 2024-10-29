@@ -81,6 +81,7 @@ public class MainCar : MonoBehaviour
 
     void Start()
     {
+       
         rb = GetComponent<Rigidbody>();
         Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
@@ -89,9 +90,7 @@ public class MainCar : MonoBehaviour
 
         health = maxHealth;
 
-        /*boostUI.maxValue = maxBoostAmount;
-        boostUI.value = 0;*/
-
+       
         if (boostUI != null)
         {
             boostUI.maxValue = maxBoostAmount;
@@ -100,19 +99,11 @@ public class MainCar : MonoBehaviour
     }
     void Update()
     {
-        //print(rb.velocity.magnitude);
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
-            //print("reset");
-            //SceneManager.LoadScene(resetToScene.name);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+            
             transform.position = spawnPos;
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            //SceneManager.LoadScene("Level 1 Design");
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -360,19 +351,19 @@ public class MainCar : MonoBehaviour
             enemyScript.health = 0;
             if (currentScene.name == "Showcase")
             {
-                TestEndlessEnemyDeath(enemyScript);
+                EndlessEnemyDeath(enemyScript);
                 // StartCoroutine(EndlessEnemyDeath(enemyScript));
 
             }
         else if (currentScene.name == "EndlessTest")
             {
-                TestEndlessEnemyDeath(enemyScript);
+                EndlessEnemyDeath(enemyScript);
                // StartCoroutine(EndlessEnemyDeath(enemyScript));
            
             }
         else if (currentScene.name == "TimeRushTest")
             {
-                TestRushEnemyDeath(enemyScript);
+                RushEnemyDeath(enemyScript);
                 //StartCoroutine(TimeRushEnemyDeath(enemyScript));
             }
         else
@@ -412,7 +403,7 @@ public class MainCar : MonoBehaviour
     
 
 
-    void TestRushEnemyDeath(Enemy enemy)
+    void RushEnemyDeath(Enemy enemy)
     {
         Destroy(enemy.gameObject);
         Upgrades.AddUpgradePoints();
@@ -420,7 +411,7 @@ public class MainCar : MonoBehaviour
 
     }
 
-    void TestEndlessEnemyDeath(Enemy enemy)
+    void EndlessEnemyDeath(Enemy enemy)
     {
         Upgrades.AddUpgradePoints();
         Destroy(enemy.gameObject);
