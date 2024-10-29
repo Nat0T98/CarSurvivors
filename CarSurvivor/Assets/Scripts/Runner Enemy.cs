@@ -17,7 +17,7 @@ public class RunnerEnemy : Enemy
 
     [Header("NavMesh References")]
     public NavMeshAgent agent;
-    //public GameObject player;
+    public GameObject player;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
