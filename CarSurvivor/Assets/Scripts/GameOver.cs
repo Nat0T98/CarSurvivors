@@ -37,7 +37,7 @@ public class GameOver : MonoBehaviour
 
     public void PlayAgainButton()
     {
-        //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
@@ -45,10 +45,10 @@ public class GameOver : MonoBehaviour
 
     public void MainMenuButton()
     {
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         GameOverCanvas.SetActive(false);
         Time.timeScale = 1f;
-        AudioManager.GlobalAudioManager.StopMusic();
+        MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Main Menu");
     }
 

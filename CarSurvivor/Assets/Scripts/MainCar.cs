@@ -154,7 +154,7 @@ public class MainCar : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            AudioManager.GlobalAudioManager.PlaySFX("Beep");
+            SFX_Manager.GlobalSFXManager.PlaySFX("Beep");
         }
 
         if (Input.GetKey(KeyCode.Space) && currentBoostAmount > 0)

@@ -40,13 +40,13 @@ public class PauseMenu : MonoBehaviour
         PauseMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
     } 
 
 
     public void MainMenuButton()
     { 
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         PauseMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -57,7 +57,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        AudioManager.GlobalAudioManager.StopMusic();
+        MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Main Menu");
     }
     

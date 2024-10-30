@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemy();
             nextSpawnTime = Time.time + spawnInterval;
-            Debug.Log("Trying to spawn an enemy...");
+            //Debug.Log("Trying to spawn an enemy...");
         }
         if (spawnInterval > 0.1f)
         {
@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
         Transform spawnPoint = spawnPoints[locations];
         GameObject enemyType = ChooseEnemyType();
         Instantiate(enemyType, spawnPoint.position, spawnPoint.rotation);
-        Debug.Log("Spawning enemy at: " + spawnPoint.position);
+        //Debug.Log("Spawning enemy at: " + spawnPoint.position);
 
         Enemy enemyScript = enemyType.GetComponent<Enemy>();
        /* if (enemyScript != null)
