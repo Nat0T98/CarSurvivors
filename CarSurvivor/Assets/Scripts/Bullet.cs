@@ -35,6 +35,8 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.name + "ksrhbkajserfbnk");
+        
         if (other.gameObject.CompareTag("Enemy"))
         {
             if (other.gameObject.GetComponent<Enemy>() != null)

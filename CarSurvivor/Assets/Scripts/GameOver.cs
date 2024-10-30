@@ -37,7 +37,7 @@ public class GameOver : MonoBehaviour
 
     public void PlayAgainButton()
     {
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }

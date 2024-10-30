@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -79,6 +80,10 @@ public class MainCar : MonoBehaviour
 
     private float steeringObj;
 
+    public float boomExtraLength = 0;
+    private float boomInitDist;
+    private bool boomOnce;
+
     private void Awake()
     {
         GameManager.Instance.InitializeCar();
@@ -93,6 +98,7 @@ public class MainCar : MonoBehaviour
         spawnPos = transform.position;
 
         health = maxHealth;
+
 
         /*boostUI.maxValue = maxBoostAmount;
         boostUI.value = 0;*/
@@ -178,6 +184,12 @@ public class MainCar : MonoBehaviour
         {
             health += 99999999f;
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Upgrades.EnemyPointWorth = 999999;
+            Upgrades.AddUpgradePoints();
+        }
     }
 
     void ActivateBoost()
@@ -217,6 +229,7 @@ public class MainCar : MonoBehaviour
         HandleMovement();
         SpinWheels();
         CameraPosition();
+        CamBoom();
     }
 
     public void ramTriggerEnter(Collider otherCol)
@@ -243,7 +256,7 @@ public class MainCar : MonoBehaviour
         if (otherCol.CompareTag("Enemy"))
         {
             targetedObjects.Remove(otherCol.gameObject);
-            print(otherCol.gameObject.name);
+            //print(otherCol.gameObject.name);
         }
     }
 
@@ -254,6 +267,27 @@ public class MainCar : MonoBehaviour
         Camera.main.transform.LookAt(camLookAtObject.transform);
     }
 
+    void CamBoom()
+    {
+        Vector3 endPoint = currentCamLock.transform.position;
+        Vector3 startPoint = new Vector3(transform.position.x, currentCamLock.transform.position.y, transform.position.z);
+
+        Vector3 direction = (endPoint - startPoint).normalized;
+        if (boomOnce == false)
+        {
+            boomInitDist = Vector3.Distance(startPoint, endPoint) + boomExtraLength;
+            boomOnce = true;
+        }
+        
+
+        if (Physics.Raycast(startPoint, direction, out RaycastHit hitInfo, boomInitDist))
+        {
+            currentCamLock.transform.position = hitInfo.point;
+        }
+
+        
+        Debug.DrawLine(startPoint, startPoint + direction * boomInitDist, Color.blue);
+    }
     
 
     void HandleMovement()
