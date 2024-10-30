@@ -147,8 +147,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 5862294416274150896}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.56
-  m_Speed: 7
+  m_Radius: 1
+  m_Speed: 12
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -174,10 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
-  AttackingRange: 5
-  chargeUpTime: 3
-  damage: 10
-  damageRadius: 5
+  AttackingRange: 8
+  chargeUpTime: 0.7
+  damage: 5
+  damageRadius: 6
   isInAttackRange: 0
   ExplosionEffect: {fileID: 4956222297010266826, guid: a4a030f1159df7d4cbaeff4b31d4f626,
     type: 3}
