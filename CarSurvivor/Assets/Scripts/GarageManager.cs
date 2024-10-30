@@ -8,18 +8,18 @@ public class GarageManager : MonoBehaviour
 {
     private void Awake()
     {
-        AudioManager.GlobalAudioManager.LoopMusic("Garage Music");
+        MusicManager.GlobalMusicManager.LoopMusic("Garage_Music");
     }
 
     public void BackButton()
     {
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         Invoke("LoadMainMenu", 1);
     }
 
     public void LoadMainMenu()
     {
-        AudioManager.GlobalAudioManager.StopMusic();
+        MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Main Menu");
     }
 }

@@ -12,7 +12,7 @@ public class EndlessTimer : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.GlobalAudioManager.LoopMusic("Endless Music");
+        MusicManager.GlobalMusicManager.LoopMusic("Game_Music1");
     }
 
 

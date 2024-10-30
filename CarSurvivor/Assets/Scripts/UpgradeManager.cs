@@ -65,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
         UpgradeCanvas.SetActive(false);
         Time.timeScale = 1f;
         isMenuActive = false;
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         //Debug.Log(UpgradeCanvas.active);
     }
 

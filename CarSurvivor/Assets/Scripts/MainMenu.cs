@@ -15,24 +15,24 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-       AudioManager.GlobalAudioManager.LoopMusic("Menu Music");
+       MusicManager.GlobalMusicManager.LoopMusic("Menu Music");
     }
     
     public void EndlessModeButton()
-    { 
-        AudioManager.GlobalAudioManager.PlaySFX("Play Button");
+    {
+        SFX_Manager.GlobalSFXManager.PlaySFX("Play_Button");
         Invoke("LoadEndlessMode", 2); //wait 2 seconds so that SFX can play
     }
     public void TimeRushModeButton()
     {
-        AudioManager.GlobalAudioManager.PlaySFX("Play Button");
+        MusicManager.GlobalMusicManager.PlaySFX("Play Button");
         Invoke("LoadTimeRushMode", 2); //wait 2 seconds so that SFX can play
     }
 
 
     public void GaragaeButton()
     {
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         Invoke("LoadGarage", 1);
 
     }
@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
     public void SettingsButton()
     {
 
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
 
     }
 
@@ -48,24 +48,24 @@ public class MainMenu : MonoBehaviour
     {
         //Application.Quit();
         Debug.Log("Quit");
-        AudioManager.GlobalAudioManager.PlaySFX("UI Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
     }
 
     public void LoadEndlessMode()
     {
-        AudioManager.GlobalAudioManager.StopMusic();
+        MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Showcase");
     }
     public void LoadTimeRushMode()
     {
-        AudioManager.GlobalAudioManager.StopMusic();
+        MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("TimeRushTest");
     }
 
 
     public void LoadGarage()
     {
-        AudioManager.GlobalAudioManager.StopMusic();
+        MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Garage");
     }
 }
