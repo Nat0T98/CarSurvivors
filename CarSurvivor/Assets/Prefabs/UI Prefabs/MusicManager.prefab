@@ -46,7 +46,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -159,3 +159,7 @@ MonoBehaviour:
   Music_Prefab: {fileID: 3224560746294379828, guid: b2aaa0d310057e54996a58fec571db62,
     type: 3}
   MusicSource: {fileID: 2391741416335585750}
+  GameMusicPlaylist:
+  - Game_Music1
+  - Game_Music2
+  - Game_Music3
