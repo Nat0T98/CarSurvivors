@@ -24,13 +24,14 @@ public class RunnerEnemy : Enemy
     private Rigidbody rb;
     private Vector3 Target; 
     private MainCar playerScript;
-
+    private MeshRenderer enemyMeshRenderer;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
         playerScript = GameManager.Instance.player.GetComponent<MainCar>();
+        enemyMeshRenderer = gameObject.GetComponent<MeshRenderer>();
 
     }
     void Update()
@@ -73,9 +74,11 @@ public class RunnerEnemy : Enemy
                 playerScript.TakeDamage(damage); 
             }
         }
-        //Add Explosion sfx, particles and whatever else here
-       Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+        enemyMeshRenderer.enabled = false;
+        ExplosionEffect.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
       
+
         Destroy(gameObject); 
     }
 
