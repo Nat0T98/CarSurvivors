@@ -207,6 +207,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5166156329421775347, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cf2fc0299cf8634ab76644f6047bc6b, type: 2}
     - target: {fileID: 919132149155446097, guid: 5e3f4a4868ac1614fb4955543ffbb0b6,
         type: 3}
       propertyPath: m_Name
@@ -378,9 +383,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 5347925807942082324}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
-  m_Speed: 8
-  m_Acceleration: 4
+  m_Radius: 1
+  m_Speed: 10
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 10
@@ -389,7 +394,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2.04
   m_BaseOffset: 1.73
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3733640510462509156
 MonoBehaviour:
@@ -407,7 +412,7 @@ MonoBehaviour:
   health: 0
   firingPos: {fileID: 2757472979737168849}
   Laser: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7, type: 3}
-  LaserSpeed: 15
+  LaserSpeed: 16
   damage: 2
   timeBetweenAttacks: 2
   StoppingRange: 10
