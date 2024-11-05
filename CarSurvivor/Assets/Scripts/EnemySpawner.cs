@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -8,70 +9,76 @@ public class EnemySpawner : MonoBehaviour
     public GameObject runnerPrefab;
     public GameObject rangedPrefab;
     [Space(10)]
-    [Header("Spawn Points")]
+   /* [Header("Spawn Points")]
     public List<Transform> spawnPoints;
-    [Space(10)]
+    [Space(10)]*/
     [Header("Spawn Settings")]
+    public float minSpawnRadius = 5f; 
+    public float maxSpawnRadius = 20f;
+
     public float spawnInterval = 5f;
     [Range(0f, 1f)]
     public float runnerProbability = 0.7f;
 
     private float nextSpawnTime = 0f;
+    private Transform player;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        player = GameManager.Instance.player.transform;
+    }
     void Update()
     {
         if (Time.time >= nextSpawnTime)
         {
-            SpawnEnemy();
+            TrySpawnEnemy();
             nextSpawnTime = Time.time + spawnInterval;
             //Debug.Log("Trying to spawn an enemy...");
         }
-        if (spawnInterval > 0.1f)
-        {
+    }
 
-        }
 
-        if (Input.GetKeyDown(KeyCode.J))
+    void TrySpawnEnemy()
+    {
+        if (player == null) return;
+
+        Vector3 randPos = GetRandomSpawnPosition();
+        if (IsOnNavMesh(randPos))
         {
-            spawnInterval = 0f;
+            GameObject enemyType = ChooseEnemyType();
+            Instantiate(enemyType, randPos, Quaternion.identity);
         }
     }
 
-    void SpawnEnemy()
+    Vector3 GetRandomSpawnPosition()
     {
-        if (spawnPoints.Count == 0) 
-        {
-            Debug.LogWarning("No spawn points available!");
-            return;
-        }
+        Vector2 randDir = Random.insideUnitCircle.normalized;
+        float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
+        Vector3 spawnOffset = new Vector3(randDir.x, 0, randDir.y) * distance;
+        return player.position + spawnOffset;
+    }
 
-        int locations = Random.Range(0, spawnPoints.Count);
-        Transform spawnPoint = spawnPoints[locations];
-        GameObject enemyType = ChooseEnemyType();
-        Instantiate(enemyType, spawnPoint.position, spawnPoint.rotation);
-        //Debug.Log("Spawning enemy at: " + spawnPoint.position);
-
-        Enemy enemyScript = enemyType.GetComponent<Enemy>();
-       /* if (enemyScript != null)
-        {
-            enemyScript.SetPlayerObj(GameManager.Instance.player);
-            enemyScript.SetPlayerTransform(GameManager.Instance.playerTransform);
-        }*/
-
+    bool IsOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        return NavMesh.SamplePosition(position, out hit, 1.0f, NavMesh.AllAreas);
     }
 
     GameObject ChooseEnemyType()
     {
         float chance = Random.value;
+        return chance <= runnerProbability ? runnerPrefab : rangedPrefab;
+    }
 
-        if (chance <= runnerProbability)
+    void OnDrawGizmos()
+    {
+        if (player != null)
         {
-            return runnerPrefab;
-        }
-        else
-        {
-            return rangedPrefab;
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(player.position, minSpawnRadius);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(player.position, maxSpawnRadius);
         }
     }
 }
