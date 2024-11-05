@@ -17,6 +17,9 @@ public class MainCar : MonoBehaviour
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
+    public float driftTurnSpeed = 200f;
+    public float driftForce = 10f;
+    public float driftFactor = 0.95f;
     public float steeringSpeed = 0.1f;
     public float maxDamage = 120f;
     public float maxHealth = 100f;
@@ -56,10 +59,19 @@ public class MainCar : MonoBehaviour
     public float turretFireRateLimit = 0.02f;
     [Space(10)]
     [Header("Wheel References")]
-    public GameObject wheel1;
-    public GameObject wheel2;
-    public GameObject wheel3;
-    public GameObject wheel4;
+    public float skidThreshholdAngle;
+    public GameObject smokeObj;
+    public float smokeSpawnDelay = 0.5f;
+    public float smokeSpawnVarience = 0.2f;
+
+    [Serializable]
+    public struct Wheels
+    {
+        public GameObject wheelObj;
+        public GameObject wheelEffectObj;
+        private float smokeTime;
+    }
+    public List<Wheels> wheels;
     [Space(10)]
 
     [Header("Camera References")]
@@ -83,6 +95,7 @@ public class MainCar : MonoBehaviour
     public float boomExtraLength = 0;
     private float boomInitDist;
     private bool boomOnce;
+    private bool isDrifting; 
 
     private void Awake()
     {
@@ -157,7 +170,16 @@ public class MainCar : MonoBehaviour
             SFX_Manager.GlobalSFXManager.PlaySFX("Beep");
         }
 
-        if (Input.GetKey(KeyCode.Space) && currentBoostAmount > 0)
+        if (Input.GetKey(KeyCode.Space))
+        {
+            isDrifting = true;
+        }
+        else
+        {
+            isDrifting = false;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && currentBoostAmount > 0)
         {
             ActivateBoost();
         }
@@ -190,6 +212,8 @@ public class MainCar : MonoBehaviour
             Upgrades.EnemyPointWorth = 999999;
             Upgrades.AddUpgradePoints();
         }
+
+        wheelSkidMarks();
     }
 
     void ActivateBoost()
@@ -295,6 +319,7 @@ public class MainCar : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical"); 
         float turnInput = Input.GetAxis("Horizontal");
         float currentSpeed = maxSpeed * (isBoosting ? boostMulitiplier : 1f);
+        //float turnAmount = (isDrifting ? driftTurnSpeed : turnSpeed) * turnInput * Time.fixedDeltaTime;
 
         //forward and backward movement
         if (forwardInput > 0)
@@ -307,25 +332,26 @@ public class MainCar : MonoBehaviour
             //turnInput = 0 - turnInput;
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
-        
+
         //turn movement
-        if (Input.GetKey(KeyCode.A))
-        {
-            steeringObj = Mathf.MoveTowards(steeringObj, -1, steeringSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            steeringObj = Mathf.MoveTowards(steeringObj, 1, steeringSpeed * Time.deltaTime);
-        }
-        else
-        {
-            steeringObj = Mathf.MoveTowards(steeringObj, 0, steeringSpeed * Time.deltaTime);
-        }
-        
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    steeringObj = Mathf.MoveTowards(steeringObj, -1, steeringSpeed * Time.deltaTime);
+        //}
+        //else if (Input.GetKey(KeyCode.D))
+        //{
+        //    steeringObj = Mathf.MoveTowards(steeringObj, 1, steeringSpeed * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    steeringObj = Mathf.MoveTowards(steeringObj, 0, steeringSpeed * Time.deltaTime);
+        //}
+
+        steeringObj = Mathf.MoveTowards(steeringObj, turnInput, steeringSpeed * Time.deltaTime);
 
         steeringObj = Mathf.Clamp(steeringObj, -1, 1);
 
-        if (rb.velocity.magnitude > 0.1f) 
+        if (rb.velocity.magnitude > 0.1f)
         {
             float turn = steeringObj * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
@@ -340,6 +366,29 @@ public class MainCar : MonoBehaviour
             rb.MovePosition(newCarPosition);
         }
 
+        //if (rb.velocity.magnitude < maxSpeed)
+        //{
+        //    if (isDrifting)
+        //    {
+        //        rb.AddForce(transform.forward * forwardInput * driftForce * Time.fixedDeltaTime, ForceMode.Acceleration);
+        //    }
+        //    else
+        //    {
+        //        rb.AddForce(transform.forward * forwardInput * accelerationForce * Time.fixedDeltaTime, ForceMode.Acceleration);
+        //    }
+        //}
+
+        //if (isDrifting)
+        //{
+        //    rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, driftFactor);
+        //}
+
+
+
+        //if (rb.velocity.magnitude > 0.1f)
+        //{
+        //    rb.MoveRotation(rb.rotation * Quaternion.Euler(0, turnAmount, 0));
+        //}
     }   
 
     public void MelleUpgradeTest()
@@ -367,11 +416,10 @@ public class MainCar : MonoBehaviour
         float distanceTraveled = rb.velocity.magnitude * Time.deltaTime;
         float rotationAngle = (distanceTraveled / (2 * Mathf.PI * wheelRadius)) * 360f;
 
-        
-        RotateWheel(wheel1, rotationAngle);
-        RotateWheel(wheel2, rotationAngle);
-        RotateWheel(wheel3, rotationAngle);
-        RotateWheel(wheel4, rotationAngle);
+        foreach (var wheel in wheels)
+        {
+            RotateWheel(wheel.wheelObj, rotationAngle);
+        }
     }
 
     void RotateWheel(GameObject wheel, float rotationAngle)
@@ -516,6 +564,25 @@ public class MainCar : MonoBehaviour
         if (GetComponent<Firing>().fireRate < turretFireRateLimit)
         {
             GetComponent<Firing>().fireRate = turretFireRateLimit;
+        }
+    }
+
+    private void wheelSkidMarks()
+    {
+        if (Vector3.Angle(transform.forward.normalized, rb.velocity.normalized) >= skidThreshholdAngle)
+        {
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
+                //Instantiate();
+            }
+        }
+        else
+        {
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
+            }
         }
     }
 
