@@ -6,11 +6,15 @@ using UnityEngine.UIElements;
 public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100;
+    public GameObject oilPrefab;
+    public int oilSpawnCountMin = 1;
+    public int oilSpawnCountMax = 3;
     [HideInInspector]public float health;
     [SerializeField]
     private float lifetime = 10f;  // Lifetime of the enemy in seconds
     private float lifetimeTimer;
     private UpgradeManager upgradeManager;
+    private static bool isQuitting = false;
    
     void Start()
     {
@@ -36,5 +40,21 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
+    private void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+
+    private void OnDestroy()
+    {
+        if (isQuitting) return;
+
+        int spawnCount = Random.Range(oilSpawnCountMin, oilSpawnCountMax);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Instantiate(oilPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
 }

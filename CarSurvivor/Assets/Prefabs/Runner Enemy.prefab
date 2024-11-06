@@ -175,7 +175,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  oilPrefab: {fileID: 7949151436896390533, guid: e4e04bd5533e8694896b479c1f223242,
+    type: 3}
+  oilSpawnCountMin: 5
+  oilSpawnCountMax: 10
   health: 0
+  lifetime: 10
   AttackingRange: 6
   chargeUpTime: 0.3
   damage: 5
