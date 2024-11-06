@@ -600,6 +600,11 @@ public class MainCar : MonoBehaviour
         }
     }
 
+    public void VehicleChange(int vehicle)
+    {
+        
+    }
+    
     public void ScreenShake(Vector3 shakeOrigin, float power)
     {
 
