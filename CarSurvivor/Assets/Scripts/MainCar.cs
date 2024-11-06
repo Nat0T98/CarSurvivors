@@ -17,9 +17,6 @@ public class MainCar : MonoBehaviour
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
-    public float driftTurnSpeed = 200f;
-    public float driftForce = 10f;
-    public float driftFactor = 0.95f;
     public float steeringSpeed = 0.1f;
     public float maxDamage = 120f;
     public float maxHealth = 100f;
@@ -63,13 +60,14 @@ public class MainCar : MonoBehaviour
     public GameObject smokeObj;
     public float smokeSpawnDelay = 0.5f;
     public float smokeSpawnVarience = 0.2f;
+    private bool skidOnce = true;
+    private bool canSmoke;
 
     [Serializable]
     public struct Wheels
     {
         public GameObject wheelObj;
         public GameObject wheelEffectObj;
-        private float smokeTime;
     }
     public List<Wheels> wheels;
     [Space(10)]
@@ -124,6 +122,9 @@ public class MainCar : MonoBehaviour
     }
     void Update()
     {
+        //print("Speed:" + rb.velocity.magnitude);
+        
+        
         //print(rb.velocity.magnitude);
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -569,16 +570,23 @@ public class MainCar : MonoBehaviour
 
     private void wheelSkidMarks()
     {
-        if (Vector3.Angle(transform.forward.normalized, rb.velocity.normalized) >= skidThreshholdAngle)
+        if (Vector3.Angle(transform.forward.normalized, rb.velocity.normalized) >= skidThreshholdAngle && rb.velocity.magnitude > 10)
         {
+            canSmoke = true;
             foreach (var wheel in wheels)
             {
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
-                //Instantiate();
+                if (skidOnce)
+                {
+                    StartCoroutine(SpawnSmoke(wheel.wheelObj));
+                }
             }
+            skidOnce = false;
         }
         else
         {
+            skidOnce = true;
+            canSmoke = false;
             foreach (var wheel in wheels)
             {
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
@@ -586,4 +594,12 @@ public class MainCar : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnSmoke(GameObject wheelobj)
+    {
+        while(canSmoke)
+        {
+            Instantiate(smokeObj, wheelobj.transform.position + new Vector3(0, 0.3f, 0), wheelobj.transform.rotation);
+            yield return new WaitForSeconds(smokeSpawnDelay + UnityEngine.Random.Range(-smokeSpawnVarience, smokeSpawnVarience));
+        }
+    }
 }

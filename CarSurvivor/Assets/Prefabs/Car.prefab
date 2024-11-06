@@ -273,6 +273,10 @@ MonoBehaviour:
   turretFireRateUpgrade: 0.05
   turretFireRateLimit: 0.02
   skidThreshholdAngle: 20
+  smokeObj: {fileID: 8861775285669256459, guid: 19f5a826209051d4995e6a3b7de42528,
+    type: 3}
+  smokeSpawnDelay: 0.4
+  smokeSpawnVarience: 0.3
   wheels:
   - wheelObj: {fileID: 4140478437241108277}
     wheelEffectObj: {fileID: 2984609594377297873}

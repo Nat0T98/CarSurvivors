@@ -102,7 +102,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -118,3 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc83417000e28a4abf6917bca285d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 2.03
+  lifetimeRandVarience: 0.5
+  moveSpeed: 2.26
+  startScale: 0.67
+  startScaleVarience: 0.1
+  endScale: 1
+  endScaleVarience: 0.3
+  scaleSpeed: 1
