@@ -567,7 +567,7 @@ public class MainCar : MonoBehaviour
 
     private void wheelSkidMarks()
     {
-        if (Vector3.Angle(transform.forward.normalized, rb.velocity.normalized) >= skidThreshholdAngle && rb.velocity.magnitude > 10)
+        if (Vector3.Angle(transform.forward.normalized, rb.velocity.normalized) >= skidThreshholdAngle && rb.velocity.magnitude > 5)
         {
             canSmoke = true;
             foreach (var wheel in wheels)
