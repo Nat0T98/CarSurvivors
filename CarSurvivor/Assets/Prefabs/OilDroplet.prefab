@@ -230,10 +230,10 @@ MonoBehaviour:
   puddleScaleVarience: 2
   lifeTime: 5
   dissapearTime: 2
-  verticalLaunchMin: 0.5
-  verticalLaunchMax: 1
-  horizontalLaunchMinMax: 0.5
-  launchForce: 5
+  verticalLaunchMin: 0
+  verticalLaunchMax: 0.3
+  horizontalLaunchMinMax: 0.93
+  launchForce: 3.06
 --- !u!54 &1519900830363096030
 Rigidbody:
   m_ObjectHideFlags: 0

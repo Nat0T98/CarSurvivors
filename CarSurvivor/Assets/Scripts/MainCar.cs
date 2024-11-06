@@ -599,4 +599,9 @@ public class MainCar : MonoBehaviour
             yield return new WaitForSeconds(smokeSpawnDelay + UnityEngine.Random.Range(-smokeSpawnVarience, smokeSpawnVarience));
         }
     }
+
+    public void ScreenShake(Vector3 shakeOrigin, float power)
+    {
+
+    }
 }
