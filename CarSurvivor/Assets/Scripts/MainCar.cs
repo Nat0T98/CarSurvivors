@@ -135,10 +135,7 @@ public class MainCar : MonoBehaviour
             transform.position = spawnPos;
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            //SceneManager.LoadScene("Level 1 Design");
-        }
+ 
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -452,7 +449,7 @@ public class MainCar : MonoBehaviour
                 // StartCoroutine(EndlessEnemyDeath(enemyScript));
 
             }
-        else if (currentScene.name == "EndlessTest")
+       /* else if (currentScene.name == "EndlessTest")
             {
                 TestEndlessEnemyDeath(enemyScript);
                // StartCoroutine(EndlessEnemyDeath(enemyScript));
@@ -466,7 +463,7 @@ public class MainCar : MonoBehaviour
         else
             {
                 Debug.Log("NULL SCENE");
-            }
+            }*/
            
             
         }
@@ -500,13 +497,13 @@ public class MainCar : MonoBehaviour
     
 
 
-    void TestRushEnemyDeath(Enemy enemy)
+    /*void TestRushEnemyDeath(Enemy enemy)
     {
         Destroy(enemy.gameObject);
         Upgrades.AddUpgradePoints();
         RushTimer.AddTime(RushTimer.KillBonus);
 
-    }
+    }*/
 
     void TestEndlessEnemyDeath(Enemy enemy)
     {

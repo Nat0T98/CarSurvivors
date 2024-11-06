@@ -73,6 +73,7 @@ public class UpgradeManager : MonoBehaviour
     {
         UpgradePoints -= PointsToUpgrade;
         GameManager.Instance.upgradePointsRef = UpgradePoints;
+        Car.health += 5;
         if (UpgradePoints < PointsToUpgrade)
         {
             UpgradeCanvas.SetActive(false);
@@ -80,7 +81,8 @@ public class UpgradeManager : MonoBehaviour
             Time.timeScale = 1f;
             isMenuActive = false;
         }
-        
+
+        SFX_Manager.GlobalSFXManager.PlaySFX("Upgrade_Button");
         //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
     public void ChooseUpgrade1()
