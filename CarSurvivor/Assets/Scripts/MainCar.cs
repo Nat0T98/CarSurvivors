@@ -32,13 +32,16 @@ public class MainCar : MonoBehaviour
     [Space(10)]
 
     [Header("Boost Parameters")]
-    public float boostMulitiplier = 1.25f;    
+    public float boostMaxSpeedMulitiplier = 1.25f;
+    public float boostAccelerationMult = 1.5f;
+    public float boostDecelSpeed = 1f;
     public float maxBoostAmount;
     public float boostRechargeRate;
     public Slider boostUI;
     private float currentBoostAmount;
     private bool isBoosting = false;
     private float boostUpgradeVal = 1;
+    private float boostToNormPercent;
 
     private bool firstUpgrade;
     private float upgradeScale;
@@ -316,15 +319,18 @@ public class MainCar : MonoBehaviour
     {        
         float forwardInput = Input.GetAxis("Vertical"); 
         float turnInput = Input.GetAxis("Horizontal");
-        
-        
+        float maxBoostSpeed;
+
+
         if (isBoosting)
         {
-            float maxBoostSpeed = maxSpeed * (isBoosting ? boostMulitiplier : 1f);
+            maxBoostSpeed = maxSpeed * boostMaxSpeedMulitiplier;
+            boostToNormPercent = 0f;
         }
         else
         {
-            float maxBoostSpeed = maxSpeed;
+            boostToNormPercent = Mathf.Clamp(boostToNormPercent + Time.deltaTime * boostDecelSpeed, 0, 1);
+            maxBoostSpeed = Mathf.Lerp(maxSpeed * boostMaxSpeedMulitiplier, maxSpeed, boostToNormPercent);
         }
 
         //float turnAmount = (isDrifting ? driftTurnSpeed : turnSpeed) * turnInput * Time.fixedDeltaTime;
@@ -332,9 +338,9 @@ public class MainCar : MonoBehaviour
         //forward and backward movement
         if (forwardInput > 0)
         {
-            rb.AddForce(transform.forward * forwardInput * accelerationForce, ForceMode.Acceleration);
+            rb.AddForce(transform.forward * forwardInput * accelerationForce * (isBoosting ? boostAccelerationMult : 1f), ForceMode.Acceleration);
         }
-        else if (forwardInput < 0)
+        else if (forwardInput < 0) 
         {
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
             //turnInput = 0 - turnInput;
