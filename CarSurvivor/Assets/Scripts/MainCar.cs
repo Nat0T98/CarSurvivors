@@ -316,7 +316,17 @@ public class MainCar : MonoBehaviour
     {        
         float forwardInput = Input.GetAxis("Vertical"); 
         float turnInput = Input.GetAxis("Horizontal");
-        float currentSpeed = maxSpeed * (isBoosting ? boostMulitiplier : 1f);
+        
+        
+        if (isBoosting)
+        {
+            float maxBoostSpeed = maxSpeed * (isBoosting ? boostMulitiplier : 1f);
+        }
+        else
+        {
+            float maxBoostSpeed = maxSpeed;
+        }
+
         //float turnAmount = (isDrifting ? driftTurnSpeed : turnSpeed) * turnInput * Time.fixedDeltaTime;
 
         //forward and backward movement
@@ -329,7 +339,7 @@ public class MainCar : MonoBehaviour
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
             //turnInput = 0 - turnInput;
         }
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentSpeed);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxBoostSpeed);
 
         //turn movement
         //if (Input.GetKey(KeyCode.A))
