@@ -76,7 +76,8 @@ public class RunnerEnemy : Enemy
         }
         enemyMeshRenderer.enabled = false;
         ExplosionEffect.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+        SFX_Manager.GlobalSFXManager.PlaySFX("Runner_Explosion");
+        yield return new WaitForSeconds(0.2f);
       
 
         Destroy(gameObject); 

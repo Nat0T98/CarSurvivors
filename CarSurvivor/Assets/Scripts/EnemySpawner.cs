@@ -9,13 +9,10 @@ public class EnemySpawner : MonoBehaviour
     public GameObject runnerPrefab;
     public GameObject rangedPrefab;
     [Space(10)]
-   /* [Header("Spawn Points")]
-    public List<Transform> spawnPoints;
-    [Space(10)]*/
+  
     [Header("Spawn Settings")]
     public float minSpawnRadius = 5f; 
     public float maxSpawnRadius = 20f;
-
     public float spawnInterval = 5f;
     [Range(0f, 1f)]
     public float runnerProbability = 0.7f;

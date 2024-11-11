@@ -145,7 +145,7 @@ MonoBehaviour:
   ClipNames:
   - Game_Start
   - UI_Button
-  - Upgrade_Chosen
+  - Upgrade_Button
   - Runner_Explosion
   - Drone_Death
   - Drone_Laser

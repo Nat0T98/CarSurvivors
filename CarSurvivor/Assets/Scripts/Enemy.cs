@@ -35,8 +35,9 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0 )
         {
-           /* health = 0;
-            upgradeManager.AddUpgradePoints();*/
+            /* health = 0;
+             upgradeManager.AddUpgradePoints();*/
+            SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Death");
             Destroy(gameObject);
         }
     }

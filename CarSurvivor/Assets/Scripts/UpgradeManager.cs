@@ -82,13 +82,14 @@ public class UpgradeManager : MonoBehaviour
             isMenuActive = false;
         }
 
-        SFX_Manager.GlobalSFXManager.PlaySFX("Upgrade_Button");
+        
         //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
     public void ChooseUpgrade1()
     {
         Debug.Log("Upgrade 1");
         Car.CarMiniGunUpgrade();
+        SFX_Manager.GlobalSFXManager.PlaySFX("Upgrade_Button");
         UpgradeSelected();
     }
 
@@ -97,6 +98,7 @@ public class UpgradeManager : MonoBehaviour
     {
         Debug.Log("Upgrade 2");
         Car.MelleUpgradeTest();
+        SFX_Manager.GlobalSFXManager.PlaySFX("Upgrade_Button");
         UpgradeSelected();
     }
 
@@ -105,6 +107,7 @@ public class UpgradeManager : MonoBehaviour
     {
         Debug.Log("Upgrade 3");
         Car.BoostUpgrade();
+        SFX_Manager.GlobalSFXManager.PlaySFX("Upgrade_Button");
         UpgradeSelected();
     }
 }
