@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     
     public void EndlessModeButton()
     {
-        SFX_Manager.GlobalSFXManager.PlaySFX("Play_Button");
+        SFX_Manager.GlobalSFXManager.PlaySFX("Play");
         Invoke("LoadEndlessMode", 2); //wait 2 seconds so that SFX can play
     }
     public void TimeRushModeButton()

@@ -612,7 +612,7 @@ public class MainCar : MonoBehaviour
     {
         while(canSmoke)
         {
-            SFX_Manager.GlobalSFXManager.PlaySFX("Drift");
+            //SFX_Manager.GlobalSFXManager.PlaySFX("Drift");
             Instantiate(smokeObj, wheelobj.transform.position + new Vector3(0, 0.3f, 0), wheelobj.transform.rotation);
             yield return new WaitForSeconds(smokeSpawnDelay + UnityEngine.Random.Range(-smokeSpawnVarience, smokeSpawnVarience));
         }

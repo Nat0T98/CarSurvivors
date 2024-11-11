@@ -74,13 +74,13 @@ public class RangedEnemy : Enemy
         if (!hasAttacked)
         {
             //add sfx and visuals here
-            SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Laser");
+           
             Rigidbody rigb = Instantiate(Laser, firingPos.position, Quaternion.identity).GetComponent<Rigidbody>();
             rigb.AddForce(transform.forward * LaserSpeed, ForceMode.Impulse);
-        
+            
             EnemyBullet eBulletScript = Laser.GetComponent<EnemyBullet>();
             eBulletScript.damage = damage;
-
+            SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Laser");
             hasAttacked = true;
             Invoke("ResetAttack", timeBetweenAttacks);
         }
