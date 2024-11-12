@@ -460,76 +460,30 @@ public class MainCar : MonoBehaviour
         if (enemyScript.health <= 0)
         {
             enemyScript.health = 0;
-            if (currentScene.name == "Showcase")
+            EndlessEnemyDeath(enemyScript);
+           /* if (currentScene.name == "Showcase")
             {
-                TestEndlessEnemyDeath(enemyScript);
-                // StartCoroutine(EndlessEnemyDeath(enemyScript));
-
-            }
-       /* else if (currentScene.name == "EndlessTest")
-            {
-                TestEndlessEnemyDeath(enemyScript);
-               // StartCoroutine(EndlessEnemyDeath(enemyScript));
-           
-            }
-        else if (currentScene.name == "TimeRushTest")
-            {
-                TestRushEnemyDeath(enemyScript);
-                //StartCoroutine(TimeRushEnemyDeath(enemyScript));
-            }
-        else
-            {
-                Debug.Log("NULL SCENE");
-            }*/
-           
-            
+                EndlessEnemyDeath(enemyScript);              
+            }     */       
         }
     }
-    #region Old Enumerators
-/*IEnumerator EndlessEnemyDeath(Enemy enemyScript)
+ 
+    void EndlessEnemyDeath(Enemy enemy)
     {
-        enemyScript.gameObject.SetActive(false);
-        print("respawning");
-        Upgrades.AddUpgradePoints();
-        yield return new WaitForSeconds(enemyScript.respawnTime);
-        enemyScript.gameObject.transform.position = enemyScript.spawnLoc;
-        enemyScript.gameObject.SetActive(true);
-        enemyScript.health = enemyScript.maxHealth;
-    }
-
-    IEnumerator TimeRushEnemyDeath(Enemy enemyScript)
-    {
-        enemyScript.gameObject.SetActive(false);
-        print("respawning");
-        Upgrades.AddUpgradePoints();
-        RushTimer.AddTime(RushTimer.KillBonus);
-        yield return new WaitForSeconds(enemyScript.respawnTime);
-        enemyScript.gameObject.transform.position = enemyScript.spawnLoc;
-        enemyScript.gameObject.SetActive(true);
-        enemyScript.health = enemyScript.maxHealth;
-
-    }*/
-    #endregion
-
-    
-
-
-    /*void TestRushEnemyDeath(Enemy enemy)
-    {
-        Destroy(enemy.gameObject);
-        Upgrades.AddUpgradePoints();
-        RushTimer.AddTime(RushTimer.KillBonus);
-
-    }*/
-
-    void TestEndlessEnemyDeath(Enemy enemy)
-    {
-        Upgrades.AddUpgradePoints();
-        Destroy(enemy.gameObject);
         
+        if (enemy is RangedEnemy)
+        {
+            ObjectPooler.Instance.ReturnToPool("RangedEnemyPool", enemy.gameObject);
+        }
+        else if (enemy is RunnerEnemy)
+        {
+            ObjectPooler.Instance.ReturnToPool("RunnerEnemyPool", enemy.gameObject);
+        }
+
+        Upgrades.AddUpgradePoints();
+       
     }
-
-
+   
     void Turret()
     {
         float closestDistance = 9999999f;

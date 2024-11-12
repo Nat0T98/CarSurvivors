@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 public class RunnerEnemy : Enemy
-{   
+{
     [Header("Attack References")]
     public float AttackingRange;
     public float chargeUpTime;
@@ -13,7 +12,8 @@ public class RunnerEnemy : Enemy
     public float damageRadius;
     [HideInInspector] public bool isInAttackRange;
     private bool isCharging;
-    public GameObject ExplosionEffect;
+    public GameObject ExplosionEffect; 
+    public GameObject RunnerPrefab;
 
     [Header("NavMesh References")]
     public NavMeshAgent agent;
@@ -22,65 +22,81 @@ public class RunnerEnemy : Enemy
     public LayerMask whatIsPlayer;
 
     private Rigidbody rb;
-    private Vector3 Target; 
+    private Vector3 Target;
     private MainCar playerScript;
-    private MeshRenderer enemyMeshRenderer;
+   
+    private Coroutine attackCoroutine;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
         playerScript = GameManager.Instance.player.GetComponent<MainCar>();
-        enemyMeshRenderer = gameObject.GetComponent<MeshRenderer>();
-
     }
+
+    private void OnEnable()
+    {
+        // Reset enemy for re-enable
+        isCharging = false;
+        agent.isStopped = false;
+        RunnerPrefab.SetActive(true);
+        ExplosionEffect.SetActive(false);
+
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+    }
+
     void Update()
     {
         Target = player.transform.position;
         isInAttackRange = Physics.CheckSphere(transform.position, AttackingRange, whatIsPlayer);
 
-
-        //Moves towards player, if in attack range, start explosion charge up, else chase player
+        // Move towards player, if in attack range, start explosion charge up, else chase player
         if (isInAttackRange && !isCharging)
         {
-            StartCoroutine(RunnerAttack());
+            attackCoroutine = StartCoroutine(RunnerAttack());
         }
         else if (!isInAttackRange && !isCharging)
         {
             ChaseTarget();
         }
-
     }
-    //Navmesh version of move towards
+
+    // Navmesh version of move towards
     public void ChaseTarget()
-    { 
+    {
         transform.LookAt(Target);
         agent.SetDestination(Target);
     }
 
     private IEnumerator RunnerAttack()
     {
-        isCharging = true;                   
-        agent.isStopped = true;              
-       //Charge up SFX and Visuals here
+        isCharging = true;
+        agent.isStopped = true; // Stop movement during charge-up
+        //ChargeUp SFX?
+       
+        yield return new WaitForSeconds(chargeUpTime);
 
-        yield return new WaitForSeconds(chargeUpTime);        
+        // Damage player within radius
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRadius, whatIsPlayer);
         foreach (Collider collider in hitColliders)
         {
             playerScript = collider.GetComponent<MainCar>();
             if (playerScript != null)
             {
-                playerScript.TakeDamage(damage); 
+                playerScript.TakeDamage(damage);
             }
         }
-        enemyMeshRenderer.enabled = false;
+
+        RunnerPrefab.SetActive(false);
         ExplosionEffect.SetActive(true);
         SFX_Manager.GlobalSFXManager.PlaySFX("Runner_Explosion");
-        yield return new WaitForSeconds(0.3f);
-      
 
-        Destroy(gameObject); 
+        yield return new WaitForSeconds(0.3f); 
+        gameObject.SetActive(false);  // Deactivate the enemy to return to pool
     }
 
     private void OnDrawGizmosSelected()
@@ -89,39 +105,5 @@ public class RunnerEnemy : Enemy
         Gizmos.DrawWireSphere(transform.position, AttackingRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
-
     }
-
-    /* private void OnTriggerEnter(Collider other)
-     {
-         if (other.CompareTag("Player"))
-         {
-             playerIsInRange = true;
-         }
-     }
-
-     private void OnTriggerExit(Collider other)
-     {
-         if (other.CompareTag("Player"))
-         {
-             playerIsInRange = false;
-         }
-     }
-
-     void Attacking()
-     {
-         if (playerIsInRange)
-         {
-             attackTime += Time.deltaTime;
-             if (attackTime >= timeToAttack)
-             {
-                 playerScript.TakeDamage(damage);
-                 attackTime = 0;
-             }
-         }
-         else
-         {
-             attackTime = 0;
-         }
-     }*/
 }

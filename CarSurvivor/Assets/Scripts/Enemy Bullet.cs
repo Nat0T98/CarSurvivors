@@ -8,19 +8,33 @@ public class EnemyBullet : MonoBehaviour
     public float lifetime = 5f;
     public bool hasMissed = false;
 
-    void Start()
+
+    private void OnEnable()
     {
-        Destroy(gameObject, lifetime);
+        Invoke("Deactivate", lifetime);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.GetComponent<MainCar>() != null)
+            MainCar playerCar = other.gameObject.GetComponent<MainCar>();
+            if (playerCar != null)
             {
-                GameManager.Instance.player.GetComponent<MainCar>().TakeDamage(damage);
+                playerCar.TakeDamage(damage);
             }
+
+            gameObject.SetActive(false);
         }
     }
 }

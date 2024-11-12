@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Firing : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    public string bulletPool = "CarBulletPool";  
     public Transform firePoint;
     public float bulletSpeed = 20f;
     public float fireRate = 0.2f;
@@ -24,7 +24,7 @@ public class Firing : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = ObjectPooler.Instance.SpawnFromPool(bulletPool, firePoint.position, firePoint.rotation);
 
         Vector3 spread = new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), 0);
         bullet.transform.forward += spread;

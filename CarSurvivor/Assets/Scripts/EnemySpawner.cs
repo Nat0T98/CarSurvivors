@@ -1,17 +1,16 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Enemy Prefabs")]
-    public GameObject runnerPrefab;
-    public GameObject rangedPrefab;
-    [Space(10)]
-  
+    [Header("Pool Names")]
+    public string runnerPoolName = "RunnerPool";
+    public string rangedPoolName = "RangedPool"; 
+
     [Header("Spawn Settings")]
-    public float minSpawnRadius = 5f; 
+    public float minSpawnRadius = 5f;
     public float maxSpawnRadius = 20f;
     public float spawnInterval = 5f;
     [Range(0f, 1f)]
@@ -24,16 +23,15 @@ public class EnemySpawner : MonoBehaviour
     {
         player = GameManager.Instance.player.transform;
     }
+
     void Update()
     {
         if (Time.time >= nextSpawnTime)
         {
             TrySpawnEnemy();
             nextSpawnTime = Time.time + spawnInterval;
-            //Debug.Log("Trying to spawn an enemy...");
         }
     }
-
 
     void TrySpawnEnemy()
     {
@@ -42,8 +40,8 @@ public class EnemySpawner : MonoBehaviour
         Vector3 randPos = GetRandomSpawnPosition();
         if (IsOnNavMesh(randPos))
         {
-            GameObject enemyType = ChooseEnemyType();
-            Instantiate(enemyType, randPos, Quaternion.identity);
+            string poolName = ChooseEnemyType();
+            GameObject enemy = ObjectPooler.Instance.SpawnFromPool(poolName, randPos, Quaternion.identity);
         }
     }
 
@@ -61,10 +59,10 @@ public class EnemySpawner : MonoBehaviour
         return NavMesh.SamplePosition(position, out hit, 1.0f, NavMesh.AllAreas);
     }
 
-    GameObject ChooseEnemyType()
+    string ChooseEnemyType()
     {
         float chance = Random.value;
-        return chance <= runnerProbability ? runnerPrefab : rangedPrefab;
+        return chance <= runnerProbability ? runnerPoolName : rangedPoolName;
     }
 
     void OnDrawGizmos()

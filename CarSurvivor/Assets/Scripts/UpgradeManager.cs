@@ -81,9 +81,6 @@ public class UpgradeManager : MonoBehaviour
             Time.timeScale = 1f;
             isMenuActive = false;
         }
-
-        
-        //AudioManager.GlobalAudioManager.PlaySFX("UI Button");
     }
     public void ChooseUpgrade1()
     {

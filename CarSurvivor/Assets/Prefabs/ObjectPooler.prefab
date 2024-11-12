@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1448973757416652220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3775128675685315853}
+  - component: {fileID: 2666981328228323106}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3775128675685315853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448973757416652220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -105.704956, y: 38.965096, z: -92.62076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2666981328228323106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448973757416652220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88284ce8453b7d44fa465dff94e3d404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - poolName: RunnerPool
+    prefab: {fileID: 5862294416274150896, guid: 3ab1e25c7ecd2e44f9c6bc6c3a7ad950,
+      type: 3}
+    size: 25
+  - poolName: RangedPool
+    prefab: {fileID: 5347925807942082324, guid: 8e811e0f0d41aa5469c39452feb6fed8,
+      type: 3}
+    size: 25
+  - poolName: DroneLaserPool
+    prefab: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7,
+      type: 3}
+    size: 30
+  - poolName: CarBulletPool
+    prefab: {fileID: 8967282007738410105, guid: c10814079d13e41499587704eaf2054a,
+      type: 3}
+    size: 30

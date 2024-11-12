@@ -195,6 +195,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
+  RunnerPrefab: {fileID: 8154831212953392164}
 --- !u!1 &8637414302432872746
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +389,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8063e90e75613e14ba77902d4de3ffd6, type: 3}
+--- !u!1 &8154831212953392164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8063e90e75613e14ba77902d4de3ffd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 9073255825301563765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8818073791506321054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8063e90e75613e14ba77902d4de3ffd6,

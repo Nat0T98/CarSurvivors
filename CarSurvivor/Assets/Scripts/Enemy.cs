@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,40 +8,59 @@ public class Enemy : MonoBehaviour
     public GameObject oilPrefab;
     public int oilSpawnCountMin = 1;
     public int oilSpawnCountMax = 3;
-    [HideInInspector]public float health;
-    [SerializeField]
-    private float lifetime = 10f;  // Lifetime of the enemy in seconds
+
+    [HideInInspector] public float health;
+    [SerializeField] private float lifetime = 10f;
     private float lifetimeTimer;
     private UpgradeManager upgradeManager;
     private static bool isQuitting = false;
-   
-    void Start()
+
+    private void OnEnable()
     {
         health = maxHealth;
         lifetimeTimer = lifetime;
     }
-    void Update()
+
+    private void Update()
     {
+        
         lifetimeTimer -= Time.deltaTime;
         if (lifetimeTimer <= 0f)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
+
     public void TakeDamage(float damage)
     {
-        //PlayerObject.GetComponent<MainCar>().DamageEnemy(gameObject.GetComponent<Enemy>(), damage);
+        
         health -= damage;
-        if (health <= 0 )
+
+        if (health <= 0)
         {
-            /* health = 0;
-             upgradeManager.AddUpgradePoints();*/
             SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Death");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     private void OnApplicationQuit()
+    {
+       
+        isQuitting = true;
+    }
+
+    private void OnDisable()
+    {
+        if (isQuitting) return;
+        int spawnCount = Random.Range(oilSpawnCountMin, oilSpawnCountMax);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Instantiate(oilPrefab, transform.position, Quaternion.identity);
+        }
+    }
+}
+
+    /*private void OnApplicationQuit()
     {
         isQuitting = true;
     }
@@ -56,6 +74,6 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(oilPrefab, transform.position, Quaternion.identity);
         }
-    }
+    }*/
 
-}
+
