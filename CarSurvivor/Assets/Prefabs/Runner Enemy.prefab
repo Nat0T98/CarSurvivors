@@ -183,10 +183,11 @@ MonoBehaviour:
   lifetime: 10
   AttackingRange: 6
   chargeUpTime: 0.3
-  damage: 5
+  damage: 3
   damageRadius: 5
   isInAttackRange: 0
   ExplosionEffect: {fileID: 2591728779860782847}
+  RunnerPrefab: {fileID: 8154831212953392164}
   agent: {fileID: -8148526284554539315}
   player: {fileID: 0}
   whatIsGround:
@@ -195,7 +196,6 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
-  RunnerPrefab: {fileID: 8154831212953392164}
 --- !u!1 &8637414302432872746
 GameObject:
   m_ObjectHideFlags: 0

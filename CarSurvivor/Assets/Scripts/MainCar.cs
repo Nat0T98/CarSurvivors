@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Security.Cryptography;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -40,6 +41,7 @@ public class MainCar : MonoBehaviour
     public Slider boostUI;
     private float currentBoostAmount;
     private bool isBoosting = false;
+    private bool isBoostSFX = false;
     private float boostUpgradeVal = 1;
     private float boostToNormPercent;
 
@@ -96,7 +98,8 @@ public class MainCar : MonoBehaviour
     public float boomExtraLength = 0;
     private float boomInitDist;
     private bool boomOnce;
-    private bool isDrifting; 
+    private bool isDrifting;
+    private float boostUsageRate = 1f;
 
     private void Awake()
     {
@@ -178,16 +181,7 @@ public class MainCar : MonoBehaviour
         else
         {
             isDrifting = false;
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift) && currentBoostAmount > 0)
-        {
-            ActivateBoost();
-        }
-        else
-        {
-            RechargeBoost();
-        }
+        }      
 
         UpdateBoostSlider();
 
@@ -215,27 +209,62 @@ public class MainCar : MonoBehaviour
         }
 
         wheelSkidMarks();
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            ActivateBoost();
+        }
+        
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            DeactivateBoost();
+        }
+
+        
+        if (isBoosting)
+        {
+            currentBoostAmount -= boostUsageRate * Time.deltaTime;
+            if (currentBoostAmount <= 0)
+            {
+                currentBoostAmount = 0;
+                DeactivateBoost(); 
+            }
+        }
+        else
+        {
+            RechargeBoost();
+        }
+
+
+
     }
 
     void ActivateBoost()
     {
-        isBoosting = true;
-        currentBoostAmount -= Time.deltaTime;
-       
-        if (currentBoostAmount <= 0)
+        if (currentBoostAmount > 0)
         {
-            isBoosting = false;
+            isBoosting = true;
+            SFX_Manager.GlobalSFXManager.PlayBoostSFX();
         }
     }
-    void RechargeBoost()
+
+    void DeactivateBoost()
     {
         isBoosting = false;
-        if (currentBoostAmount < maxBoostAmount)
+        SFX_Manager.GlobalSFXManager.StopBoostSFX();
+    }
+
+    void RechargeBoost()
+    {
+        if (!isBoosting && currentBoostAmount < maxBoostAmount)
         {
-            currentBoostAmount += boostRechargeRate * Time.deltaTime; 
+            currentBoostAmount += boostRechargeRate * Time.deltaTime;
             currentBoostAmount = Mathf.Clamp(currentBoostAmount, 0, maxBoostAmount);
         }
     }
+
+
     void UpdateBoostSlider()
     {
         if (boostUI != null)
