@@ -235,9 +235,6 @@ public class MainCar : MonoBehaviour
         {
             RechargeBoost();
         }
-
-
-
     }
 
     void ActivateBoost()
@@ -245,7 +242,7 @@ public class MainCar : MonoBehaviour
         if (currentBoostAmount > 0)
         {
             isBoosting = true;
-            SFX_Manager.GlobalSFXManager.PlayBoostSFX();
+            SFX_Manager.GlobalSFXManager.PlayBoostSFX(0.5f);
         }
     }
 

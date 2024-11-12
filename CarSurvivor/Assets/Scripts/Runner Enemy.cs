@@ -93,7 +93,7 @@ public class RunnerEnemy : Enemy
 
         RunnerPrefab.SetActive(false);
         ExplosionEffect.SetActive(true);
-        SFX_Manager.GlobalSFXManager.PlaySFX("Runner_Explosion");
+        SFX_Manager.GlobalSFXManager.PlaySFX("Runner_Explosion", 0.6f);
 
         yield return new WaitForSeconds(0.3f); 
         gameObject.SetActive(false);  // Deactivate the enemy to return to pool

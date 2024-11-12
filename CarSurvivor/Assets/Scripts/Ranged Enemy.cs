@@ -72,7 +72,7 @@ public class RangedEnemy : Enemy
             GameObject laser = ObjectPooler.Instance.SpawnFromPool("DroneLaserPool", firingPos.position, Quaternion.identity);
             if (laser != null)
             { 
-                SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Laser");
+                SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Laser", 1f);
                 Rigidbody rigb = laser.GetComponent<Rigidbody>();
                 rigb.velocity = Vector3.zero;
                 rigb.AddForce(transform.forward * LaserSpeed, ForceMode.Impulse);

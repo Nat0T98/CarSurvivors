@@ -32,25 +32,26 @@ public class SFX_Manager : MonoBehaviour
         boostSource.loop = true;
     }
 
-    public void PlaySFX(string clipName)
+    public void PlaySFX(string clipName, float volume = 1.0f) 
     {
         if (SFX_Lib.ContainsKey(clipName))
         {
             AudioSource TheSFX = Instantiate(SFX_Prefab).GetComponent<AudioSource>();
-            TheSFX.PlayOneShot(SFX_Lib[clipName]); // Set clip and play it
+            TheSFX.volume = volume;
+            TheSFX.PlayOneShot(SFX_Lib[clipName]);
             Destroy(TheSFX.gameObject, SFX_Lib[clipName].length);
         }
     }
 
-    public void PlayBoostSFX()
+    public void PlayBoostSFX(float volume = 1.0f) 
     {
         if (SFX_Lib.ContainsKey("Boost") && !boostSource.isPlaying)
         {
             boostSource.clip = SFX_Lib["Boost"];
-            boostSource.Play(); 
+            boostSource.volume = volume; 
+            boostSource.Play();
         }
     }
-
     public void StopBoostSFX()
     {
         if (boostSource.isPlaying)
