@@ -326,22 +326,22 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -198.5
+      value: 0.8439064
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0002207756
+      value: 0.00023841858
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 161.2
+      value: 22.214508
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.13052888
+      value: -0.6585017
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -351,7 +351,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9914446
+      value: 0.7525793
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 165
+      value: 262.371
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -598,7 +598,7 @@ MonoBehaviour:
   maxSpeed: 10
   turnSpeed: 150
   turnSlowDownAtPercent: 0.3
-  steeringSpeed: 2.5
+  steeringSpeed: 1.5
   maxDamage: 120
   maxHealth: 100
   health: 0

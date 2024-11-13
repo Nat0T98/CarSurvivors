@@ -252,7 +252,7 @@ MonoBehaviour:
   accelerationForce: 25
   reverseForce: 30
   maxSpeed: 20
-  turnSpeed: 150
+  turnSpeed: 130
   turnSlowDownAtPercent: 0.3
   steeringSpeed: 2.5
   maxDamage: 120
@@ -312,8 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b74da29a912f64d9061e5063d125a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8967282007738410105, guid: c10814079d13e41499587704eaf2054a,
-    type: 3}
+  bulletPool: CarBulletPool
   firePoint: {fileID: 7522306011603941253}
   bulletSpeed: 80
   fireRate: 0.3
