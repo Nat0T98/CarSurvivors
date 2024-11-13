@@ -48,7 +48,10 @@ public class CarAi : MonoBehaviour
         Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
         horiz = Mathf.Clamp(cross.y, -1f, 1f);
 
+        horiz = cross.y;
         //vert *= CornerSpeed();
+        //horiz *= CornerSpeed() * 10f;
+        horiz *= 100000f;
 
         agent.nextPosition = transform.position;
     }
