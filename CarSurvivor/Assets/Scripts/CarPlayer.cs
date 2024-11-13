@@ -98,9 +98,10 @@ public class CarPlayer : CarMechanics
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        
+        base.Awake();
+        GameManager.Instance.InitializeCar();
     }
 
     protected override void FixedUpdate()

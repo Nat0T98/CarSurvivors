@@ -249,12 +249,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardInput: 0
   turnInput: 0
-  accelerationForce: 50
+  accelerationForce: 25
   reverseForce: 30
   maxSpeed: 20
   turnSpeed: 150
   turnSlowDownAtPercent: 0.3
-  steeringSpeed: 0.1
+  steeringSpeed: 2.5
   maxDamage: 120
   maxHealth: 100
   health: 0
@@ -265,21 +265,21 @@ MonoBehaviour:
   rammer: {fileID: 4290653890458397349}
   boostMaxSpeedMulitiplier: 1.25
   boostAccelerationMult: 1.5
-  boostDecelSpeed: 1
-  maxBoostAmount: 0
-  boostRechargeRate: 0
+  boostDecelSpeed: 1.5
+  maxBoostAmount: 5
+  boostRechargeRate: 1
   currentBoostAmount: 0
   rb: {fileID: 7666441603724394600}
   turretMain: {fileID: 8712085435664907816}
-  turretRotSpeed: 1
+  turretRotSpeed: 20
   turretActive: 0
   turretFireRateUpgrade: 0.05
   turretFireRateLimit: 0.02
-  skidThreshholdAngle: 0
+  skidThreshholdAngle: 20
   smokeObj: {fileID: 8861775285669256459, guid: 19f5a826209051d4995e6a3b7de42528,
     type: 3}
-  smokeSpawnDelay: 0.5
-  smokeSpawnVarience: 0.2
+  smokeSpawnDelay: 0.4
+  smokeSpawnVarience: 0.3
   wheels:
   - wheelObj: {fileID: 4140478437241108277}
     wheelEffectObj: {fileID: 2984609594377297873}
@@ -290,7 +290,7 @@ MonoBehaviour:
   - wheelObj: {fileID: 7982940585930037635}
     wheelEffectObj: {fileID: 6302368451888033146}
   RushTimer: {fileID: 0}
-  rotationPointOffset: {x: 0, y: 0, z: 2}
+  rotationPointOffset: {x: 0, y: 0, z: -1.38}
   gameOverScreen: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   slowTurnMultiplier: 1
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 8608652924892619246}
   - component: {fileID: 2980149902436507240}
   - component: {fileID: 5749553599859399119}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TargetAqArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1369,7 +1369,7 @@ GameObject:
   - component: {fileID: 7103391603054178946}
   - component: {fileID: 1869240967539975258}
   - component: {fileID: 6741750715855267551}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2793,7 +2793,7 @@ GameObject:
   - component: {fileID: 3032034271053336017}
   - component: {fileID: 4580755641230461965}
   - component: {fileID: 7734422158925883399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5406,6 +5406,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkidEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 8642052767791959060, guid: b863bd2fd07c11e47a2ae00d783c761e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5486,6 +5491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkidEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 8642052767791959060, guid: b863bd2fd07c11e47a2ae00d783c761e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5565,6 +5575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SkidEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642052767791959060, guid: b863bd2fd07c11e47a2ae00d783c761e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5789,6 +5804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SkidEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642052767791959060, guid: b863bd2fd07c11e47a2ae00d783c761e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,10 +25,14 @@ public class CarAi : CarMechanics
 
     private bool moveVeloDriftCheckOnce;
 
-    public GameObject testObject;
-    public GameObject velotest;
-    void Start()
+    private Vector3 spawnPosAI;
+    private quaternion spawnRotAI;
+
+    //public GameObject testObject;
+    //public GameObject velotest;
+    protected override void Start()
     {
+        base.Start();
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
 
@@ -36,41 +41,52 @@ public class CarAi : CarMechanics
 
         if (target != null)
             agent.SetDestination(target.position);
+
+        spawnPosAI = transform.position;
+        spawnRotAI = transform.rotation;
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         forwardInput = vert;
         turnInput = horiz;
         
-        NewUpdate();
-        testObject.transform.position = TurnCoordsCentre();
-        velotest.transform.position = transform.position;
-        velotest.transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+        OldUpdate();
+        //NewUpdate();
+        //testObject.transform.position = TurnCoordsCentre();
+        //velotest.transform.position = transform.position;
+        //velotest.transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            transform.position = spawnPosAI;
+            transform.rotation = spawnRotAI;
+        }
     }
 
-    //void OldUpdate()
-    //{
-    //    if (target != null)
-    //    {
-    //        agent.SetDestination(target.position);
-    //    }
+    void OldUpdate()
+    {
+        if (target != null)
+        {
+            agent.SetDestination(target.position);
+        }
 
-    //    Vector3 direction = agent.steeringTarget - transform.position;
-    //    direction.y = 0;
+        Vector3 direction = agent.steeringTarget - transform.position;
+        direction.y = 0;
 
-    //    vert = Mathf.Clamp(Vector3.Dot(transform.forward, direction.normalized), -1f, 1f);
+        vert = Mathf.Clamp(Vector3.Dot(transform.forward, direction.normalized), -1f, 1f);
 
-    //    Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
-    //    horiz = Mathf.Clamp(cross.y, -1f, 1f);
+        Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
+        horiz = Mathf.Clamp(cross.y, -1f, 1f);
 
-    //    horiz = cross.y;
-    //    //vert *= CornerSpeed();
-    //    //horiz *= CornerSpeed() * 10f;
-    //    horiz *= 100000f;
+        horiz = cross.y;
+        //vert *= CornerSpeed();
+        //horiz *= CornerSpeed() * 10f;
+        //horiz *= 100000f;
 
-    //    agent.nextPosition = transform.position;
-    //}
+        agent.nextPosition = transform.position;
+    }
 
     //private float CornerSpeed()
     //{
@@ -86,7 +102,7 @@ public class CarAi : CarMechanics
     //        float cornerAngle = Vector3.Angle(carToCornerDir, cornerToCornerDir);
 
     //        //float slowFactor = Mathf.Lerp(1f, minCornerSpeed, cornerAngle / slowestAngleCorner);
-            
+
     //        //print(CalculateDecelerationByDistance(rb.velocity.magnitude, 5f, 15f) + "SLOW");
     //        //float slowFactor = CalculateDecelerationByDistance(rb.velocity.magnitude, slowSpeed, slowDist);
 
@@ -97,7 +113,7 @@ public class CarAi : CarMechanics
 
     //        if (distanceToCorner <= slowDist)
     //        {
-                
+
     //            slowFactor = Mathf.Lerp(1f, minCornerSpeed, cornerAngle / slowestAngleCorner);
     //        }
     //        else
@@ -112,14 +128,14 @@ public class CarAi : CarMechanics
     //    {
     //        return 0.4f;
     //    }
-        
+
     //}
     //float CalculateDecelerationByDistance(float initialSpeed, float finalSpeed, float distance)
     //{
     //    return (Mathf.Pow(finalSpeed, 2) - Mathf.Pow(initialSpeed, 2)) / (2 * distance);
     //}
 
-    
+
 
     void NewUpdate()
     {

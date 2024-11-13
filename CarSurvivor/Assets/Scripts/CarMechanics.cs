@@ -106,9 +106,9 @@ public class CarMechanics : MonoBehaviour
     private CarAi carAiScript;
     //public bool useAi = true;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-       GameManager.Instance.InitializeCar();
+       //GameManager.Instance.InitializeCar();
     }
 
     protected virtual void Start()
@@ -255,7 +255,6 @@ public class CarMechanics : MonoBehaviour
         SpinWheels();
         //CameraPosition();
         //CamBoom();
-        print("reeeeeeeeeeeeeee");
     }
 
     public void ramTriggerEnter(Collider otherCol)
