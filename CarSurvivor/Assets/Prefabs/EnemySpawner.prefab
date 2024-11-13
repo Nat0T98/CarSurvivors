@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5646670409185114134}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a136bad156592164faa52cc6296a9cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runnerPrefab: {fileID: 5862294416274150896, guid: 3ab1e25c7ecd2e44f9c6bc6c3a7ad950,
-    type: 3}
-  rangedPrefab: {fileID: 5347925807942082324, guid: 8e811e0f0d41aa5469c39452feb6fed8,
-    type: 3}
+  runnerPoolName: RunnerPool
+  rangedPoolName: RangedPool
   minSpawnRadius: 30
   maxSpawnRadius: 70
-  spawnInterval: 0.5
+  spawnInterval: 1
   runnerProbability: 0.5

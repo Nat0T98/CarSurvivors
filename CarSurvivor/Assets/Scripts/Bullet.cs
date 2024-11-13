@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         lifetimeTimer -= Time.deltaTime;
         if (lifetimeTimer <= 0f)
         {
-            ReturnToPool(); 
+            ReturnToPool();
         }
     }
 
@@ -28,20 +28,22 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            if (other.gameObject.GetComponent<Enemy>() != null)
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                
-                GameManager.Instance.player.GetComponent<MainCar>().DamageEnemy(other.GetComponent<Enemy>(), damage);
+                Debug.Log("Bullet hit: " + enemy.gameObject.name);
+                GameManager.Instance.player.GetComponent<MainCar>().DamageEnemy(enemy, damage);
             }
         }
-
-        if (punchthrough == false)
+        if (!punchthrough)
         {
-            ReturnToPool(); 
+            ReturnToPool();
         }
     }
+
     void ReturnToPool()
     {
-        gameObject.SetActive(false); 
+        ObjectPooler.Instance.ReturnToPool("CarBulletPool", gameObject);
     }
+
 }

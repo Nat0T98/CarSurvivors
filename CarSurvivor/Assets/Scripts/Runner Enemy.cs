@@ -38,6 +38,7 @@ public class RunnerEnemy : Enemy
     private void OnEnable()
     {
         // Reset enemy for re-enable
+        health = maxHealth;
         isCharging = false;
         agent.isStopped = false;
         RunnerPrefab.SetActive(true);
@@ -68,8 +69,11 @@ public class RunnerEnemy : Enemy
     // Navmesh version of move towards
     public void ChaseTarget()
     {
-        transform.LookAt(Target);
-        agent.SetDestination(Target);
+        if (Vector3.Distance(agent.destination, Target) > 0.5f)
+        {
+            agent.SetDestination(Target);
+            agent.isStopped = false;
+        }
     }
 
     private IEnumerator RunnerAttack()

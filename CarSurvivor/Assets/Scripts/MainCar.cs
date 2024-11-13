@@ -1,15 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using System.Security.Cryptography;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class MainCar : MonoBehaviour
 {
@@ -286,6 +280,7 @@ public class MainCar : MonoBehaviour
 
     public void ramTriggerEnter(Collider otherCol)
     {
+        
         if (otherCol.CompareTag("Enemy"))
         {
             print("Damaged Enemy");
@@ -472,31 +467,34 @@ public class MainCar : MonoBehaviour
     public void DamageEnemy(Enemy enemyScript, float otherDamage)
     {
        
-        Scene currentScene = SceneManager.GetActiveScene(); 
+        //Scene currentScene = SceneManager.GetActiveScene(); 
         float damage = rb.velocity.magnitude / maxSpeed * maxDamage;
         if (otherDamage > 0)
         {
             enemyScript.health -= otherDamage;
+            Debug.Log("Damaging Enemy");
         }
         else
         {
             enemyScript.health -= damage;
         }
-        
+
         if (enemyScript.health <= 0)
         {
+            Debug.Log("Enemy Death");
             enemyScript.health = 0;
-            EndlessEnemyDeath(enemyScript);
+            //EndlessEnemyDeath(enemyScript);
            /* if (currentScene.name == "Showcase")
             {
-                EndlessEnemyDeath(enemyScript);              
-            }     */       
+                EndlessEnemyDeath(enemyScript);
+            }*/
+                
         }
     }
- 
+
     void EndlessEnemyDeath(Enemy enemy)
     {
-        
+
         if (enemy is RangedEnemy)
         {
             ObjectPooler.Instance.ReturnToPool("RangedEnemyPool", enemy.gameObject);

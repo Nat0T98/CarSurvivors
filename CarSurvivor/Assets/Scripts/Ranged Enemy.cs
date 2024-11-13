@@ -32,35 +32,55 @@ public class RangedEnemy : Enemy
         agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
+    private void OnEnable()
+    {
+        health = maxHealth;
+        hasAttacked = false;
+        if (agent != null)
+        {
+            agent.isStopped = false;
+            agent.ResetPath();
+        }
+
+    }
+
+
     void Update()
     {
         Target = player.transform.position;
 
-        // Check attack radius
+        // Check radius for attack and stopping range
         isInAttackRange = Physics.CheckSphere(transform.position, AttackingRange, whatIsPlayer);
         isInStoppingRange = Physics.CheckSphere(transform.position, StoppingRange, whatIsPlayer);
 
-        if (isInAttackRange && !isInStoppingRange)
+        // Movement and Attack Control
+        if (isInStoppingRange)
         {
-            ChasingPlayer();
+            agent.isStopped = true;
             AttackPlayer();
         }
-        else if (isInStoppingRange)
+        else
         {
-            rb.velocity = Vector3.zero;
-            AttackPlayer();
-        }
-        else if (!isInAttackRange && !isInStoppingRange)
-        {
+            agent.isStopped = false;
             ChasingPlayer();
+
+            if (isInAttackRange)
+            {
+                AttackPlayer();
+            }
         }
     }
 
     private void ChasingPlayer()
     {
-        transform.LookAt(Target);
-        agent.SetDestination(Target);
+        Vector3 directionToTarget = (Target - transform.position).normalized;
+        if (Vector3.Distance(agent.destination, Target) > 0.5f)
+        {
+            agent.SetDestination(Target);
+            transform.forward = directionToTarget;
+        }
     }
+
 
     private void AttackPlayer()
     {

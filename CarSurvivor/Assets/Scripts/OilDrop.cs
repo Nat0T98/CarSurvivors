@@ -32,7 +32,7 @@ public class OilDrop : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("HITIITIITITITTTTT");
+        //print("HITIITIITITITTTTT");
         Vector3 normal = collision.contacts[0].normal;
         Quaternion targetRot = Quaternion.FromToRotation(Vector3.up, normal);
         PuddleHit(targetRot);

@@ -17,13 +17,14 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        health = maxHealth;
+        //health = maxHealth;
         lifetimeTimer = lifetime;
+        Debug.Log("Enemy respawned with full health: " + health);
     }
 
     private void Update()
     {
-        
+        Debug.Log("Test");
         lifetimeTimer -= Time.deltaTime;
         if (lifetimeTimer <= 0f)
         {
@@ -33,19 +34,19 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        
-        health -= damage;
 
+        health -= damage;
+        Debug.Log("Enemy took damage. Health remaining: " + health);
         if (health <= 0)
         {
-            SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Death");
+            //SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Death");
             gameObject.SetActive(false);
         }
     }
 
     private void OnApplicationQuit()
     {
-       
+
         isQuitting = true;
     }
 
@@ -60,20 +61,6 @@ public class Enemy : MonoBehaviour
     }
 }
 
-    /*private void OnApplicationQuit()
-    {
-        isQuitting = true;
-    }
 
-    private void OnDestroy()
-    {
-        if (isQuitting) return;
-
-        int spawnCount = Random.Range(oilSpawnCountMin, oilSpawnCountMax);
-        for (int i = 0; i < spawnCount; i++)
-        {
-            Instantiate(oilPrefab, transform.position, Quaternion.identity);
-        }
-    }*/
 
 

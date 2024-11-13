@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 randPos = GetRandomSpawnPosition();
         if (IsOnNavMesh(randPos))
         {
+            //Debug.Log("Spawning Enemy");
             string poolName = ChooseEnemyType();
             GameObject enemy = ObjectPooler.Instance.SpawnFromPool(poolName, randPos, Quaternion.identity);
         }
