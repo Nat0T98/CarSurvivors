@@ -17,11 +17,11 @@ public class CarAi : CarMechanics
     public float oversteerStrength = 2f;
     public float cornerCoordsShift = 5f;
 
-    //public float minCornerSpeed = 0.1f;
-    //public float slowestAngleCorner = 90f;
-    //public float slowDist = 15f;
-    //public float slowLingerSpeed = 1f;
-    //private float slowFactor;
+    public float minCornerSpeed = 0.1f;
+    public float slowestAngleCorner = 90f;
+    public float slowDist = 15f;
+    public float slowLingerSpeed = 1f;
+    private float slowFactor;
 
     private bool moveVeloDriftCheckOnce;
 
@@ -51,7 +51,7 @@ public class CarAi : CarMechanics
         base.Update();
         forwardInput = vert;
         turnInput = horiz;
-        
+
         OldUpdate();
         //NewUpdate();
         //testObject.transform.position = TurnCoordsCentre();
@@ -62,6 +62,7 @@ public class CarAi : CarMechanics
         {
             transform.position = spawnPosAI;
             transform.rotation = spawnRotAI;
+            agent.Warp(spawnPosAI);
         }
     }
 
@@ -88,146 +89,147 @@ public class CarAi : CarMechanics
         agent.nextPosition = transform.position;
     }
 
-    //private float CornerSpeed()
-    //{
-    //    if (agent.path.corners.Length > 2)
-    //    {
-    //        Vector3 currentPos = transform.position;
-    //        Vector3 firstCorner = agent.path.corners[1];
-    //        Vector3 secondCorner = agent.path.corners[2];
-    //        float distanceToCorner = Vector3.Distance(currentPos, firstCorner);
-
-    //        Vector3 carToCornerDir = firstCorner - currentPos;
-    //        Vector3 cornerToCornerDir = secondCorner - firstCorner;
-    //        float cornerAngle = Vector3.Angle(carToCornerDir, cornerToCornerDir);
-
-    //        //float slowFactor = Mathf.Lerp(1f, minCornerSpeed, cornerAngle / slowestAngleCorner);
-
-    //        //print(CalculateDecelerationByDistance(rb.velocity.magnitude, 5f, 15f) + "SLOW");
-    //        //float slowFactor = CalculateDecelerationByDistance(rb.velocity.magnitude, slowSpeed, slowDist);
-
-    //        testObject.transform.position = firstCorner;
-    //        //print(rb.velocity.magnitude);
-    //        print(Vector3.Distance(currentPos, firstCorner) + " DISTANCE");
-    //        print(cornerAngle + " ANGLE");
-
-    //        if (distanceToCorner <= slowDist)
-    //        {
-
-    //            slowFactor = Mathf.Lerp(1f, minCornerSpeed, cornerAngle / slowestAngleCorner);
-    //        }
-    //        else
-    //        {
-    //            slowFactor = slowFactor <= 1f ? slowFactor + Time.deltaTime * slowLingerSpeed : slowFactor;
-    //            slowFactor = Mathf.Min(slowFactor, 1f);
-    //        }
-    //        print(slowFactor + " SLOW");
-    //        return slowFactor;
-    //    }
-    //    else
-    //    {
-    //        return 0.4f;
-    //    }
-
-    //}
-    //float CalculateDecelerationByDistance(float initialSpeed, float finalSpeed, float distance)
-    //{
-    //    return (Mathf.Pow(finalSpeed, 2) - Mathf.Pow(initialSpeed, 2)) / (2 * distance);
-    //}
-
-
-
-    void NewUpdate()
+    private float CornerSpeed()
     {
-        if (target != null)
-            agent.SetDestination(target.position);
-
-        Vector3 lookAheadTarget = CalculateLookAheadPoint();
-        Vector3 direction = lookAheadTarget - transform.position;
-
-        float horizontalInput = CalculateSteering(direction);
-
-        
-        vert = 1f;
-        horiz = horizontalInput;
-        agent.nextPosition = transform.position;
-        print(horizontalInput + "IUHGIALUSRTHGLA");
-    }
-
-    Vector3 CalculateLookAheadPoint()
-    {
-        Vector3 lookAheadTarget = agent.steeringTarget;
-
-        for (int i = 1; i < agent.path.corners.Length; i++)
+        if (agent.path.corners.Length > 2)
         {
-            Vector3 corner = agent.path.corners[i];
-            if (Vector3.Distance(transform.position, corner) >= lookAheadDistance)
+            Vector3 currentPos = transform.position;
+            Vector3 firstCorner = agent.path.corners[1];
+            Vector3 secondCorner = agent.path.corners[2];
+            float distanceToCorner = Vector3.Distance(currentPos, firstCorner);
+
+            Vector3 carToCornerDir = firstCorner - currentPos;
+            Vector3 cornerToCornerDir = secondCorner - firstCorner;
+            float cornerAngle = Vector3.Angle(carToCornerDir, cornerToCornerDir);
+
+            //float slowFactor = Mathf.Lerp(1f, minCornerSpeed, cornerAngle / slowestAngleCorner);
+
+            //print(CalculateDecelerationByDistance(rb.velocity.magnitude, 5f, 15f) + "SLOW");
+            //float slowFactor = CalculateDecelerationByDistance(rb.velocity.magnitude, slowSpeed, slowDist);
+
+            //testObject.transform.position = firstCorner;
+            //print(rb.velocity.magnitude);
+            print(Vector3.Distance(currentPos, firstCorner) + " DISTANCE");
+            print(cornerAngle + " ANGLE");
+
+            if (distanceToCorner <= slowDist)
             {
-                lookAheadTarget = corner;
-                break;
+
+                slowFactor = Mathf.Lerp(1f, minCornerSpeed, cornerAngle / slowestAngleCorner);
             }
-        }
-
-        return lookAheadTarget;
-    }
-
-    float CalculateSteering(Vector3 direction)
-    {
-        Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
-        float horizontalInput = Mathf.Clamp(cross.y, -1f, 1f);
-
-        if (NeedsPostTurnOversteer())
-        {
-            horizontalInput *= oversteerStrength;
-            //print("NOT ALIGNED");
+            else
+            {
+                slowFactor = slowFactor <= 1f ? slowFactor + Time.deltaTime * slowLingerSpeed : slowFactor;
+                slowFactor = Mathf.Min(slowFactor, 1f);
+            }
+            print(slowFactor + " SLOW");
+            return slowFactor;
         }
         else
         {
-            horizontalInput = Mathf.Lerp(horizontalInput, 0, 0.1f);
+            return 0.4f;
         }
 
-        return horizontalInput;
-    }
+        //}
+        //float CalculateDecelerationByDistance(float initialSpeed, float finalSpeed, float distance)
+        //{
+        //    return (Mathf.Pow(finalSpeed, 2) - Mathf.Pow(initialSpeed, 2)) / (2 * distance);
+        //}
 
-    bool NeedsPostTurnOversteer()
-    {
-        if (agent.path.corners.Length < 2)
-            return false;
-        
-        Vector3 nextSegmentDirection = (agent.path.corners[1] + (TurnCoordsCentre() - agent.path.corners[1])) - transform.position;
 
-        float alignmentAngle = Vector3.Angle(rb.velocity, nextSegmentDirection);
 
-        return alignmentAngle > alignmentTolerance;
-    }
-
-    Vector3 TurnCoordsCentre()
-    {
-        
-        Vector3 firstPoint = agent.path.corners[1];
-        Vector3 secondPoint = agent.path.corners[2];
-        Vector3 carPosition = transform.position;
-
-        Vector3 dirToFirstPoint = (firstPoint - carPosition).normalized;
-        Vector3 dirToSecondPoint = (secondPoint - carPosition).normalized;
-
-        Vector3 rightVectorOfFirst = Vector3.Cross(Vector3.up, dirToFirstPoint).normalized;
-
-        Vector3 crossProd = Vector3.Cross(dirToFirstPoint, dirToSecondPoint);
-
-        if (crossProd.y < 0)
+        void NewUpdate()
         {
-            //right
-            return  firstPoint + rightVectorOfFirst * cornerCoordsShift;
+            if (target != null)
+                agent.SetDestination(target.position);
+
+            Vector3 lookAheadTarget = CalculateLookAheadPoint();
+            Vector3 direction = lookAheadTarget - transform.position;
+
+            float horizontalInput = CalculateSteering(direction);
+
+
+            vert = 1f;
+            horiz = horizontalInput;
+            agent.nextPosition = transform.position;
+            print(horizontalInput + "IUHGIALUSRTHGLA");
         }
-        else if (crossProd.y > 0)
+
+        Vector3 CalculateLookAheadPoint()
         {
-            //left
-            return firstPoint - rightVectorOfFirst * cornerCoordsShift;
+            Vector3 lookAheadTarget = agent.steeringTarget;
+
+            for (int i = 1; i < agent.path.corners.Length; i++)
+            {
+                Vector3 corner = agent.path.corners[i];
+                if (Vector3.Distance(transform.position, corner) >= lookAheadDistance)
+                {
+                    lookAheadTarget = corner;
+                    break;
+                }
+            }
+
+            return lookAheadTarget;
         }
-        else
+
+        float CalculateSteering(Vector3 direction)
         {
-            return Vector3.zero;
+            Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
+            float horizontalInput = Mathf.Clamp(cross.y, -1f, 1f);
+
+            if (NeedsPostTurnOversteer())
+            {
+                horizontalInput *= oversteerStrength;
+                //print("NOT ALIGNED");
+            }
+            else
+            {
+                horizontalInput = Mathf.Lerp(horizontalInput, 0, 0.1f);
+            }
+
+            return horizontalInput;
+        }
+
+        bool NeedsPostTurnOversteer()
+        {
+            if (agent.path.corners.Length < 2)
+                return false;
+
+            Vector3 nextSegmentDirection = (agent.path.corners[1] + (TurnCoordsCentre() - agent.path.corners[1])) - transform.position;
+
+            float alignmentAngle = Vector3.Angle(rb.velocity, nextSegmentDirection);
+
+            return alignmentAngle > alignmentTolerance;
+        }
+
+        Vector3 TurnCoordsCentre()
+        {
+
+            Vector3 firstPoint = agent.path.corners[1];
+            Vector3 secondPoint = agent.path.corners[2];
+            Vector3 carPosition = transform.position;
+
+            Vector3 dirToFirstPoint = (firstPoint - carPosition).normalized;
+            Vector3 dirToSecondPoint = (secondPoint - carPosition).normalized;
+
+            Vector3 rightVectorOfFirst = Vector3.Cross(Vector3.up, dirToFirstPoint).normalized;
+
+            Vector3 crossProd = Vector3.Cross(dirToFirstPoint, dirToSecondPoint);
+
+            if (crossProd.y < 0)
+            {
+                //right
+                return firstPoint + rightVectorOfFirst * cornerCoordsShift;
+            }
+            else if (crossProd.y > 0)
+            {
+                //left
+                return firstPoint - rightVectorOfFirst * cornerCoordsShift;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
         }
     }
 }

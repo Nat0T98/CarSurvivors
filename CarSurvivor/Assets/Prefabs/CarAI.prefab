@@ -336,7 +336,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.214508
+      value: 24.4
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -598,7 +598,7 @@ MonoBehaviour:
   maxSpeed: 10
   turnSpeed: 150
   turnSlowDownAtPercent: 0.3
-  steeringSpeed: 1.5
+  steeringSpeed: 2.5
   maxDamage: 120
   maxHealth: 100
   health: 0
@@ -646,6 +646,10 @@ MonoBehaviour:
   alignmentTolerance: 5
   oversteerStrength: 2
   cornerCoordsShift: 5
+  minCornerSpeed: 0.1
+  slowestAngleCorner: 90
+  slowDist: 15
+  slowLingerSpeed: 1
 --- !u!195 &6440576476627852172
 NavMeshAgent:
   m_ObjectHideFlags: 0

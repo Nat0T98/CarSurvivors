@@ -231,7 +231,7 @@ MonoBehaviour:
   lifeTime: 5
   dissapearTime: 2
   verticalLaunchMin: 0
-  verticalLaunchMax: 0.3
+  verticalLaunchMax: 0.06
   horizontalLaunchMinMax: 0.93
   launchForce: 3.06
 --- !u!54 &1519900830363096030
