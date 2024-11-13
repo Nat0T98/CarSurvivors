@@ -6,10 +6,10 @@ public class CarAreaTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.Instance.player.GetComponent<MainCar>().areaTriggerEnter(other);
+        GameManager.Instance.player.GetComponent<CarMechanics>().areaTriggerEnter(other);
     }
     private void OnTriggerExit(Collider other)
     {
-        GameManager.Instance.player.GetComponent<MainCar>().areaTriggerExit(other);
+        GameManager.Instance.player.GetComponent<CarMechanics>().areaTriggerExit(other);
     }
 }

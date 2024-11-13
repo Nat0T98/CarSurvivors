@@ -17,9 +17,9 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.GetComponent<MainCar>() != null)
+            if (other.gameObject.GetComponent<CarMechanics>() != null)
             {
-                GameManager.Instance.player.GetComponent<MainCar>().TakeDamage(damage);
+                GameManager.Instance.player.GetComponent<CarMechanics>().TakeDamage(damage);
             }
         }
     }

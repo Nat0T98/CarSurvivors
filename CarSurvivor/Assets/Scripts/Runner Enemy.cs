@@ -23,14 +23,14 @@ public class RunnerEnemy : Enemy
 
     private Rigidbody rb;
     private Vector3 Target; 
-    private MainCar playerScript;
+    private CarMechanics playerScript;
     private MeshRenderer enemyMeshRenderer;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
-        playerScript = GameManager.Instance.player.GetComponent<MainCar>();
+        playerScript = GameManager.Instance.player.GetComponent<CarMechanics>();
         enemyMeshRenderer = gameObject.GetComponent<MeshRenderer>();
 
     }
@@ -68,7 +68,7 @@ public class RunnerEnemy : Enemy
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRadius, whatIsPlayer);
         foreach (Collider collider in hitColliders)
         {
-            playerScript = collider.GetComponent<MainCar>();
+            playerScript = collider.GetComponent<CarMechanics>();
             if (playerScript != null)
             {
                 playerScript.TakeDamage(damage); 

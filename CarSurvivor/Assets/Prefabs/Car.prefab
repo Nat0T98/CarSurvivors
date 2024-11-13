@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6546622091087463099}
   - component: {fileID: 7054694096988198080}
   - component: {fileID: 7666441603724394600}
-  - component: {fileID: 8795286881257081220}
+  - component: {fileID: 4977774811405835783}
   - component: {fileID: 7003340251140724500}
   m_Layer: 8
   m_Name: Car
@@ -235,7 +235,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &8795286881257081220
+--- !u!114 &4977774811405835783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,17 +244,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 810731362967932891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d62976d79523445ae0c0d41891075a, type: 3}
+  m_Script: {fileID: 11500000, guid: 11fc007a017f5b24b8fe930400b90ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationForce: 25
+  forwardInput: 0
+  turnInput: 0
+  accelerationForce: 50
   reverseForce: 30
   maxSpeed: 20
   turnSpeed: 150
-  driftTurnSpeed: 200
-  driftForce: 10
-  driftFactor: 0.95
-  steeringSpeed: 2.5
+  turnSlowDownAtPercent: 0.3
+  steeringSpeed: 0.1
   maxDamage: 120
   maxHealth: 100
   health: 0
@@ -263,20 +263,23 @@ MonoBehaviour:
   wheelSpinnerL: {fileID: 1913970329550540588}
   wheelSpinnerR: {fileID: 1956491115564154270}
   rammer: {fileID: 4290653890458397349}
-  boostMulitiplier: 2
-  maxBoostAmount: 5
-  boostRechargeRate: 1
-  boostUI: {fileID: 0}
+  boostMaxSpeedMulitiplier: 1.25
+  boostAccelerationMult: 1.5
+  boostDecelSpeed: 1
+  maxBoostAmount: 0
+  boostRechargeRate: 0
+  currentBoostAmount: 0
+  rb: {fileID: 7666441603724394600}
   turretMain: {fileID: 8712085435664907816}
-  turretRotSpeed: 20
+  turretRotSpeed: 1
   turretActive: 0
   turretFireRateUpgrade: 0.05
   turretFireRateLimit: 0.02
-  skidThreshholdAngle: 20
+  skidThreshholdAngle: 0
   smokeObj: {fileID: 8861775285669256459, guid: 19f5a826209051d4995e6a3b7de42528,
     type: 3}
-  smokeSpawnDelay: 0.4
-  smokeSpawnVarience: 0.3
+  smokeSpawnDelay: 0.5
+  smokeSpawnVarience: 0.2
   wheels:
   - wheelObj: {fileID: 4140478437241108277}
     wheelEffectObj: {fileID: 2984609594377297873}
@@ -286,13 +289,16 @@ MonoBehaviour:
     wheelEffectObj: {fileID: 263721837393929964}
   - wheelObj: {fileID: 7982940585930037635}
     wheelEffectObj: {fileID: 6302368451888033146}
+  RushTimer: {fileID: 0}
+  rotationPointOffset: {x: 0, y: 0, z: 2}
+  gameOverScreen: {fileID: 0}
+  spawnPos: {x: 0, y: 0, z: 0}
+  slowTurnMultiplier: 1
+  boostUI: {fileID: 0}
   camStillRotObject: {fileID: 5275671823776584725}
   camLockRotObject: {fileID: 2178058583894489150}
   camLookAtObject: {fileID: 3120677023452796647}
   camSmoothSpeed: 5
-  RushTimer: {fileID: 0}
-  rotationPointOffset: {x: 0, y: 0, z: -1.38}
-  gameOverScreen: {fileID: 0}
   boomExtraLength: 0
 --- !u!114 &7003340251140724500
 MonoBehaviour:
@@ -5212,7 +5218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6010549701490051730
 Transform:
   m_ObjectHideFlags: 0

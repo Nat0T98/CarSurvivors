@@ -6,6 +6,6 @@ public class RamCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.Instance.player.GetComponent<MainCar>().ramTriggerEnter(other);
+        GameManager.Instance.player.GetComponent<CarMechanics>().ramTriggerEnter(other);
     }
 }

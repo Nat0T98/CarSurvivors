@@ -7,7 +7,7 @@ public class UpgradeManager : MonoBehaviour
     public GameObject UpgradeCanvas;
     PauseMenu pauseMenu;
     public static bool isMenuActive = false;
-    public MainCar Car;
+    public CarMechanics Car;
 
 
     public int UpgradePoints = 0;
