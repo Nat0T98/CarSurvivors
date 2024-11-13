@@ -24,7 +24,7 @@ public class PickupTESTER : MonoBehaviour
     {
         if (other.tag == "Player") 
         {
-            PlayerObject.GetComponent<MainCar>().MelleUpgradeTest();
+            PlayerObject.GetComponent<CarMechanics>().MelleUpgradeTest();
         }
     }
 }

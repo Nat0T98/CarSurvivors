@@ -22,17 +22,15 @@ public class RunnerEnemy : Enemy
     public LayerMask whatIsPlayer;
 
     private Rigidbody rb;
-    private Vector3 Target;
-    private MainCar playerScript;
-   
     private Coroutine attackCoroutine;
-
+    private Vector3 Target; 
+    private CarMechanics playerScript;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
-        playerScript = GameManager.Instance.player.GetComponent<MainCar>();
+        playerScript = GameManager.Instance.player.GetComponent<CarMechanics>();
     }
 
     private void OnEnable()
@@ -88,7 +86,7 @@ public class RunnerEnemy : Enemy
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRadius, whatIsPlayer);
         foreach (Collider collider in hitColliders)
         {
-            playerScript = collider.GetComponent<MainCar>();
+            playerScript = collider.GetComponent<CarMechanics>();
             if (playerScript != null)
             {
                 playerScript.TakeDamage(damage);

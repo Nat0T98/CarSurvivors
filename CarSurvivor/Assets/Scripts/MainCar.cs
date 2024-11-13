@@ -12,6 +12,7 @@ public class MainCar : MonoBehaviour
     public float reverseForce = 30f; 
     public float maxSpeed = 20f; 
     public float turnSpeed = 150f;
+    public float turnSlowDownAtPercent = 0.3f;
     public float steeringSpeed = 0.1f;
     public float maxDamage = 120f;
     public float maxHealth = 100f;
@@ -88,12 +89,15 @@ public class MainCar : MonoBehaviour
     private Vector3 spawnPos;
 
     private float steeringObj;
+    public float slowTurnMultiplier = 1.0f;
 
     public float boomExtraLength = 0;
     private float boomInitDist;
     private bool boomOnce;
     private bool isDrifting;
     private float boostUsageRate = 1f;
+    private CarAi carAiScript;
+    public bool useAi = true;
 
     private void Awake()
     {
@@ -109,6 +113,8 @@ public class MainCar : MonoBehaviour
         spawnPos = transform.position;
 
         health = maxHealth;
+
+        carAiScript = GetComponent<CarAi>();
 
 
         /*boostUI.maxValue = maxBoostAmount;
@@ -338,10 +344,21 @@ public class MainCar : MonoBehaviour
     
 
     void HandleMovement()
-    {        
-        float forwardInput = Input.GetAxis("Vertical"); 
-        float turnInput = Input.GetAxis("Horizontal");
+    {
+        float forwardInput;
+        float turnInput;
         float maxBoostSpeed;
+
+        if (useAi)
+        {
+            forwardInput = carAiScript.vert;
+            turnInput = carAiScript.horiz;
+        }
+        else
+        {
+            forwardInput = Input.GetAxis("Vertical");
+            turnInput = Input.GetAxis("Horizontal");
+        }
 
 
         if (isBoosting)
@@ -368,7 +385,7 @@ public class MainCar : MonoBehaviour
             //turnInput = 0 - turnInput;
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxBoostSpeed);
-
+        
         //turn movement
         //if (Input.GetKey(KeyCode.A))
         //{
@@ -389,7 +406,8 @@ public class MainCar : MonoBehaviour
 
         if (rb.velocity.magnitude > 0.1f)
         {
-            float turn = steeringObj * ((rb.velocity.magnitude / maxSpeed) * turnSpeed) * Time.deltaTime;
+            //float turn = steeringObj * (rb.velocity.magnitude / maxSpeed * turnSpeed) * Time.deltaTime;
+            float turn = steeringObj * (Mathf.Clamp01(rb.velocity.magnitude / maxSpeed / turnSlowDownAtPercent)  * turnSpeed) * Time.deltaTime;
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
             Vector3 rotationPointWorld = transform.TransformPoint(rotationPointOffset);
@@ -603,6 +621,6 @@ public class MainCar : MonoBehaviour
     
     public void ScreenShake(Vector3 shakeOrigin, float power)
     {
-
+        
     }
 }
