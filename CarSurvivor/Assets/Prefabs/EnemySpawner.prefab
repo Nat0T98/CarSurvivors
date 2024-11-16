@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runnerPoolName: RunnerPool
   rangedPoolName: RangedPool
-  minSpawnRadius: 30
+  minSpawnRadius: 20
   maxSpawnRadius: 70
   spawnInterval: 1
   runnerProbability: 0.5

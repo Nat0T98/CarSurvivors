@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
     public float damage = 10f;
-    public float lifetime = 5f;
+    public float lifetime = 8f;
     public bool hasMissed = false;
-
-
+    CarMechanics Player;
     private void OnEnable()
     {
         Invoke("Deactivate", lifetime);
@@ -28,10 +25,10 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            MainCar playerCar = other.gameObject.GetComponent<MainCar>();
-            if (playerCar != null)
+            Player = other.gameObject.GetComponent<CarMechanics>();
+            if (Player != null)
             {
-                playerCar.TakeDamage(damage);
+                Player.TakeDamage(damage);
             }
 
             gameObject.SetActive(false);

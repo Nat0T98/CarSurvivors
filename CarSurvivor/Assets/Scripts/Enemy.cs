@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -39,7 +37,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy took damage. Health remaining: " + health);
         if (health <= 0)
         {
-            //SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Death");
+            SFX_Manager.GlobalSFXManager.PlaySFX("Drone_Death", 1);
             gameObject.SetActive(false);
         }
     }

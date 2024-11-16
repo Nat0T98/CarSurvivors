@@ -268,8 +268,7 @@ MonoBehaviour:
   boostDecelSpeed: 1.5
   maxBoostAmount: 5
   boostRechargeRate: 1
-  currentBoostAmount: 0
-  rb: {fileID: 7666441603724394600}
+  boostUI: {fileID: 0}
   turretMain: {fileID: 8712085435664907816}
   turretRotSpeed: 20
   turretActive: 0
@@ -289,12 +288,11 @@ MonoBehaviour:
     wheelEffectObj: {fileID: 263721837393929964}
   - wheelObj: {fileID: 7982940585930037635}
     wheelEffectObj: {fileID: 6302368451888033146}
-  RushTimer: {fileID: 0}
+  rb: {fileID: 7666441603724394600}
   rotationPointOffset: {x: 0, y: 0, z: -1.38}
   gameOverScreen: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   slowTurnMultiplier: 1
-  boostUI: {fileID: 0}
   camStillRotObject: {fileID: 5275671823776584725}
   camLockRotObject: {fileID: 2178058583894489150}
   camLookAtObject: {fileID: 3120677023452796647}
@@ -460,7 +458,7 @@ GameObject:
   - component: {fileID: 5914436764365904138}
   - component: {fileID: 8377290225216246043}
   - component: {fileID: 5106756840469597074}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1180,7 +1178,7 @@ GameObject:
   - component: {fileID: 8608652924892619246}
   - component: {fileID: 2980149902436507240}
   - component: {fileID: 5749553599859399119}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TargetAqArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1368,7 +1366,7 @@ GameObject:
   - component: {fileID: 7103391603054178946}
   - component: {fileID: 1869240967539975258}
   - component: {fileID: 6741750715855267551}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spot Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2792,7 +2790,7 @@ GameObject:
   - component: {fileID: 3032034271053336017}
   - component: {fileID: 4580755641230461965}
   - component: {fileID: 7734422158925883399}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3978,7 +3976,7 @@ GameObject:
   - component: {fileID: 2851176053062677709}
   - component: {fileID: 3308992002758100901}
   - component: {fileID: 8462528097388815048}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

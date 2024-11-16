@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
@@ -7,7 +5,7 @@ public class UpgradeManager : MonoBehaviour
     public GameObject UpgradeCanvas;
     PauseMenu pauseMenu;
     public static bool isMenuActive = false;
-    public CarMechanics Car;
+    public CarPlayer Car;
 
 
     public int UpgradePoints = 0;

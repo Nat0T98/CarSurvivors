@@ -1,14 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class CarMechanics : MonoBehaviour
 {
@@ -41,17 +36,18 @@ public class CarMechanics : MonoBehaviour
     public float boostDecelSpeed = 1f;
     public float maxBoostAmount;
     public float boostRechargeRate;
-
-    //public Slider boostUI;
-    public float currentBoostAmount;
-    private bool isBoosting = false;
+    public Slider boostUI;
+    protected float currentBoostAmount;
+    protected bool isBoosting = false;
+    protected bool isBoostSFX = false;
     private float boostUpgradeVal = 1;
+    protected float boostUsageRate = 1f;
     private float boostToNormPercent;
 
     private bool firstUpgrade;
     private float upgradeScale;
     private float wheelRadius = 0.38f;
-    public Rigidbody rb;
+    
     //public GameManager gameManager;
     [Space(10)]
 
@@ -90,7 +86,8 @@ public class CarMechanics : MonoBehaviour
     [Space(10)]
 
     [Header("Other")]
-    public TimeRushTimer RushTimer;
+    //public TimeRushTimer RushTimer;
+    public Rigidbody rb;
     public Vector3 rotationPointOffset = new Vector3(0, 0, 2f);
 
     public GameObject gameOverScreen;
@@ -131,7 +128,8 @@ public class CarMechanics : MonoBehaviour
     }
     protected virtual void Update()
     {
-        //print("Speed:" + rb.velocity.magnitude);
+        #region Old Update Code
+ //print("Speed:" + rb.velocity.magnitude);
 
 
         //print(rb.velocity.magnitude);
@@ -195,7 +193,9 @@ public class CarMechanics : MonoBehaviour
         //    RechargeBoost();
         //}
 
-        
+        #endregion
+       
+
 
         if (turretActive)
         {
@@ -223,30 +223,7 @@ public class CarMechanics : MonoBehaviour
         wheelSkidMarks();
     }
 
-    public void ActivateBoost()
-    {
-        isBoosting = true;
-        currentBoostAmount -= Time.deltaTime;
-        if (currentBoostAmount <= 0)
-        {
-            isBoosting = false;
-        }
-    }
-    public void RechargeBoost()
-    {
-        isBoosting = false;
-        if (currentBoostAmount < maxBoostAmount)
-        {
-            currentBoostAmount += boostRechargeRate * Time.deltaTime;
-            currentBoostAmount = Mathf.Clamp(currentBoostAmount, 0, maxBoostAmount);
-        }
-    }
     
-
-    public void BoostUpgrade()
-    {
-        currentBoostAmount = maxBoostAmount;
-    }
 
 
     protected virtual void FixedUpdate()
@@ -284,8 +261,8 @@ public class CarMechanics : MonoBehaviour
             //print(otherCol.gameObject.name);
         }
     }
-
-    //void CameraPosition()
+    #region CameraPosition()
+//void CameraPosition()
     //{
     //    Vector3 desiredPosition = currentCamLock.transform.position;
     //    Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, desiredPosition, camSmoothSpeed * Time.deltaTime);
@@ -313,6 +290,8 @@ public class CarMechanics : MonoBehaviour
 
     //    Debug.DrawLine(startPoint, startPoint + direction * boomInitDist, Color.blue);
     //}
+    #endregion
+    
 
 
     void HandleMovement()
@@ -358,20 +337,7 @@ public class CarMechanics : MonoBehaviour
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxBoostSpeed);
 
-        //turn movement
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    steeringObj = Mathf.MoveTowards(steeringObj, -1, steeringSpeed * Time.deltaTime);
-        //}
-        //else if (Input.GetKey(KeyCode.D))
-        //{
-        //    steeringObj = Mathf.MoveTowards(steeringObj, 1, steeringSpeed * Time.deltaTime);
-        //}
-        //else
-        //{
-        //    steeringObj = Mathf.MoveTowards(steeringObj, 0, steeringSpeed * Time.deltaTime);
-        //}
-
+       
         steeringObj = Mathf.MoveTowards(steeringObj, turnInput, steeringSpeed * Time.deltaTime);
 
         steeringObj = Mathf.Clamp(steeringObj, -1, 1);
@@ -391,8 +357,22 @@ public class CarMechanics : MonoBehaviour
             Vector3 newCarPosition = turnRotation * directionToCar + rotationPointWorld;
             rb.MovePosition(newCarPosition);
         }
+        #region Old Code 
+        //turn movement
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    steeringObj = Mathf.MoveTowards(steeringObj, -1, steeringSpeed * Time.deltaTime);
+        //}
+        //else if (Input.GetKey(KeyCode.D))
+        //{
+        //    steeringObj = Mathf.MoveTowards(steeringObj, 1, steeringSpeed * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    steeringObj = Mathf.MoveTowards(steeringObj, 0, steeringSpeed * Time.deltaTime);
+        //}
 
-        //if (rb.velocity.magnitude < maxSpeed)
+ //if (rb.velocity.magnitude < maxSpeed)
         //{
         //    if (isDrifting)
         //    {
@@ -415,6 +395,8 @@ public class CarMechanics : MonoBehaviour
         //{
         //    rb.MoveRotation(rb.rotation * Quaternion.Euler(0, turnAmount, 0));
         //}
+        #endregion
+       
     }
 
     public void MelleUpgradeTest()
@@ -471,12 +453,13 @@ public class CarMechanics : MonoBehaviour
         if (enemyScript.health <= 0)
         {
             enemyScript.health = 0;
-            if (currentScene.name == "Showcase")
+            TestEndlessEnemyDeath(enemyScript);
+            /*if (currentScene.name == "Showcase")
             {
                 TestEndlessEnemyDeath(enemyScript);
                 // StartCoroutine(EndlessEnemyDeath(enemyScript));
 
-            }
+            }*/
             /* else if (currentScene.name == "EndlessTest")
                  {
                      TestEndlessEnemyDeath(enemyScript);
@@ -536,8 +519,8 @@ public class CarMechanics : MonoBehaviour
     void TestEndlessEnemyDeath(Enemy enemy)
     {
         Upgrades.AddUpgradePoints();
-        Destroy(enemy.gameObject);
-
+        //Destroy(enemy.gameObject);
+        enemy.gameObject.SetActive(false);
     }
 
 

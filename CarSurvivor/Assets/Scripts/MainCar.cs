@@ -501,12 +501,13 @@ public class MainCar : MonoBehaviour
         {
             Debug.Log("Enemy Death");
             enemyScript.health = 0;
+            //Upgrades.AddUpgradePoints();
             //EndlessEnemyDeath(enemyScript);
-           /* if (currentScene.name == "Showcase")
-            {
-                EndlessEnemyDeath(enemyScript);
-            }*/
-                
+            /* if (currentScene.name == "Showcase")
+             {
+                 EndlessEnemyDeath(enemyScript);
+             }*/
+
         }
     }
 

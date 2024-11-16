@@ -1,19 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class CarPlayer : CarMechanics
 {
-    public Slider boostUI;
-
     [Header("Camera References")]
     public GameObject camStillRotObject;
     public GameObject camLockRotObject;
@@ -26,7 +14,8 @@ public class CarPlayer : CarMechanics
     private bool boomOnce;
 
     private GameManager gameManager;
-    // Start is called before the first frame update
+    
+
     protected override void Start()
     {
         base.Start();
@@ -39,7 +28,7 @@ public class CarPlayer : CarMechanics
         }
     }
 
-    // Update is called once per frame
+    
     protected override void Update()
     {
         base.Update();
@@ -50,10 +39,6 @@ public class CarPlayer : CarMechanics
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            //print("reset");
-            //SceneManager.LoadScene(resetToScene.name);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
             transform.position = spawnPos;
         }
 
@@ -88,9 +73,25 @@ public class CarPlayer : CarMechanics
             SFX_Manager.GlobalSFXManager.PlaySFX("Beep");
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && currentBoostAmount > 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             ActivateBoost();
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            DeactivateBoost();
+        }
+
+
+        if (isBoosting)
+        {
+            currentBoostAmount -= boostUsageRate * Time.deltaTime;
+            if (currentBoostAmount <= 0)
+            {
+                currentBoostAmount = 0;
+                DeactivateBoost();
+            }
         }
         else
         {
@@ -111,12 +112,42 @@ public class CarPlayer : CarMechanics
         CamBoom();
     }
 
+    void ActivateBoost()
+    {
+        if (currentBoostAmount > 0)
+        {
+            isBoosting = true;
+            SFX_Manager.GlobalSFXManager.PlayBoostSFX(0.5f);
+        }
+    }
+
+    void DeactivateBoost()
+    {
+        isBoosting = false;
+        SFX_Manager.GlobalSFXManager.StopBoostSFX();
+    }
+
+    void RechargeBoost()
+    {
+        if (!isBoosting && currentBoostAmount < maxBoostAmount)
+        {
+            currentBoostAmount += boostRechargeRate * Time.deltaTime;
+            currentBoostAmount = Mathf.Clamp(currentBoostAmount, 0, maxBoostAmount);
+        }
+    }
+
+
     void UpdateBoostSlider()
     {
         if (boostUI != null)
         {
             boostUI.value = currentBoostAmount;
         }
+    }
+
+    public void BoostUpgrade()
+    {
+        currentBoostAmount = maxBoostAmount;
     }
 
     void CameraPosition()
