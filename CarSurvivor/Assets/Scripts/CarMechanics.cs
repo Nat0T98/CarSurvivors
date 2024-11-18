@@ -40,7 +40,7 @@ public class CarMechanics : MonoBehaviour
     protected float currentBoostAmount;
     protected bool isBoosting = false;
     protected bool isBoostSFX = false;
-    private float boostUpgradeVal = 1;
+    //private float boostUpgradeVal = 1;
     protected float boostUsageRate = 1f;
     private float boostToNormPercent;
 

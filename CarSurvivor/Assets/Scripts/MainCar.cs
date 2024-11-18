@@ -36,8 +36,8 @@ public class MainCar : MonoBehaviour
     public Slider boostUI;
     private float currentBoostAmount;
     private bool isBoosting = false;
-    private bool isBoostSFX = false;
-    private float boostUpgradeVal = 1;
+    //private bool isBoostSFX = false;
+    //private float boostUpgradeVal = 1;
     private float boostToNormPercent;
 
     private bool firstUpgrade;
@@ -94,7 +94,6 @@ public class MainCar : MonoBehaviour
     public float boomExtraLength = 0;
     private float boomInitDist;
     private bool boomOnce;
-    private bool isDrifting;
     private float boostUsageRate = 1f;
     private CarAi carAiScript;
     public bool useAi = true;
@@ -176,11 +175,11 @@ public class MainCar : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            isDrifting = true;
+            //isDrifting = true;
         }
         else
         {
-            isDrifting = false;
+            //isDrifting = false;
         }      
 
         UpdateBoostSlider();

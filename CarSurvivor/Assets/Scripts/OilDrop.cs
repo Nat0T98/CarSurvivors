@@ -45,7 +45,7 @@ public class OilDrop : MonoBehaviour
         oilFlatObj.GetComponent<MeshRenderer>().enabled = true;
         oilFlatObj.transform.rotation = angle;
 
-        float scalar = Random.RandomRange(-puddleScaleVarience, puddleScaleVarience);
+        float scalar = Random.Range(-puddleScaleVarience, puddleScaleVarience);
         float scalarResult = puddleScale - scalar;
         oilFlatObj.transform.localScale = new Vector3(scalarResult, oilFlatObj.transform.localScale.y, scalarResult);
         endScale = oilFlatObj.transform.localScale;

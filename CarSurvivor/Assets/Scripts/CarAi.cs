@@ -135,98 +135,98 @@ public class CarAi : CarMechanics
 
 
 
-        void NewUpdate()
-        {
-            if (target != null)
-                agent.SetDestination(target.position);
+        //void NewUpdate()
+        //{
+        //    if (target != null)
+        //        agent.SetDestination(target.position);
 
-            Vector3 lookAheadTarget = CalculateLookAheadPoint();
-            Vector3 direction = lookAheadTarget - transform.position;
+        //    Vector3 lookAheadTarget = CalculateLookAheadPoint();
+        //    Vector3 direction = lookAheadTarget - transform.position;
 
-            float horizontalInput = CalculateSteering(direction);
+        //    float horizontalInput = CalculateSteering(direction);
 
 
-            vert = 1f;
-            horiz = horizontalInput;
-            agent.nextPosition = transform.position;
-            print(horizontalInput + "IUHGIALUSRTHGLA");
-        }
+        //    vert = 1f;
+        //    horiz = horizontalInput;
+        //    agent.nextPosition = transform.position;
+        //    print(horizontalInput + "IUHGIALUSRTHGLA");
+        //}
 
-        Vector3 CalculateLookAheadPoint()
-        {
-            Vector3 lookAheadTarget = agent.steeringTarget;
+        //Vector3 CalculateLookAheadPoint()
+        //{
+        //    Vector3 lookAheadTarget = agent.steeringTarget;
 
-            for (int i = 1; i < agent.path.corners.Length; i++)
-            {
-                Vector3 corner = agent.path.corners[i];
-                if (Vector3.Distance(transform.position, corner) >= lookAheadDistance)
-                {
-                    lookAheadTarget = corner;
-                    break;
-                }
-            }
+        //    for (int i = 1; i < agent.path.corners.Length; i++)
+        //    {
+        //        Vector3 corner = agent.path.corners[i];
+        //        if (Vector3.Distance(transform.position, corner) >= lookAheadDistance)
+        //        {
+        //            lookAheadTarget = corner;
+        //            break;
+        //        }
+        //    }
 
-            return lookAheadTarget;
-        }
+        //    return lookAheadTarget;
+        //}
 
-        float CalculateSteering(Vector3 direction)
-        {
-            Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
-            float horizontalInput = Mathf.Clamp(cross.y, -1f, 1f);
+        //float CalculateSteering(Vector3 direction)
+        //{
+        //    Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
+        //    float horizontalInput = Mathf.Clamp(cross.y, -1f, 1f);
 
-            if (NeedsPostTurnOversteer())
-            {
-                horizontalInput *= oversteerStrength;
-                //print("NOT ALIGNED");
-            }
-            else
-            {
-                horizontalInput = Mathf.Lerp(horizontalInput, 0, 0.1f);
-            }
+        //    if (NeedsPostTurnOversteer())
+        //    {
+        //        horizontalInput *= oversteerStrength;
+        //        //print("NOT ALIGNED");
+        //    }
+        //    else
+        //    {
+        //        horizontalInput = Mathf.Lerp(horizontalInput, 0, 0.1f);
+        //    }
 
-            return horizontalInput;
-        }
+        //    return horizontalInput;
+        //}
 
-        bool NeedsPostTurnOversteer()
-        {
-            if (agent.path.corners.Length < 2)
-                return false;
+        //bool NeedsPostTurnOversteer()
+        //{
+        //    if (agent.path.corners.Length < 2)
+        //        return false;
 
-            Vector3 nextSegmentDirection = (agent.path.corners[1] + (TurnCoordsCentre() - agent.path.corners[1])) - transform.position;
+        //    Vector3 nextSegmentDirection = (agent.path.corners[1] + (TurnCoordsCentre() - agent.path.corners[1])) - transform.position;
 
-            float alignmentAngle = Vector3.Angle(rb.velocity, nextSegmentDirection);
+        //    float alignmentAngle = Vector3.Angle(rb.velocity, nextSegmentDirection);
 
-            return alignmentAngle > alignmentTolerance;
-        }
+        //    return alignmentAngle > alignmentTolerance;
+        //}
 
-        Vector3 TurnCoordsCentre()
-        {
+        //Vector3 TurnCoordsCentre()
+        //{
 
-            Vector3 firstPoint = agent.path.corners[1];
-            Vector3 secondPoint = agent.path.corners[2];
-            Vector3 carPosition = transform.position;
+        //    Vector3 firstPoint = agent.path.corners[1];
+        //    Vector3 secondPoint = agent.path.corners[2];
+        //    Vector3 carPosition = transform.position;
 
-            Vector3 dirToFirstPoint = (firstPoint - carPosition).normalized;
-            Vector3 dirToSecondPoint = (secondPoint - carPosition).normalized;
+        //    Vector3 dirToFirstPoint = (firstPoint - carPosition).normalized;
+        //    Vector3 dirToSecondPoint = (secondPoint - carPosition).normalized;
 
-            Vector3 rightVectorOfFirst = Vector3.Cross(Vector3.up, dirToFirstPoint).normalized;
+        //    Vector3 rightVectorOfFirst = Vector3.Cross(Vector3.up, dirToFirstPoint).normalized;
 
-            Vector3 crossProd = Vector3.Cross(dirToFirstPoint, dirToSecondPoint);
+        //    Vector3 crossProd = Vector3.Cross(dirToFirstPoint, dirToSecondPoint);
 
-            if (crossProd.y < 0)
-            {
-                //right
-                return firstPoint + rightVectorOfFirst * cornerCoordsShift;
-            }
-            else if (crossProd.y > 0)
-            {
-                //left
-                return firstPoint - rightVectorOfFirst * cornerCoordsShift;
-            }
-            else
-            {
-                return Vector3.zero;
-            }
-        }
+        //    if (crossProd.y < 0)
+        //    {
+        //        //right
+        //        return firstPoint + rightVectorOfFirst * cornerCoordsShift;
+        //    }
+        //    else if (crossProd.y > 0)
+        //    {
+        //        //left
+        //        return firstPoint - rightVectorOfFirst * cornerCoordsShift;
+        //    }
+        //    else
+        //    {
+        //        return Vector3.zero;
+        //    }
+        //}
     }
 }
