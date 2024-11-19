@@ -87,7 +87,6 @@ public class CarMechanics : MonoBehaviour
     [Space(10)]
 
     [Header("Other")]
-    //public TimeRushTimer RushTimer;
     public Rigidbody rb;
     public Vector3 rotationPointOffset = new Vector3(0, 0, 2f);
 
@@ -103,6 +102,7 @@ public class CarMechanics : MonoBehaviour
     //private bool isDrifting;
     private CarAi carAiScript;
     //public bool useAi = true;
+    public TimeRushTimer timeRush;
 
     protected virtual void Awake()
     {
@@ -466,30 +466,16 @@ public class CarMechanics : MonoBehaviour
         if (enemyScript.health <= 0)
         {
             enemyScript.health = 0;
-            TestEndlessEnemyDeath(enemyScript);
-            /*if (currentScene.name == "Showcase")
+            //TestEndlessEnemyDeath(enemyScript);
+            switch (currentScene.name)
             {
-                TestEndlessEnemyDeath(enemyScript);
-                // StartCoroutine(EndlessEnemyDeath(enemyScript));
-
-            }*/
-            /* else if (currentScene.name == "EndlessTest")
-                 {
-                     TestEndlessEnemyDeath(enemyScript);
-                    // StartCoroutine(EndlessEnemyDeath(enemyScript));
-
-                 }
-             else if (currentScene.name == "TimeRushTest")
-                 {
-                     TestRushEnemyDeath(enemyScript);
-                     //StartCoroutine(TimeRushEnemyDeath(enemyScript));
-                 }
-             else
-                 {
-                     Debug.Log("NULL SCENE");
-                 }*/
-
-
+                case "Showcase":
+                    TestEndlessEnemyDeath(enemyScript);
+                    break;
+                case "Time Rush":
+                    TestRushEnemyDeath(enemyScript);
+                    break;
+            }
         }
     }
     #region Old Enumerators
@@ -521,18 +507,17 @@ public class CarMechanics : MonoBehaviour
 
 
 
-    /*void TestRushEnemyDeath(Enemy enemy)
+    void TestRushEnemyDeath(Enemy enemy)
     {
-        Destroy(enemy.gameObject);
+        enemy.gameObject.SetActive(false);
         Upgrades.AddUpgradePoints();
-        RushTimer.AddTime(RushTimer.KillBonus);
+        timeRush.AddTime();
 
-    }*/
+    }
 
     void TestEndlessEnemyDeath(Enemy enemy)
     {
         Upgrades.AddUpgradePoints();
-        //Destroy(enemy.gameObject);
         enemy.gameObject.SetActive(false);
     }
 
@@ -594,6 +579,15 @@ public class CarMechanics : MonoBehaviour
         if (Vector3.Angle(transform.forward.normalized, rb.velocity.normalized) >= skidThreshholdAngle && rb.velocity.magnitude > 5)
         {
             canSmoke = true;
+
+            // Play the drifting SFX when drifting
+            /*if (!SFX_Manager.GlobalSFXManager.IsDriftingSFXPlaying()) // Optional check to avoid playing multiple times
+            {
+                Debug.Log("Drift SFX");
+                SFX_Manager.GlobalSFXManager.PlayDriftSFX("Drift", true, 1f);
+            }*/
+
+
             foreach (var wheel in wheels)
             {
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
@@ -608,6 +602,8 @@ public class CarMechanics : MonoBehaviour
         {
             skidOnce = true;
             canSmoke = false;
+            //SFX_Manager.GlobalSFXManager.PlayDriftSFX("Drift", false);
+
             foreach (var wheel in wheels)
             {
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;

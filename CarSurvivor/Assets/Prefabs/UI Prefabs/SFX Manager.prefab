@@ -172,3 +172,4 @@ MonoBehaviour:
     type: 3}
   MusicSource: {fileID: 725860685054335512}
   drivingAudioSource: {fileID: 725860685054335512}
+  driftAudioSource: {fileID: 725860685054335512}

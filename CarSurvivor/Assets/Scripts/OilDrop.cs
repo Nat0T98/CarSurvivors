@@ -24,12 +24,17 @@ public class OilDrop : MonoBehaviour
         LaunchDroplet();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
+    {
+        time = 0f;
+    }
+
+    private void Update()
     {
         TimeTillDestroy();
     }
 
+    
     private void OnCollisionEnter(Collision collision)
     {
         //print("HITIITIITITITTTTT");
@@ -60,7 +65,8 @@ public class OilDrop : MonoBehaviour
             oilFlatObj.transform.localScale = Vector3.Lerp(endScale, new Vector3(0, oilFlatObj.transform.localScale.y, 0), scalar);
             if (time >= lifeTime + dissapearTime)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
     }

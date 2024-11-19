@@ -11,6 +11,7 @@ public class SFX_Manager : MonoBehaviour
     public AudioSource MusicSource;
     private AudioSource boostSource;
     public AudioSource drivingAudioSource;
+    public AudioSource driftAudioSource;
     public static SFX_Manager GlobalSFXManager;
 
     private void Awake()
@@ -77,12 +78,12 @@ public class SFX_Manager : MonoBehaviour
     }
 
 
-    public void PlayDrivingSFX(string sfxName, bool shouldPlay, float pitch = 1f, float volume = 1f) //Variables so that the driving sfx will change pitch with the speed of the car
+    public void PlayDrivingSFX(string sfxName, bool shouldPlay, float pitch = 1f, float volume = 1f) 
     {
         
         if (!SFX_Lib.ContainsKey(sfxName))
         {
-            Debug.LogWarning($"Driving SFX '{sfxName}' not found in SFX library!");
+            Debug.LogWarning($"SFX '{sfxName}' not found");
             return;
         }
 
@@ -109,6 +110,38 @@ public class SFX_Manager : MonoBehaviour
     }
 
 
-    
+    public void PlayDriftSFX(string sfxName, bool shouldPlay, float volume = 1f)
+    {
 
+        if (!SFX_Lib.ContainsKey(sfxName))
+        {
+            Debug.LogWarning($"SFX '{sfxName}' not found");
+            return;
+        }
+
+        AudioClip driftClip = SFX_Lib[sfxName];
+
+        if (shouldPlay)
+        {
+            if (!driftAudioSource.isPlaying || driftAudioSource.clip != driftClip)
+            {
+                driftAudioSource.clip = driftClip;
+                driftAudioSource.volume = Mathf.Clamp(volume, 0f, 1f);
+                driftAudioSource.loop = true;
+                driftAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (driftAudioSource.isPlaying)
+            {
+                driftAudioSource.Stop();
+            }
+        }
+    }
+
+    public bool IsDriftingSFXPlaying()
+    {
+        return driftAudioSource.isPlaying;
+    }
 }
