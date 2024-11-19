@@ -40,6 +40,7 @@ public class CarMechanics : MonoBehaviour
     protected float currentBoostAmount;
     protected bool isBoosting = false;
     protected bool isBoostSFX = false;
+    protected float drivingPitch = 1f;
     //private float boostUpgradeVal = 1;
     protected float boostUsageRate = 1f;
     private float boostToNormPercent;
@@ -299,7 +300,10 @@ public class CarMechanics : MonoBehaviour
         //float forwardInput;
         //float turnInput;
         float maxBoostSpeed;
-        
+        //pitch based on speed of car,
+        /*float speedPercentage = rb.velocity.magnitude / maxSpeed;
+        float pitch = Mathf.Clamp(speedPercentage + 0.5f, 0.5f, 2f);*/
+
         //if (useAi)
         //{
         //    forwardInput = carAiScript.vert;
@@ -329,11 +333,20 @@ public class CarMechanics : MonoBehaviour
         if (forwardInput > 0)
         {
             rb.AddForce(transform.forward * forwardInput * accelerationForce * (isBoosting ? boostAccelerationMult : 1f), ForceMode.Acceleration);
+            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.1f);
+
         }
         else if (forwardInput < 0)
         {
+            drivingPitch = 0.8f;
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
             //turnInput = 0 - turnInput;
+            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.1f);
+        }
+        else
+        {
+            // Stop driving sound when stationary
+            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxBoostSpeed);
 

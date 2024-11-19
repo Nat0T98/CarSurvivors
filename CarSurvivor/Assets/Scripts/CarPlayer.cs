@@ -116,6 +116,9 @@ public class CarPlayer : CarMechanics
     {
         if (currentBoostAmount > 0)
         {
+            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
+            drivingPitch = 1.4f;//Higher SFX pitch whilst boosting
+            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.2f);
             isBoosting = true;
             SFX_Manager.GlobalSFXManager.PlayBoostSFX(0.5f);
         }
@@ -123,6 +126,8 @@ public class CarPlayer : CarMechanics
 
     void DeactivateBoost()
     {
+        SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
+        drivingPitch = 1f;
         isBoosting = false;
         SFX_Manager.GlobalSFXManager.StopBoostSFX();
     }

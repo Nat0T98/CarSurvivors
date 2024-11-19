@@ -152,7 +152,7 @@ MonoBehaviour:
   - Minigun
   - Boost
   - Gain_Health
-  - Car_Drive
+  - Driving
   - Beep
   - Drift
   ClipList:
@@ -171,3 +171,4 @@ MonoBehaviour:
   SFX_Prefab: {fileID: 3224560746294379828, guid: ab0b4a04d980d7c4d84cb63a1bf58768,
     type: 3}
   MusicSource: {fileID: 725860685054335512}
+  drivingAudioSource: {fileID: 725860685054335512}
