@@ -9,7 +9,8 @@ public class SFX_Manager : MonoBehaviour
 
     public GameObject SFX_Prefab;
     public AudioSource MusicSource;
-    private AudioSource boostSource; 
+    private AudioSource boostSource;
+    public AudioSource drivingAudioSource;
     public static SFX_Manager GlobalSFXManager;
 
     private void Awake()
@@ -74,4 +75,40 @@ public class SFX_Manager : MonoBehaviour
     {
         MusicSource.Stop(); // Stop the music
     }
+
+
+    public void PlayDrivingSFX(string sfxName, bool shouldPlay, float pitch = 1f, float volume = 1f) //Variables so that the driving sfx will change pitch with the speed of the car
+    {
+        
+        if (!SFX_Lib.ContainsKey(sfxName))
+        {
+            Debug.LogWarning($"Driving SFX '{sfxName}' not found in SFX library!");
+            return;
+        }
+
+        AudioClip drivingClip = SFX_Lib[sfxName];
+
+        if (shouldPlay)
+        {
+            if (!drivingAudioSource.isPlaying || drivingAudioSource.clip != drivingClip)
+            {
+                drivingAudioSource.clip = drivingClip;
+                drivingAudioSource.pitch = pitch;
+                drivingAudioSource.volume = Mathf.Clamp(volume, 0f, 1f);
+                drivingAudioSource.loop = true;
+                drivingAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (drivingAudioSource.isPlaying)
+            {
+                drivingAudioSource.Stop();
+            }
+        }
+    }
+
+
+    
+
 }
