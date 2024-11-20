@@ -1190,7 +1190,7 @@ GameObject:
   - component: {fileID: 8608652924892619246}
   - component: {fileID: 2980149902436507240}
   - component: {fileID: 5749553599859399119}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TargetAqArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5587,8 +5587,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 750846431592952649, guid: a451358a9c4afba4988825f905410b5c,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 750846431592952649, guid: a451358a9c4afba4988825f905410b5c,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828762245590841820, guid: a451358a9c4afba4988825f905410b5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 828762245590841820, guid: a451358a9c4afba4988825f905410b5c,
         type: 3}
@@ -5597,8 +5607,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1270505309056616926, guid: a451358a9c4afba4988825f905410b5c,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270505309056616926, guid: a451358a9c4afba4988825f905410b5c,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270376050863790245, guid: a451358a9c4afba4988825f905410b5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5009463698991292162, guid: a451358a9c4afba4988825f905410b5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5009463698991292162, guid: a451358a9c4afba4988825f905410b5c,
         type: 3}
@@ -5615,6 +5640,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 1d97e4f3897de614ca8a945e53a36090, type: 2}
+    - target: {fileID: 8989584640499556406, guid: a451358a9c4afba4988825f905410b5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8989584640499556406, guid: a451358a9c4afba4988825f905410b5c,
         type: 3}
       propertyPath: m_IsActive
