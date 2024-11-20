@@ -5,18 +5,21 @@ public class TimeRushTimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI upgradeText;
+    [SerializeField] private TextMeshProUGUI upgradePromptText;
     [SerializeField] private float remainingTime;
     public float killBonus;
     public GameOver GameOver;
 
-    private bool isFlashing = false; // Tracks whether the timer is in flashing mode for low time
-    private float flashTimer = 0f; // Timer for controlling the flashing effect
-    private const float flashDuration = 0.5f; // Duration for each flash cycle
 
-    private bool isGreenFlash = false; // Tracks if the text is in green flash mode
-    private float greenFlashTimer = 0f; // Timer for controlling the green flash
-    private const float greenFlashDuration = 0.3f; // Duration for green flash
+    private bool isUpgradeFlashing = false;
+    private float upgradeFlashTimer = 0f;
+    private bool isFlashing = false;
+    private float flashTimer = 0f; 
+    private const float flashDuration = 0.5f;
 
+    private bool isGreenFlash = false; 
+    private float greenFlashTimer = 0f; 
+    private const float greenFlashDuration = 0.3f;
     private void Start()
     {
         if (GameOver == null)
@@ -29,11 +32,12 @@ public class TimeRushTimer : MonoBehaviour
         }
 
         MusicManager.GlobalMusicManager.PlayGameMusic();
+        upgradePromptText.gameObject.SetActive(false);
+        
     }
 
     private void Update()
     {
-        // Countdown Timer Logic
         if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
@@ -41,15 +45,14 @@ public class TimeRushTimer : MonoBehaviour
         else
         {
             remainingTime = 0;
-            GameOver.GameOverScreen(); // Trigger game over if time is up
+            GameOver.GameOverScreen();
         }
 
-        // Format and Update Timer Text
+     
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        // Handle Green Flash
         if (isGreenFlash)
         {
             AddTimeFlash();
@@ -65,12 +68,32 @@ public class TimeRushTimer : MonoBehaviour
             isFlashing = false;
         }
 
-        
+
         if (GameManager.Instance != null)
         {
-            upgradeText.text = string.Format("Upgrade Points: {0}", GameManager.Instance.upgradePointsRef);
+            int upgradePoints = GameManager.Instance.upgradePointsRef;
+            upgradeText.text = string.Format("Upgrade Points: {0}", upgradePoints);
+
+            if (upgradePoints >= 5)
+            {
+                upgradePromptText.gameObject.SetActive(true);
+                if (!isUpgradeFlashing)
+                {
+                    isUpgradeFlashing = true;
+                    flashTimer = 0f;
+                }
+                UpgradePromptFlash();
+            }
+            else
+            {
+                isUpgradeFlashing = false;
+                upgradePromptText.gameObject.SetActive(false);
+            }
         }
+
+
     }
+
 
     public void AddTime()
     {
@@ -84,28 +107,37 @@ public class TimeRushTimer : MonoBehaviour
         isFlashing = true;
         flashTimer += Time.deltaTime;
 
-        // Alternate between red and transparent colors based on the flash duration
         if (flashTimer >= flashDuration)
         {
-            flashTimer = 0f; // Reset the flash timer
+            flashTimer = 0f;
         }
 
         // Lerp color to create a flashing effect
         float t = Mathf.PingPong(flashTimer * 2f / flashDuration, 1f);
-        timerText.color = Color.Lerp(Color.red, new Color(1, 0, 0, 0.5f), t); // Flash between red and semi-transparent red
+        timerText.color = Color.Lerp(Color.red, new Color(1, 0, 0, 0.5f), t);
     }
 
     private void AddTimeFlash()
     {
         greenFlashTimer += Time.deltaTime;
-
-        // Set the timer text to green
         timerText.color = Color.green;
 
-        // Reset after the green flash duration
         if (greenFlashTimer >= greenFlashDuration)
         {
             isGreenFlash = false;
         }
+    }
+
+
+    private void UpgradePromptFlash()
+    {
+        upgradeFlashTimer += Time.deltaTime;
+
+        if (upgradeFlashTimer >= flashDuration)
+        {
+            upgradeFlashTimer = 0f;
+        }
+        float t = Mathf.PingPong(upgradeFlashTimer * 2f / flashDuration, 1f);
+        upgradePromptText.color = Color.Lerp(Color.white, Color.yellow, t); // Flash between white and yellow
     }
 }

@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     }
     public void TimeRushModeButton()
     {
-        MusicManager.GlobalMusicManager.PlaySFX("Play Button");
+        MusicManager.GlobalMusicManager.PlaySFX("Play");
         Invoke("LoadTimeRushMode", 2); //wait 2 seconds so that SFX can play
     }
 
@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
 
     public void QuitButton()
     {
-        //Application.Quit();
+        Application.Quit();
         Debug.Log("Quit");
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
     }
@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
     public void LoadTimeRushMode()
     {
         MusicManager.GlobalMusicManager.StopMusic();
-        SceneManager.LoadSceneAsync("TimeRushTest");
+        SceneManager.LoadSceneAsync("Time Rush");
     }
 
 
