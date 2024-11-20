@@ -73,6 +73,8 @@ public class CarMechanics : MonoBehaviour
     {
         public GameObject wheelObj;
         public GameObject wheelEffectObj;
+        public Vector3 car1WheelPos;
+        public Vector3 car2WheelPos;
     }
     public List<Wheels> wheels;
     [Space(10)]
@@ -103,6 +105,9 @@ public class CarMechanics : MonoBehaviour
     private CarAi carAiScript;
     //public bool useAi = true;
     public TimeRushTimer timeRush;
+
+    public GameObject car1Body;
+    public GameObject car2Body;
 
     protected virtual void Awake()
     {
@@ -622,7 +627,24 @@ public class CarMechanics : MonoBehaviour
 
     public void VehicleChange(int vehicle)
     {
-
+        if (vehicle == 1)
+        {
+            car1Body.SetActive(true);
+            car2Body.SetActive(false);
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelObj.transform.localPosition = wheel.car1WheelPos;
+            }
+        }
+        else if (vehicle == 2)
+        {
+            car1Body.SetActive(false);
+            car2Body.SetActive(true);
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelObj.transform.localPosition = wheel.car2WheelPos;
+            }
+        }
     }
 
     public void ScreenShake(Vector3 shakeOrigin, float power)

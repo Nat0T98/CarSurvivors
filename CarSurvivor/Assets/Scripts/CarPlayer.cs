@@ -13,6 +13,11 @@ public class CarPlayer : CarMechanics
     private float boomInitDist;
     private bool boomOnce;
 
+    //public float camFollowSpeed = 5f;
+    //public float camInertia = 1.5f;
+    //public float camReturnSpeed = 3f;
+    //private Vector3 camVelocity;
+
     private GameManager gameManager;
     
 
@@ -83,6 +88,16 @@ public class CarPlayer : CarMechanics
             DeactivateBoost();
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            VehicleChange(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            VehicleChange(2);
+        }
+
 
         if (isBoosting)
         {
@@ -96,7 +111,7 @@ public class CarPlayer : CarMechanics
         else
         {
             RechargeBoost();
-        }
+        } 
     }
 
     protected override void Awake()
@@ -160,6 +175,21 @@ public class CarPlayer : CarMechanics
         Vector3 desiredPosition = currentCamLock.transform.position;
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, desiredPosition, camSmoothSpeed * Time.deltaTime);
         Camera.main.transform.LookAt(camLookAtObject.transform);
+
+
+        
+
+        //if (rb.velocity.magnitude > 0.1f) 
+        //{
+        //    camVelocity += rb.velocity * camInertia * Time.deltaTime;
+        //}
+
+        //camVelocity = Vector3.Lerp(camVelocity, Vector3.zero, Time.deltaTime * camReturnSpeed);
+
+        ////Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, currentCamLock.transform.position + camVelocity, Time.deltaTime * camFollowSpeed);
+
+        //Camera.main.transform.position = currentCamLock.transform.position - camVelocity;
+
     }
 
     void CamBoom()
@@ -170,14 +200,19 @@ public class CarPlayer : CarMechanics
         Vector3 direction = (endPoint - startPoint).normalized;
         if (boomOnce == false)
         {
-            boomInitDist = Vector3.Distance(startPoint, endPoint) + boomExtraLength;
+            boomInitDist = Vector3.Distance(startPoint, endPoint);
             boomOnce = true;
         }
 
+        float boomDist = boomInitDist + boomExtraLength;
 
-        if (Physics.Raycast(startPoint, direction, out RaycastHit hitInfo, boomInitDist))
+        if (Physics.Raycast(startPoint, direction, out RaycastHit hitInfo, boomDist))
         {
             currentCamLock.transform.position = hitInfo.point;
+        }
+        else
+        {
+            currentCamLock.transform.position = endPoint;
         }
 
 
