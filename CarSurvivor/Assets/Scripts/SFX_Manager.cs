@@ -11,7 +11,7 @@ public class SFX_Manager : MonoBehaviour
     public AudioSource MusicSource;
     private AudioSource boostSource;
     public AudioSource drivingAudioSource;
-    public AudioSource driftAudioSource;
+    public AudioSource driftSource;
     public static SFX_Manager GlobalSFXManager;
 
     private void Awake()
@@ -110,7 +110,28 @@ public class SFX_Manager : MonoBehaviour
     }
 
 
-    public void PlayDriftSFX(string sfxName, bool shouldPlay, float volume = 1f)
+    public void PlayDriftFX(float volume = 1.0f)
+    {
+        if (SFX_Lib.ContainsKey("Drift") && !driftSource.isPlaying)
+        {
+            driftSource.clip = SFX_Lib["Drift"];
+            driftSource.volume = volume;
+            driftSource.loop = true;
+            driftSource.Play();
+            //Debug.Log("PLAYED");
+        }
+    }
+    public void StopDriftSFX()
+    {
+        if (driftSource.isPlaying)
+        {
+            driftSource.Stop(); // Stop playing the drift sound
+        }
+    }
+
+
+
+    /*public void PlayDriftSFX(string sfxName, bool shouldPlay, float volume = 1f)
     {
 
         if (!SFX_Lib.ContainsKey(sfxName))
@@ -143,5 +164,5 @@ public class SFX_Manager : MonoBehaviour
     public bool IsDriftingSFXPlaying()
     {
         return driftAudioSource.isPlaying;
-    }
+    }*/
 }
