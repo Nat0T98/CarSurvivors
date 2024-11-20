@@ -2489,7 +2489,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -98.9
+      value: -81.1
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -2499,7 +2499,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -49.7
+      value: -44.7
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -6194,7 +6194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardInput: 0
   turnInput: 0
-  accelerationForce: 15
+  accelerationForce: 50
   reverseForce: 30
   maxSpeed: 20
   turnSpeed: 130
@@ -6227,28 +6227,18 @@ MonoBehaviour:
   wheels:
   - wheelObj: {fileID: 715443960}
     wheelEffectObj: {fileID: 669344822}
-    car1WheelPos: {x: 0, y: 0, z: 0}
-    car2WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 1517390349}
     wheelEffectObj: {fileID: 166491552}
-    car1WheelPos: {x: 0, y: 0, z: 0}
-    car2WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 2061427280}
     wheelEffectObj: {fileID: 198104297}
-    car1WheelPos: {x: 0, y: 0, z: 0}
-    car2WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 785362976}
     wheelEffectObj: {fileID: 690841911}
-    car1WheelPos: {x: 0, y: 0, z: 0}
-    car2WheelPos: {x: 0, y: 0, z: 0}
   rb: {fileID: 1303650946}
   rotationPointOffset: {x: 0, y: 0, z: 2}
   gameOverScreen: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   slowTurnMultiplier: 1
   timeRush: {fileID: 0}
-  car1Body: {fileID: 0}
-  car2Body: {fileID: 0}
   agent: {fileID: 1303650951}
   target: {fileID: 1931085168}
   vert: 0
@@ -11065,6 +11055,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7254749027100209433, guid: 4475677581527d64fa9a77addfaf93ce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461858721158907752, guid: 4475677581527d64fa9a77addfaf93ce,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814964276921107578, guid: 4475677581527d64fa9a77addfaf93ce,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8240841300452254323, guid: 4475677581527d64fa9a77addfaf93ce,
         type: 3}
       propertyPath: m_Name
@@ -11075,6 +11080,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1163488384}
+    - target: {fileID: 8721496974281937187, guid: 4475677581527d64fa9a77addfaf93ce,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780523707729320887, guid: 4475677581527d64fa9a77addfaf93ce,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

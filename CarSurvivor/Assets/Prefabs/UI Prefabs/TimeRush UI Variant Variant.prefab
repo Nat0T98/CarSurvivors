@@ -170,6 +170,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4867290778632007272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 906105809779803531, guid: 9e91022af3cd7004588cbf0ec5656ac2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5701334211901975523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5628582786902334633 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 73055379835320138, guid: 9e91022af3cd7004588cbf0ec5656ac2,
@@ -202,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 5628582786902334633}
   upgradeText: {fileID: 3645284049218842799}
-  remainingTime: 60
+  upgradePromptText: {fileID: 4867290778632007272}
+  remainingTime: 30
   killBonus: 1
   GameOver: {fileID: 0}

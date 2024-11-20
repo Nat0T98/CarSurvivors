@@ -135,7 +135,7 @@ public class CarPlayer : CarMechanics
             drivingPitch = 1.4f;//Higher SFX pitch whilst boosting
             SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.2f);
             isBoosting = true;
-            SFX_Manager.GlobalSFXManager.PlayBoostSFX(0.5f);
+            SFX_Manager.GlobalSFXManager.PlayBoostSFX(0.7f);
         }
     }
 

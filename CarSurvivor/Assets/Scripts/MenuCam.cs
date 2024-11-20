@@ -36,6 +36,6 @@ public class MenuCam : MonoBehaviour
         transform.position = Vector3.Slerp(startPos, menuPos, a);
         transform.rotation = Quaternion.Slerp(startRot, menuRot, a);
         //transform.rotation = Quaternion.RotateTowards(startRot, menuRot, time1 * 10f);
-        print(t);
+        //print(t);
     }
 }
