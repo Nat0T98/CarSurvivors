@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 810731362967932891, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: CarAi
       objectReference: {fileID: 0}
     - target: {fileID: 1034189383588265254, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -612,8 +612,7 @@ MonoBehaviour:
   boostDecelSpeed: 1.5
   maxBoostAmount: 5
   boostRechargeRate: 1
-  currentBoostAmount: 0
-  rb: {fileID: 0}
+  boostUI: {fileID: 0}
   turretMain: {fileID: 1964841965475183839}
   turretRotSpeed: 20
   turretActive: 0
@@ -627,17 +626,28 @@ MonoBehaviour:
   wheels:
   - wheelObj: {fileID: 6545667475142292930}
     wheelEffectObj: {fileID: 5388689222369565990}
+    car1WheelPos: {x: 0, y: 0, z: 0}
+    car2WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 547620275983263863}
     wheelEffectObj: {fileID: 5960350963710507093}
+    car1WheelPos: {x: 0, y: 0, z: 0}
+    car2WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 5959831245342511785}
     wheelEffectObj: {fileID: 6920875175846372379}
+    car1WheelPos: {x: 0, y: 0, z: 0}
+    car2WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 966608134756637556}
     wheelEffectObj: {fileID: 3807103437245427597}
-  RushTimer: {fileID: 0}
+    car1WheelPos: {x: 0, y: 0, z: 0}
+    car2WheelPos: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
   rotationPointOffset: {x: 0, y: 0, z: 2}
   gameOverScreen: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   slowTurnMultiplier: 1
+  timeRush: {fileID: 0}
+  car1Body: {fileID: 0}
+  car2Body: {fileID: 0}
   agent: {fileID: 6440576476627852172}
   target: {fileID: 0}
   vert: 0
