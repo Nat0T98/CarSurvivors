@@ -13,7 +13,6 @@ public class TimeRushTimer : MonoBehaviour
 
     private bool isUpgradeFlashing = false;
     private float upgradeFlashTimer = 0f;
-    private bool isFlashing = false;
     private float flashTimer = 0f; 
     private const float flashDuration = 0.5f;
 
@@ -65,7 +64,6 @@ public class TimeRushTimer : MonoBehaviour
         else
         {
             timerText.color = Color.white;
-            isFlashing = false;
         }
 
 
@@ -104,7 +102,6 @@ public class TimeRushTimer : MonoBehaviour
 
     private void LowTimeFlash()
     {
-        isFlashing = true;
         flashTimer += Time.deltaTime;
 
         if (flashTimer >= flashDuration)
