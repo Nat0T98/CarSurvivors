@@ -122,7 +122,7 @@ public class CarMechanics : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
+        
         //currentCamLock = camStillRotObject;
 
         spawnPos = transform.position;

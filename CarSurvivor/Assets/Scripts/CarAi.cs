@@ -26,10 +26,11 @@ public class CarAi : CarMechanics
     private quaternion spawnRotAI;
 
     //public GameObject testObject;
-    //public GameObject velotest;
+    public GameObject velotest;
     protected override void Start()
     {
         base.Start();
+        print("xftuihgsiughaspjighsug");
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
 
@@ -41,6 +42,7 @@ public class CarAi : CarMechanics
 
         spawnPosAI = transform.position;
         spawnRotAI = transform.rotation;
+        
     }
 
     protected override void Update()
@@ -52,8 +54,8 @@ public class CarAi : CarMechanics
         OldUpdate();
         //NewUpdate();
         //testObject.transform.position = TurnCoordsCentre();
-        //velotest.transform.position = transform.position;
-        //velotest.transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+        velotest.transform.position = transform.position;
+        velotest.transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
 
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -74,11 +76,12 @@ public class CarAi : CarMechanics
         direction.y = 0;
 
         vert = Mathf.Clamp(Vector3.Dot(transform.forward, direction.normalized), -1f, 1f);
-
+        //horiz = Mathf.Clamp(Vector3.Dot(transform.forward, direction.normalized), -1f, 1f);
         Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
         horiz = Mathf.Clamp(cross.y, -1f, 1f);
-
-        horiz = cross.y;
+        print(transform.forward + "transfor");
+        print(direction.normalized + "dirnorm");
+        //horiz = cross.y;
         //vert *= CornerSpeed();
         //horiz *= CornerSpeed() * 10f;
         //horiz *= 100000f;

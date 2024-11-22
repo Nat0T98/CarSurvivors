@@ -24,6 +24,11 @@ public class CarPlayer : CarMechanics
     protected override void Start()
     {
         base.Start();
+        if (GetComponent<Camera>() != null)
+        {
+            Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
+        }
+        
         currentCamLock = camStillRotObject;
 
         if (boostUI != null)
