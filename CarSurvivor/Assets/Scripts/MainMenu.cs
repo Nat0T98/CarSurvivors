@@ -40,10 +40,11 @@ public class MainMenu : MonoBehaviour
     }
 
     public void QuitButton()
-    {
+    { 
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         Application.Quit();
         Debug.Log("Quit");
-        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
+       
     }
 
     public void LoadEndlessMode()
