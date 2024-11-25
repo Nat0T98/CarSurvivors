@@ -3,6 +3,7 @@ using UnityEngine;
 public class UpgradeManager : MonoBehaviour
 {
     public GameObject UpgradeCanvas;
+    public Canvas UiCanvas;
     PauseMenu pauseMenu;
     public static bool isMenuActive = false;
     public CarPlayer Car;
@@ -53,6 +54,7 @@ public class UpgradeManager : MonoBehaviour
     public void OpenUpgradeMenu()
     {
         UpgradeCanvas.SetActive(true);
+        UiCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
         isMenuActive = true;
     }
@@ -61,6 +63,7 @@ public class UpgradeManager : MonoBehaviour
     public void CloseMenu()
     {
         UpgradeCanvas.SetActive(false);
+        UiCanvas.gameObject.SetActive(true);
         Time.timeScale = 1f;
         isMenuActive = false;
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
