@@ -7,10 +7,14 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject PauseMenuCanvas;
-
+    
+    public Canvas SettingsCanvas;
+    public Canvas PauseCanvas;
+    public Canvas UiCanvas;
 
     private void Start()
     {
+        
         Time.timeScale = 1.0f;
     }
 
@@ -31,6 +35,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause() 
     {
         PauseMenuCanvas.SetActive(true);
+        UiCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -38,6 +43,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         PauseMenuCanvas.SetActive(false);
+        UiCanvas.gameObject.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
@@ -60,8 +66,18 @@ public class PauseMenu : MonoBehaviour
         MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Main Menu");
     }
-    
 
-    
+    public void SettingsButton()
+    {
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
+        PauseCanvas.gameObject.SetActive(false);
+        SettingsCanvas.gameObject.SetActive(true);
+    }
+
+    public void ShowSettings()
+    {
+        PauseMenuCanvas.SetActive(false);
+        SettingsCanvas.gameObject.SetActive(true);
+    }
 
 }

@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public Canvas MainMenuCanvas;
+    public Canvas SettingsCanvas;
+
     private void Awake()
     {
         
@@ -11,8 +14,12 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
        MusicManager.GlobalMusicManager.LoopMusic("Menu Music");
+       ShowMainMenu();
     }
-    
+    private void Update()
+    {
+        
+    }
     public void EndlessModeButton()
     {
         SFX_Manager.GlobalSFXManager.PlaySFX("Play");
@@ -34,9 +41,9 @@ public class MainMenu : MonoBehaviour
 
     public void SettingsButton()
     {
-
+        
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
-
+        ShowSettings();
     }
 
     public void QuitButton()
@@ -59,9 +66,26 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    public void LoadGarage()
+    public void ShowMainMenu()
     {
-        MusicManager.GlobalMusicManager.StopMusic();
-        SceneManager.LoadSceneAsync("Garage");
+        MainMenuCanvas.gameObject.SetActive(true);
+        SettingsCanvas.gameObject.SetActive(false);
     }
+
+    public void ShowSettings()
+    {
+        MainMenuCanvas.gameObject.SetActive(false);
+        SettingsCanvas.gameObject.SetActive(true);
+    }
+
+   
+
+
+
+    /*
+        public void LoadGarage()
+        {
+            MusicManager.GlobalMusicManager.StopMusic();
+            SceneManager.LoadSceneAsync("Garage");
+        }*/
 }

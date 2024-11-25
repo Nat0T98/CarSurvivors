@@ -9,9 +9,7 @@ public class CarMechanics : MonoBehaviour
 {
     // DAN WAS HERE
     bool ISDRIFTING = false;
-
-
-
+   
     public float forwardInput;
     public float turnInput;
 
@@ -344,7 +342,11 @@ public class CarMechanics : MonoBehaviour
         if (forwardInput > 0)
         {
             rb.AddForce(transform.forward * forwardInput * accelerationForce * (isBoosting ? boostAccelerationMult : 1f), ForceMode.Acceleration);
-            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.3f);
+            if(CompareTag("Player"))
+            {
+                SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.3f);
+            }
+            
 
         }
         else if (forwardInput < 0)
@@ -352,12 +354,16 @@ public class CarMechanics : MonoBehaviour
             drivingPitch = 0.8f;
             rb.AddForce(transform.forward * forwardInput * reverseForce, ForceMode.Acceleration);
             //turnInput = 0 - turnInput;
-            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.3f);
+            if (CompareTag("Player"))
+            {
+                SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", true, drivingPitch, 0.3f);
+            }
+            
         }
         else
         {
             // Stop driving sound when stationary
-            //SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
+            SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxBoostSpeed);
 
@@ -569,6 +575,7 @@ public class CarMechanics : MonoBehaviour
         {
             if (gameOverScreen != null)
             {
+                SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
                 gameOverScreen.GetComponent<GameOver>().GameOverScreen();
             }
         }
@@ -587,20 +594,19 @@ public class CarMechanics : MonoBehaviour
 
     private void wheelSkidMarks()
     {
-        //Debug.Log(SFX_Manager.GlobalSFXManager.driftSource.isPlaying);
-        //if (Vector3.Angle(transform.forward, rb.velocity.normalized) >= skidThreshholdAngle && rb.velocity.magnitude > 5)
         Vector3 horizontalVeloctiy = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         Vector3 horizontalForward = new Vector3(transform.forward.x, 0, transform.forward.z);
         ISDRIFTING = Vector3.Angle(horizontalForward, horizontalVeloctiy) >= skidThreshholdAngle && horizontalVeloctiy.magnitude > 5;
-        //Debug.Log(ISDRIFTING);
-        //Debug.Log(horizontalVeloctiy);
-        //if (Vector3.Angle(transform.forward, rb.velocity.normalized) >= skidThreshholdAngle && horizontalVeloctiy.magnitude > 5)
+       
         if (ISDRIFTING)
         {
             //Debug.Log("STARTED");
             canSmoke = true;
-            
-            SFX_Manager.GlobalSFXManager.PlayDriftFX(0.3f);
+            if (CompareTag("Player"))
+            {
+                SFX_Manager.GlobalSFXManager.PlayDriftFX(0.3f);
+            }
+           
             foreach (var wheel in wheels)
             {
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
@@ -613,9 +619,6 @@ public class CarMechanics : MonoBehaviour
         }
         else
         {
-            //if(SFX_Manager.GlobalSFXManager.driftSource.isPlaying)
-            //    Debug.Log("STOPPED");
-            //Debug.Log("ENDED");
             skidOnce = true;
             canSmoke = false;
             SFX_Manager.GlobalSFXManager.StopDriftSFX();
@@ -631,12 +634,6 @@ public class CarMechanics : MonoBehaviour
     {
         while (canSmoke)
         {
-            //Play the drifting SFX when drifting
-           /* if (!SFX_Manager.GlobalSFXManager.IsDriftingSFXPlaying()) // Optional check to avoid playing multiple times
-            {
-                Debug.Log("Drift SFX");
-                SFX_Manager.GlobalSFXManager.PlayDriftSFX("Drift", true, 1f);
-            }*/
             Instantiate(smokeObj, wheelobj.transform.position + new Vector3(0, 0.3f, 0), wheelobj.transform.rotation);
             yield return new WaitForSeconds(smokeSpawnDelay + UnityEngine.Random.Range(-smokeSpawnVarience, smokeSpawnVarience));
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SFX_Manager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SFX_Manager : MonoBehaviour
     public AudioSource driftSource;
     public static SFX_Manager GlobalSFXManager;
 
+    CarMechanics carMechanics;
     private void Awake()
     {
         for (int i = 0; i < ClipNames.Count; i++)
@@ -32,6 +34,7 @@ public class SFX_Manager : MonoBehaviour
         //dedicated source for boost sfx
         boostSource = gameObject.AddComponent<AudioSource>();
         boostSource.loop = true;
+
     }
 
     public void PlaySFX(string clipName, float volume = 1.0f) 
@@ -80,7 +83,9 @@ public class SFX_Manager : MonoBehaviour
 
     public void PlayDrivingSFX(string sfxName, bool shouldPlay, float pitch = 1f, float volume = 1f) 
     {
-        
+       /* if (carMechanics.isPlayerControlled != false)
+            shouldPlay = false;*/
+
         if (!SFX_Lib.ContainsKey(sfxName))
         {
             Debug.LogWarning($"SFX '{sfxName}' not found");
@@ -108,7 +113,7 @@ public class SFX_Manager : MonoBehaviour
             }
         }
     }
-
+   
 
     public void PlayDriftFX(float volume = 1.0f)
     {
@@ -120,6 +125,20 @@ public class SFX_Manager : MonoBehaviour
             driftSource.Play();
             //Debug.Log("PLAYED");
         }
+
+        /*if(currentScene.name != "Main Menu")
+        {
+            if (SFX_Lib.ContainsKey("Drift") && !driftSource.isPlaying)
+            {
+                driftSource.clip = SFX_Lib["Drift"];
+                driftSource.volume = volume;
+                driftSource.loop = true;
+                driftSource.Play();
+                //Debug.Log("PLAYED");
+            }
+
+        }*/
+
     }
     public void StopDriftSFX()
     {
@@ -128,41 +147,4 @@ public class SFX_Manager : MonoBehaviour
             driftSource.Stop(); // Stop playing the drift sound
         }
     }
-
-
-
-    /*public void PlayDriftSFX(string sfxName, bool shouldPlay, float volume = 1f)
-    {
-
-        if (!SFX_Lib.ContainsKey(sfxName))
-        {
-            Debug.LogWarning($"SFX '{sfxName}' not found");
-            return;
-        }
-
-        AudioClip driftClip = SFX_Lib[sfxName];
-
-        if (shouldPlay)
-        {
-            if (!driftAudioSource.isPlaying || driftAudioSource.clip != driftClip)
-            {
-                driftAudioSource.clip = driftClip;
-                driftAudioSource.volume = Mathf.Clamp(volume, 0f, 1f);
-                driftAudioSource.loop = true;
-                driftAudioSource.Play();
-            }
-        }
-        else
-        {
-            if (driftAudioSource.isPlaying)
-            {
-                driftAudioSource.Stop();
-            }
-        }
-    }
-
-    public bool IsDriftingSFXPlaying()
-    {
-        return driftAudioSource.isPlaying;
-    }*/
 }
