@@ -55,21 +55,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032ff132dd3e2a94284e4fb4bc2b9b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  height: 0.1
-  bladeOffset: 1
-  allBladeHeight: 0
+  speed: 8.3
+  height: 0.06
+  bladeOffset: 2.9
+  allBladeHeight: -0.22
   blades:
   - bladeObj: {fileID: 4173395807806367495}
+    heightMulti: 0.25
+    heightSingle: -0.05
   - bladeObj: {fileID: 2617684802523753162}
+    heightMulti: 0.36
+    heightSingle: 0
   - bladeObj: {fileID: 8437145292518820791}
+    heightMulti: 0
+    heightSingle: 0
   - bladeObj: {fileID: 6543350270547987378}
+    heightMulti: 0
+    heightSingle: 0
   - bladeObj: {fileID: 612035072793967568}
+    heightMulti: 0
+    heightSingle: 0
   - bladeObj: {fileID: 6127621543420785190}
+    heightMulti: 0
+    heightSingle: 0
   - bladeObj: {fileID: 8691560809332402158}
+    heightMulti: 0
+    heightSingle: 0
   - bladeObj: {fileID: 6997401435542689326}
+    heightMulti: 0
+    heightSingle: 0
   - bladeObj: {fileID: 6942773241300174825}
+    heightMulti: 0.36
+    heightSingle: 0
   - bladeObj: {fileID: 7358857122014792393}
+    heightMulti: 0.25
+    heightSingle: -0.05
 --- !u!1 &9107179050353469430
 GameObject:
   m_ObjectHideFlags: 0

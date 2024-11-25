@@ -19,7 +19,7 @@ public class CarPlayer : CarMechanics
     //private Vector3 camVelocity;
 
     private GameManager gameManager;
-    
+    private bool shouldFreezeTime;
 
     protected override void Start()
     {
@@ -27,8 +27,9 @@ public class CarPlayer : CarMechanics
         if (GetComponent<Camera>() != null)
         {
             Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
+            print("seygkwygfksuiyghkjsyhghksaghkg");
         }
-        
+        Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
 
         if (boostUI != null)
@@ -116,7 +117,20 @@ public class CarPlayer : CarMechanics
         else
         {
             RechargeBoost();
-        } 
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (shouldFreezeTime == false)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+            shouldFreezeTime = !shouldFreezeTime;
+        }
     }
 
     protected override void Awake()

@@ -11,6 +11,7 @@ public class FreeCam : MonoBehaviour
 
     private float yaw = 0f;             
     private float pitch = 0f;           
+    private bool shouldFreezeTime;
 
     void Start()
     {
@@ -32,30 +33,52 @@ public class FreeCam : MonoBehaviour
 
         
         float speed = Input.GetKey(KeyCode.LeftShift) ? fastMoveSpeed : moveSpeed;
-        Vector3 move = new Vector3(
-            Input.GetAxis("Horizontal"),   
-            0f,                            
-            Input.GetAxis("Vertical")      
-        );
+
+        Vector3 move = Vector3.zero;
 
         
-        if (Input.GetKey(KeyCode.E))
-        {
-            move.y += 1f;
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            move.y -= 1f;
-        }
+        if (Input.GetKey(KeyCode.W)) move += transform.forward;  
+        if (Input.GetKey(KeyCode.S)) move -= transform.forward;  
+        if (Input.GetKey(KeyCode.A)) move -= transform.right;    
+        if (Input.GetKey(KeyCode.D)) move += transform.right;    
+        if (Input.GetKey(KeyCode.E)) move += transform.up;       
+        if (Input.GetKey(KeyCode.Q)) move -= transform.up;       
 
-        transform.Translate(move * speed * Time.deltaTime, Space.Self);
+        
+        move.Normalize();
+        transform.Translate(move * speed * Time.unscaledDeltaTime, Space.World);
 
-
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             lockCursor = !lockCursor;
             Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !lockCursor;
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (shouldFreezeTime == false)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+            shouldFreezeTime = !shouldFreezeTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            TakeScreenshot();
+        }
+    }
+
+    void TakeScreenshot()
+    {
+        string screenshotName = $"Screenshot_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png";
+        ScreenCapture.CaptureScreenshot(screenshotName);
+        Debug.Log($"Screenshot saved as: {screenshotName}");
     }
 }

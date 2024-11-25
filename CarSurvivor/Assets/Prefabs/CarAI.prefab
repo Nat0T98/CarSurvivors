@@ -677,10 +677,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardInput: 0
   turnInput: 0
-  accelerationForce: 50
+  accelerationForce: 25
   reverseForce: 30
-  maxSpeed: 10
-  turnSpeed: 150
+  maxSpeed: 20
+  turnSpeed: 130
   turnSlowDownAtPercent: 0.3
   steeringSpeed: 2.5
   maxDamage: 120
@@ -736,15 +736,11 @@ MonoBehaviour:
   target: {fileID: 0}
   vert: 0
   horiz: 0
-  lookAheadDistance: 5
-  alignmentTolerance: 5
-  oversteerStrength: 2
+  lookAheadDistance: 20
+  alignmentTolerance: 6
   cornerCoordsShift: 5
-  minCornerSpeed: 0.1
-  slowestAngleCorner: 90
-  slowDist: 15
-  slowLingerSpeed: 1
   velotest: {fileID: 0}
+  cornerObj: {fileID: 0}
 --- !u!195 &6440576476627852172
 NavMeshAgent:
   m_ObjectHideFlags: 0
