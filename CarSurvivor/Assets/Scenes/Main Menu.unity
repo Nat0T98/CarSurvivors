@@ -2494,12 +2494,12 @@ PrefabInstance:
     - target: {fileID: 4977774811405835783, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: accelerationForce
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -100.17
+      value: -87.1
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -2509,12 +2509,12 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40.71
+      value: -46.2
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.39119875
+      value: -0.7280336
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -2524,7 +2524,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9203063
+      value: 0.6855415
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -2539,7 +2539,7 @@ PrefabInstance:
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 226.058
+      value: 273.444
       objectReference: {fileID: 0}
     - target: {fileID: 6621779595953885363, guid: 21016c46274600b418387d4ffc1f0a73,
         type: 3}
@@ -4552,7 +4552,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.68
+  m_VoxelSize: 0.84999996
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 2dfd7fe206fd95c49a47830eead6c310, type: 2}
   m_BuildHeightMesh: 0
@@ -6413,13 +6413,10 @@ MonoBehaviour:
   horiz: 0
   lookAheadDistance: 5
   alignmentTolerance: 5
-  oversteerStrength: 2
   cornerCoordsShift: 5
-  minCornerSpeed: 0.1
-  slowestAngleCorner: 90
-  slowDist: 15
-  slowLingerSpeed: 1
+  dontDriftAngle: 15
   velotest: {fileID: 0}
+  cornerObj: {fileID: 0}
 --- !u!4 &1312862346 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5430853186412910428, guid: 295d2224d60509e4789f1306d233178f,

@@ -5,9 +5,8 @@ using UnityEngine;
 public class PoleBreak : MonoBehaviour
 {
     private bool startCount;
-    private bool startShrink;
+    private bool isShrink;
     private Vector3 startScale;
-    private float time;
     public float timeBeforeShrink = 5f;
     public float shrinkDuration = 2f;
     
@@ -20,32 +19,35 @@ public class PoleBreak : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shrink();
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player") || other.CompareTag("CarAi"))
         {
-            GetComponent<Rigidbody>().isKinematic = false;
-            startCount = true;
+            if (!isShrink)
+            {
+                GetComponent<Rigidbody>().isKinematic = false;
+                startCount = true;
+                StartCoroutine(ShrinkCor());
+            }
         }
     }
 
-    void Shrink()
-    {
-        if (startCount)
-        {
-            time += Time.deltaTime;
-            if (timeBeforeShrink <= time)
-            {
-                transform.localScale = Vector3.Lerp(startScale, Vector3.zero, (time - timeBeforeShrink) / shrinkDuration);
-                if (time > timeBeforeShrink + shrinkDuration)
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }
+   
 
+    IEnumerator ShrinkCor()
+    {
+        isShrink = true;
+        yield return new WaitForSeconds(timeBeforeShrink);
+        float elapsedTime = 0f;
+        while (elapsedTime < shrinkDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, elapsedTime / shrinkDuration);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }
