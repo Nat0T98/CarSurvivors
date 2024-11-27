@@ -48,20 +48,20 @@ MonoBehaviour:
   - poolName: RunnerPool
     prefab: {fileID: 5862294416274150896, guid: 3ab1e25c7ecd2e44f9c6bc6c3a7ad950,
       type: 3}
-    size: 30
+    size: 35
   - poolName: RangedPool
     prefab: {fileID: 5347925807942082324, guid: 8e811e0f0d41aa5469c39452feb6fed8,
       type: 3}
-    size: 30
+    size: 35
   - poolName: DroneLaserPool
     prefab: {fileID: 8967282007738410105, guid: 85eb6ad114697064e9158843ff732ab7,
       type: 3}
-    size: 40
+    size: 50
   - poolName: CarBulletPool
     prefab: {fileID: 8967282007738410105, guid: c10814079d13e41499587704eaf2054a,
       type: 3}
-    size: 30
+    size: 40
   - poolName: Oil
     prefab: {fileID: 7949151436896390533, guid: e4e04bd5533e8694896b479c1f223242,
       type: 3}
-    size: 200
+    size: 600

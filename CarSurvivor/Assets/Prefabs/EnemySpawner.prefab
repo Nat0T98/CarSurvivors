@@ -48,5 +48,5 @@ MonoBehaviour:
   rangedPoolName: RangedPool
   minSpawnRadius: 20
   maxSpawnRadius: 70
-  spawnInterval: 0.6
+  spawnInterval: 0.4
   runnerProbability: 0.5

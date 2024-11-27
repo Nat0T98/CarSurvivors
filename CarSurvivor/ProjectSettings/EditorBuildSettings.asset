@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Showcase.unity
     guid: 3537252f0977c024e93aa83d1b479707
+  - enabled: 0
+    path: Assets/Scenes/Time Rush OLD.unity
+    guid: 1a88567fd66819a45851cf3b080123a8
   - enabled: 1
     path: Assets/Scenes/Time Rush.unity
-    guid: 1a88567fd66819a45851cf3b080123a8
+    guid: a524c167baae93e45ac6fa317cb108f5
   m_configObjects: {}

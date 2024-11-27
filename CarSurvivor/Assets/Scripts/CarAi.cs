@@ -217,7 +217,7 @@ public class CarAi : CarMechanics
         if (isMotionless)
         {
             unstickTime += Time.deltaTime;
-            print(unstickTime + " Stick time");
+            //print(unstickTime + " Stick time");
             if (unstickTime >= unstickTimerMax)
             {
                 unstickTime = 0f;
