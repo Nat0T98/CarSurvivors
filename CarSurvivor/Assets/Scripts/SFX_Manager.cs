@@ -10,7 +10,7 @@ public class SFX_Manager : MonoBehaviour
 
     public GameObject SFX_Prefab;
     public AudioSource MusicSource;
-    private AudioSource boostSource;
+    public AudioSource boostSource;
     public AudioSource drivingAudioSource;
     public AudioSource driftSource;
     public static SFX_Manager GlobalSFXManager;
@@ -31,9 +31,7 @@ public class SFX_Manager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        //dedicated source for boost sfx
-        boostSource = gameObject.AddComponent<AudioSource>();
-        boostSource.loop = true;
+       
 
     }
 
@@ -54,6 +52,7 @@ public class SFX_Manager : MonoBehaviour
         {
             boostSource.clip = SFX_Lib["Boost"];
             boostSource.volume = volume; 
+            boostSource.loop = true;
             boostSource.Play();
         }
     }

@@ -54,7 +54,9 @@ public class Enemy : MonoBehaviour
         int spawnCount = Random.Range(oilSpawnCountMin, oilSpawnCountMax);
         for (int i = 0; i < spawnCount; i++)
         {
+            
             GameObject oil = ObjectPooler.Instance.SpawnFromPool("Oil", transform.position, Quaternion.identity);
+           
             //Instantiate(oilPrefab, transform.position, Quaternion.identity);
         }
     }
