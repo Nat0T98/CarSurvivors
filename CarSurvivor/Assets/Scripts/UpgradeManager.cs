@@ -78,6 +78,7 @@ public class UpgradeManager : MonoBehaviour
         if (UpgradePoints < PointsToUpgrade)
         {
             UpgradeCanvas.SetActive(false);
+            UiCanvas.gameObject.SetActive(true);
             canOpenMenu = false;
             Time.timeScale = 1f;
             isMenuActive = false;
