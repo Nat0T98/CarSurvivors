@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
             if (enemy != null)
             {
                 Debug.Log("Bullet hit: " + enemy.gameObject.name);
-                GameManager.Instance.player.GetComponent<MainCar>().DamageEnemy(enemy, damage);
+                GameManager.Instance.player.GetComponent<CarMechanics>().DamageEnemy(enemy, damage);
             }
         }
         if (!punchthrough)

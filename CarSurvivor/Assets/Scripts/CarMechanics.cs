@@ -91,6 +91,16 @@ public class CarMechanics : MonoBehaviour
     //private bool camFlipFlop;
     [Space(10)]
 
+    [Header("Lean Settings")]
+    public float maxLean = 10;
+    public float smoothingFactor = 1.0f;
+    public float xLeanStrength = 1f;
+    public float zLeanStrength = 1f;
+    private Vector3 previousVelocity;
+    private Vector3 localAccel;
+    private Vector3 smoothedLocalAccel;
+
+    [Space(10)]
     [Header("Other")]
     public Rigidbody rb;
     public Vector3 rotationPointOffset = new Vector3(0, 0, 2f);
@@ -111,6 +121,7 @@ public class CarMechanics : MonoBehaviour
 
     public GameObject car1Body;
     public GameObject car2Body;
+    private GameObject currentBody;
 
     protected virtual void Awake()
     {
@@ -120,7 +131,7 @@ public class CarMechanics : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        currentBody = car1Body;
         //currentCamLock = camStillRotObject;
 
         spawnPos = transform.position;
@@ -132,8 +143,10 @@ public class CarMechanics : MonoBehaviour
 
         /*boostUI.maxValue = maxBoostAmount;
         boostUI.value = 0;*/
+        previousVelocity = rb.velocity;
+        smoothedLocalAccel = Vector3.zero;
 
-        
+
     }
     protected virtual void Update()
     {
@@ -242,6 +255,7 @@ public class CarMechanics : MonoBehaviour
         SpinWheels();
         //CameraPosition();
         //CamBoom();
+        CarLean();
     }
 
     public void ramTriggerEnter(Collider otherCol)
@@ -546,7 +560,7 @@ public class CarMechanics : MonoBehaviour
 
         foreach (GameObject enemy in targetedObjects)
         {
-            if (enemy != null)
+            if (enemy != null && enemy.activeSelf)
             {
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
@@ -645,6 +659,7 @@ public class CarMechanics : MonoBehaviour
         {
             car1Body.SetActive(true);
             car2Body.SetActive(false);
+            currentBody = car1Body;
             foreach (var wheel in wheels)
             {
                 wheel.wheelObj.transform.localPosition = wheel.car1WheelPos;
@@ -654,6 +669,7 @@ public class CarMechanics : MonoBehaviour
         {
             car1Body.SetActive(false);
             car2Body.SetActive(true);
+            currentBody = car2Body;
             foreach (var wheel in wheels)
             {
                 wheel.wheelObj.transform.localPosition = wheel.car2WheelPos;
@@ -668,6 +684,14 @@ public class CarMechanics : MonoBehaviour
 
     private void CarLean()
     {
-
+        Vector3 worldAcceleration = (rb.velocity - previousVelocity) / Time.fixedDeltaTime;
+        localAccel = transform.InverseTransformDirection(worldAcceleration);
+        smoothedLocalAccel = Vector3.Lerp(smoothedLocalAccel, localAccel, smoothingFactor);
+        previousVelocity = rb.velocity;
+        float yVal = currentBody == car1Body ? 1f : -1f;
+        float xLean = Mathf.Clamp(smoothedLocalAccel.x, -maxLean, maxLean);
+        float zLean = Mathf.Clamp(smoothedLocalAccel.z, -maxLean, maxLean);
+        currentBody.transform.localRotation = Quaternion.Euler(xLean * xLeanStrength * yVal, -90f * yVal, zLean * zLeanStrength * yVal);
+        
     }
 }

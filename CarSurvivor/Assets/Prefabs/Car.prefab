@@ -297,6 +297,10 @@ MonoBehaviour:
     wheelEffectObj: {fileID: 6302368451888033146}
     car1WheelPos: {x: 0.846593, y: 0.3695242, z: -1.38107}
     car2WheelPos: {x: 0.846593, y: 0.3695242, z: -2.1979952}
+  maxLean: 20
+  smoothingFactor: 0.2
+  xLeanStrength: 1.3
+  zLeanStrength: 0.5
   rb: {fileID: 7666441603724394600}
   rotationPointOffset: {x: 0, y: 0, z: -1.38}
   gameOverScreen: {fileID: 0}

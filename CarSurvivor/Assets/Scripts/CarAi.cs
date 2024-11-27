@@ -24,6 +24,12 @@ public class CarAi : CarMechanics
     public GameObject velotest;
     public GameObject cornerObj;
 
+    [Space(10)]
+    [Header("UnStick")]
+    public float unstickTimerMax = 3f;
+    public float moveTolerence = 1f;
+    public float angleTolerence = 0.2f;
+    private float unstickTime;
 
     //public float oversteerStrength = 2f;
     //public float cornerCoordsShift = 5f;
@@ -55,12 +61,14 @@ public class CarAi : CarMechanics
     protected override void Update()
     {
         base.Update();
-        setCorners();
+        
+        
         forwardInput = vert;
         turnInput = horiz;
 
         OldUpdate();
 
+        UnStuck();
 
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -88,8 +96,8 @@ public class CarAi : CarMechanics
 
         horiz = LeftRight();
         vert = forward();
-
         agent.nextPosition = transform.position;
+        setCorners();
     }
 
     void setCorners()
@@ -150,7 +158,7 @@ public class CarAi : CarMechanics
             Vector3 direction = firstCorner - transform.position;
             direction.y = 0;
             Vector3 cross = Vector3.Cross(transform.forward, direction.normalized);
-            print("crosss: " + cross.y);
+            //print("crosss: " + cross.y);
             return Mathf.Clamp(cross.y * 2, -1f, 1f);
         }
     }
@@ -200,6 +208,29 @@ public class CarAi : CarMechanics
         float alignmentAngle = Vector3.Angle(rb.velocity, firstCorner - transform.position);
         //print(alignmentAngle + "RAAAAAGGGGHHHHHHH");
         return alignmentAngle > alignmentTolerance;
+    }
+
+    void UnStuck()
+    {
+        bool isMotionless = rb.velocity.magnitude < moveTolerence && rb.angularVelocity.magnitude < angleTolerence;
+
+        if (isMotionless)
+        {
+            unstickTime += Time.deltaTime;
+            print(unstickTime + " Stick time");
+            if (unstickTime >= unstickTimerMax)
+            {
+                unstickTime = 0f;
+                transform.position = firstCorner;
+                transform.rotation = Quaternion.LookRotation(secondCorner - firstCorner);
+                agent.Warp(firstCorner);
+                print("AiCar unstucked");
+            }
+        }
+        else
+        {
+            unstickTime = 0f;
+        }
     }
 
     //Vector3 TurnCoordsCentre()
