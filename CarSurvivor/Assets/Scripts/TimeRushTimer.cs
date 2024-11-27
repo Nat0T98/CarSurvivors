@@ -6,6 +6,7 @@ public class TimeRushTimer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI upgradeText;
     [SerializeField] private TextMeshProUGUI upgradePromptText;
+    [SerializeField] private TextMeshProUGUI plusTimePrompt;
     [SerializeField] private float remainingTime;
     public float killBonus;
     public GameOver GameOver;
@@ -18,7 +19,7 @@ public class TimeRushTimer : MonoBehaviour
 
     private bool isGreenFlash = false; 
     private float greenFlashTimer = 0f; 
-    private const float greenFlashDuration = 0.3f;
+    private const float greenFlashDuration = 0.6f;
     private void Start()
     {
         if (GameOver == null)
@@ -32,7 +33,8 @@ public class TimeRushTimer : MonoBehaviour
 
         MusicManager.GlobalMusicManager.PlayGameMusic();
         upgradePromptText.gameObject.SetActive(false);
-        
+        plusTimePrompt.gameObject.SetActive(false);
+
     }
 
     private void Update()
@@ -55,6 +57,7 @@ public class TimeRushTimer : MonoBehaviour
         if (isGreenFlash)
         {
             AddTimeFlash();
+            AddTimePrompt();
         }
         // Flashing Text Effect for Low Time
         else if (remainingTime < 15)
@@ -64,6 +67,7 @@ public class TimeRushTimer : MonoBehaviour
         else
         {
             timerText.color = Color.white;
+            plusTimePrompt.color = Color.white;
         }
 
 
@@ -122,6 +126,20 @@ public class TimeRushTimer : MonoBehaviour
         if (greenFlashTimer >= greenFlashDuration)
         {
             isGreenFlash = false;
+        }
+    }
+
+
+    private void AddTimePrompt()
+    {
+        plusTimePrompt.gameObject.SetActive(true);
+        greenFlashTimer += Time.deltaTime;
+        plusTimePrompt.color = Color.green;
+
+        if (greenFlashTimer >= greenFlashDuration)
+        {
+            isGreenFlash = false;
+            plusTimePrompt.gameObject.SetActive(false);
         }
     }
 

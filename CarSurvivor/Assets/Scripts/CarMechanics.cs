@@ -262,7 +262,7 @@ public class CarMechanics : MonoBehaviour
     {
         if (otherCol.CompareTag("Enemy"))
         {
-            print("Damaged Enemy");
+           
             if (otherCol.GetComponent<Enemy>() != null)
             {
                 DamageEnemy(otherCol.GetComponent<Enemy>(), 0);
