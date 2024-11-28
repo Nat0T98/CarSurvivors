@@ -919,18 +919,22 @@ MonoBehaviour:
     wheelEffectObj: {fileID: 5388689222369565990}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 547620275983263863}
     wheelEffectObj: {fileID: 5960350963710507093}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 5959831245342511785}
     wheelEffectObj: {fileID: 6920875175846372379}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 966608134756637556}
     wheelEffectObj: {fileID: 3807103437245427597}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   maxLean: 20
   smoothingFactor: 0.2
   xLeanStrength: 1.3
@@ -943,6 +947,11 @@ MonoBehaviour:
   timeRush: {fileID: 0}
   car1Body: {fileID: 8331166920139827013}
   car2Body: {fileID: 4218460448959733333}
+  car3Body: {fileID: 0}
+  groundCheckDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
   agent: {fileID: 6440576476627852172}
   target: {fileID: 0}
   vert: 0

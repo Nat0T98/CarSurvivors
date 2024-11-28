@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PoleBreak : MonoBehaviour
 {
-    private bool startCount;
     private bool isShrink;
     private Vector3 startScale;
     public float timeBeforeShrink = 5f;
     public float shrinkDuration = 2f;
+    public bool isMultiObject;
     
     // Start is called before the first frame update
     void Start()
@@ -28,16 +28,22 @@ public class PoleBreak : MonoBehaviour
         {
             if (!isShrink)
             {
-                GetComponent<Rigidbody>().isKinematic = false;
-                startCount = true;
-                StartCoroutine(ShrinkCor());
+                if (!isMultiObject)
+                {
+                    GetComponent<Rigidbody>().isKinematic = false;
+                    StartCoroutine(ShrinkCor(gameObject));
+                }
+                else
+                {
+                    MultiChild();
+                }
             }
         }
     }
 
    
 
-    IEnumerator ShrinkCor()
+    IEnumerator ShrinkCor(GameObject obj)
     {
         isShrink = true;
         yield return new WaitForSeconds(timeBeforeShrink);
@@ -45,9 +51,29 @@ public class PoleBreak : MonoBehaviour
         while (elapsedTime < shrinkDuration)
         {
             elapsedTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, elapsedTime / shrinkDuration);
+            obj.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, elapsedTime / shrinkDuration);
             yield return null;
         }
         Destroy(gameObject);
+    }
+
+    void MultiChild()
+    {
+        foreach (Transform child in transform)
+        {
+            Rigidbody rb = child.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                child.parent = null;
+                StartCoroutine(ShrinkCor(child.gameObject));
+                StartCoroutine(ShrinkCor(gameObject));
+            }
+            else
+            {
+                Destroy(child);
+                StartCoroutine(ShrinkCor(gameObject));
+            }
+        }
     }
 }

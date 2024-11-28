@@ -5,6 +5,8 @@ public class MainMenu : MonoBehaviour
 {
     public Canvas MainMenuCanvas;
     public Canvas SettingsCanvas;
+    public GameObject cam;
+    private MenuCam menuCamScript;
 
     private void Awake()
     {
@@ -15,6 +17,7 @@ public class MainMenu : MonoBehaviour
     {
        MusicManager.GlobalMusicManager.LoopMusic("Menu Music");
        ShowMainMenu();
+       menuCamScript = cam.GetComponent<MenuCam>();
     }
     private void Update()
     {
@@ -23,12 +26,14 @@ public class MainMenu : MonoBehaviour
     public void EndlessModeButton()
     {
         SFX_Manager.GlobalSFXManager.PlaySFX("Play");
-        Invoke("LoadEndlessMode", 2); //wait 2 seconds so that SFX can play
+        StartCoroutine(menuCamScript.EndMove());
+        Invoke("LoadEndlessMode", 5); //wait 2 seconds so that SFX can play
     }
     public void TimeRushModeButton()
     {
         MusicManager.GlobalMusicManager.PlaySFX("Play");
-        Invoke("LoadTimeRushMode", 2); //wait 2 seconds so that SFX can play
+        StartCoroutine(menuCamScript.EndMove());
+        Invoke("LoadTimeRushMode", 5); //wait 2 seconds so that SFX can play
     }
 
 

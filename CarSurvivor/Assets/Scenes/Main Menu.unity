@@ -4358,6 +4358,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e42b641bb44bc2498813f2b95733d67, type: 3}
+--- !u!1001 &972124614
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.49
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -128.53761
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.716428
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6976611
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 88.479
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 219490eb493dd3c4cba2a5c02b2e2f65,
+        type: 3}
+      propertyPath: m_Name
+      value: SM_IntroBridgeScene
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: -776045558628821581, guid: 219490eb493dd3c4cba2a5c02b2e2f65, type: 3}
+    - {fileID: -1809278360469723325, guid: 219490eb493dd3c4cba2a5c02b2e2f65, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 219490eb493dd3c4cba2a5c02b2e2f65, type: 3}
 --- !u!4 &977854122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e21b0d3eb91b15f4783ffa71e70e71f0,
@@ -5623,10 +5693,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 5
+  endMoveTime: 3
   menuPos: {x: -113.48, y: -4.41, z: -121.19}
   menuRot: {x: 0.000008726646, y: 0, z: 0, w: 1}
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
+  finalPos: {x: -114.69, y: -1.12, z: -121.19}
+  car: {fileID: 1413835856}
 --- !u!1001 &1172301519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6689,18 +6762,22 @@ MonoBehaviour:
     wheelEffectObj: {fileID: 669344822}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 1517390349}
     wheelEffectObj: {fileID: 166491552}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 2061427280}
     wheelEffectObj: {fileID: 198104297}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   - wheelObj: {fileID: 785362976}
     wheelEffectObj: {fileID: 690841911}
     car1WheelPos: {x: 0, y: 0, z: 0}
     car2WheelPos: {x: 0, y: 0, z: 0}
+    car3WheelPos: {x: 0, y: 0, z: 0}
   maxLean: 10
   smoothingFactor: 1
   xLeanStrength: 1
@@ -6713,6 +6790,7 @@ MonoBehaviour:
   timeRush: {fileID: 0}
   car1Body: {fileID: 0}
   car2Body: {fileID: 0}
+  car3Body: {fileID: 0}
   agent: {fileID: 1303650951}
   target: {fileID: 1931085168}
   vert: 0
@@ -6925,6 +7003,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4996993584361752453, guid: fbec3788afcc46140b1d0fe253de953a,
     type: 3}
   m_PrefabInstance: {fileID: 2080221315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1413835856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7557960680234306860, guid: 37c732ca3835e7443b4a0384b3f4c76e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1289620642}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1422745332 stripped
 GameObject:
@@ -12029,3 +12113,4 @@ SceneRoots:
   - {fileID: 904085138}
   - {fileID: 1727495691}
   - {fileID: 2014581243}
+  - {fileID: 972124614}

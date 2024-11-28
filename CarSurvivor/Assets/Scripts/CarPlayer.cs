@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class CarPlayer : CarMechanics
@@ -8,10 +10,21 @@ public class CarPlayer : CarMechanics
     public GameObject camLookAtObject;
     private GameObject currentCamLock;
     public float camSmoothSpeed = 1.0f;
+    public bool smoothRot;
+    public float camRotSmoothSpeed = 1.0f;
     private bool camFlipFlop;
     public float boomExtraLength = 0;
     private float boomInitDist;
     private bool boomOnce;
+
+    public Vector3 initialCam;
+    public Vector3 initialRot;
+    public bool input = true;
+    public bool doIntro;
+    public float introiAttachCamTime = 2f;
+    public float introTimeAfterCam = 3f;
+    public bool camMove;
+    
 
     //public float camFollowSpeed = 5f;
     //public float camInertia = 1.5f;
@@ -37,14 +50,23 @@ public class CarPlayer : CarMechanics
             boostUI.maxValue = maxBoostAmount;
             boostUI.value = 0;
         }
+
+        if (doIntro)
+        {
+            StartCoroutine(Intro());
+        }
     }
 
     
     protected override void Update()
     {
         base.Update();
-        forwardInput = Input.GetAxis("Vertical");
-        turnInput = Input.GetAxis("Horizontal");
+        if (input)
+        {
+            forwardInput = Input.GetAxis("Vertical");
+            turnInput = Input.GetAxis("Horizontal");
+        }
+        
 
         UpdateBoostSlider();
 
@@ -104,6 +126,11 @@ public class CarPlayer : CarMechanics
             VehicleChange(2);
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            VehicleChange(3);
+        }
+
 
         if (isBoosting)
         {
@@ -142,7 +169,11 @@ public class CarPlayer : CarMechanics
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        CameraPosition();
+        if (camMove)
+        {
+            CameraPosition();
+        }
+        
         CamBoom();
     }
 
@@ -193,10 +224,20 @@ public class CarPlayer : CarMechanics
     {
         Vector3 desiredPosition = currentCamLock.transform.position;
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, desiredPosition, camSmoothSpeed * Time.deltaTime);
-        Camera.main.transform.LookAt(camLookAtObject.transform);
-
-
         
+        if (smoothRot)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(camLookAtObject.transform.position - Camera.main.transform.position);
+            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, targetRotation, camRotSmoothSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Camera.main.transform.LookAt(camLookAtObject.transform);
+        }
+
+
+
+
 
         //if (rb.velocity.magnitude > 0.1f) 
         //{
@@ -238,5 +279,12 @@ public class CarPlayer : CarMechanics
         Debug.DrawLine(startPoint, startPoint + direction * boomInitDist, Color.blue);
     }
 
-
+    IEnumerator Intro()
+    {
+        input = false;
+        forwardInput = 1f;
+        
+        yield return new WaitForSeconds(introTimeAfterCam);
+        input = true;
+    }
 }

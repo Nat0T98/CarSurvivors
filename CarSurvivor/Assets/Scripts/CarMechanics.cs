@@ -78,6 +78,7 @@ public class CarMechanics : MonoBehaviour
         public GameObject wheelEffectObj;
         public Vector3 car1WheelPos;
         public Vector3 car2WheelPos;
+        public Vector3 car3WheelPos;
     }
     public List<Wheels> wheels;
     [Space(10)]
@@ -121,7 +122,11 @@ public class CarMechanics : MonoBehaviour
 
     public GameObject car1Body;
     public GameObject car2Body;
+    public GameObject car3Body;
     private GameObject currentBody;
+
+    public float groundCheckDistance = 0.1f;
+    public LayerMask groundLayer;
 
     protected virtual void Awake()
     {
@@ -612,7 +617,7 @@ public class CarMechanics : MonoBehaviour
         Vector3 horizontalForward = new Vector3(transform.forward.x, 0, transform.forward.z);
         ISDRIFTING = Vector3.Angle(horizontalForward, horizontalVeloctiy) >= skidThreshholdAngle && horizontalVeloctiy.magnitude > 5;
        
-        if (ISDRIFTING)
+        if (ISDRIFTING && IsGrounded())
         {
             //Debug.Log("STARTED");
             canSmoke = true;
@@ -635,8 +640,10 @@ public class CarMechanics : MonoBehaviour
         {
             skidOnce = true;
             canSmoke = false;
-            SFX_Manager.GlobalSFXManager.StopDriftSFX();
-
+            if (CompareTag("Player"))
+            {
+                SFX_Manager.GlobalSFXManager.StopDriftSFX();
+            }
             foreach (var wheel in wheels)
             {
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
@@ -657,8 +664,8 @@ public class CarMechanics : MonoBehaviour
     {
         if (vehicle == 1)
         {
+            currentBody.SetActive(false);
             car1Body.SetActive(true);
-            car2Body.SetActive(false);
             currentBody = car1Body;
             foreach (var wheel in wheels)
             {
@@ -667,12 +674,22 @@ public class CarMechanics : MonoBehaviour
         }
         else if (vehicle == 2)
         {
-            car1Body.SetActive(false);
+            currentBody.SetActive(false);
             car2Body.SetActive(true);
             currentBody = car2Body;
             foreach (var wheel in wheels)
             {
                 wheel.wheelObj.transform.localPosition = wheel.car2WheelPos;
+            }
+        }
+        else if (vehicle == 3)
+        {
+            currentBody.SetActive(false);
+            car3Body.SetActive(true);
+            currentBody = car3Body;
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelObj.transform.localPosition = wheel.car3WheelPos;
             }
         }
     }
@@ -688,10 +705,15 @@ public class CarMechanics : MonoBehaviour
         localAccel = transform.InverseTransformDirection(worldAcceleration);
         smoothedLocalAccel = Vector3.Lerp(smoothedLocalAccel, localAccel, smoothingFactor);
         previousVelocity = rb.velocity;
-        float yVal = currentBody == car1Body ? 1f : -1f;
+        float yVal = currentBody == car2Body ? -1f : 1f;
         float xLean = Mathf.Clamp(smoothedLocalAccel.x, -maxLean, maxLean);
         float zLean = Mathf.Clamp(smoothedLocalAccel.z, -maxLean, maxLean);
         currentBody.transform.localRotation = Quaternion.Euler(xLean * xLeanStrength * yVal, -90f * yVal, zLean * zLeanStrength * yVal);
         
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(rb.position, Vector3.down, groundCheckDistance, groundLayer);
     }
 }
