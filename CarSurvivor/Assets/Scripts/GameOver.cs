@@ -28,6 +28,8 @@ public class GameOver : MonoBehaviour
 
     public void GameOverScreen()
     {
+        SFX_Manager.GlobalSFXManager.StopCarSFX();
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = false;
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0f;
         //isGameOver = true;
@@ -36,6 +38,7 @@ public class GameOver : MonoBehaviour
     public void PlayAgainButton()
     {
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
@@ -48,6 +51,7 @@ public class GameOver : MonoBehaviour
         Time.timeScale = 1f;
         MusicManager.GlobalMusicManager.StopMusic();
         SceneManager.LoadSceneAsync("Main Menu");
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
     }
 
 

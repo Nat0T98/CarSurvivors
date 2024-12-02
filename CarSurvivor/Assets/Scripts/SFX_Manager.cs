@@ -146,4 +146,13 @@ public class SFX_Manager : MonoBehaviour
             driftSource.Stop(); // Stop playing the drift sound
         }
     }
+
+
+
+    public void StopCarSFX()
+    {
+        StopBoostSFX();
+        StopDriftSFX();
+        SFX_Manager.GlobalSFXManager.PlayDrivingSFX("Driving", false);
+    }
 }

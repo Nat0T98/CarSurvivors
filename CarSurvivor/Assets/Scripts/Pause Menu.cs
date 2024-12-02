@@ -38,6 +38,8 @@ public class PauseMenu : MonoBehaviour
         UiCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
+        SFX_Manager.GlobalSFXManager.StopCarSFX();
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = false;
     }
 
     public void Resume()
@@ -47,6 +49,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
     } 
 
 
@@ -57,7 +60,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         Invoke("LoadMainMenu", 1);
-              
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
     }
 
 

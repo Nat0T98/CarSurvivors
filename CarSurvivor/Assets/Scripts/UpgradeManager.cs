@@ -17,6 +17,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
+        UpgradePoints = 0;
         Time.timeScale = 1.0f;
     }
 
@@ -53,6 +54,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void OpenUpgradeMenu()
     {
+        SFX_Manager.GlobalSFXManager.StopCarSFX();
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = false;
         UpgradeCanvas.SetActive(true);
         UiCanvas.gameObject.SetActive(false);
         Time.timeScale = 0f;
@@ -67,6 +70,7 @@ public class UpgradeManager : MonoBehaviour
         Time.timeScale = 1f;
         isMenuActive = false;
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
+        SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
         //Debug.Log(UpgradeCanvas.active);
     }
 
@@ -82,6 +86,7 @@ public class UpgradeManager : MonoBehaviour
             canOpenMenu = false;
             Time.timeScale = 1f;
             isMenuActive = false;
+            SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
         }
     }
     public void ChooseUpgrade1()
