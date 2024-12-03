@@ -101,6 +101,7 @@ public class CarMechanics : MonoBehaviour
     private Vector3 localAccel;
     private Vector3 smoothedLocalAccel;
 
+
     [Space(10)]
     [Header("Other")]
     public Rigidbody rb;
@@ -709,7 +710,6 @@ public class CarMechanics : MonoBehaviour
         float xLean = Mathf.Clamp(smoothedLocalAccel.x, -maxLean, maxLean);
         float zLean = Mathf.Clamp(smoothedLocalAccel.z, -maxLean, maxLean);
         currentBody.transform.localRotation = Quaternion.Euler(xLean * xLeanStrength * yVal, -90f * yVal, zLean * zLeanStrength * yVal);
-        
     }
 
     public bool IsGrounded()

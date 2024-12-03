@@ -67,12 +67,13 @@ public class PoleBreak : MonoBehaviour
                 rb.isKinematic = false;
                 child.parent = null;
                 StartCoroutine(ShrinkCor(child.gameObject));
-                StartCoroutine(ShrinkCor(gameObject));
+                //StartCoroutine(ShrinkCor(gameObject));
             }
             else
             {
                 Destroy(child);
                 StartCoroutine(ShrinkCor(gameObject));
+                print("is null");
             }
         }
     }
