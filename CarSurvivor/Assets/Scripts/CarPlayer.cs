@@ -163,7 +163,7 @@ public class CarPlayer : CarMechanics
         {
             if (shouldFreezeTime == false)
             {
-                Time.timeScale = 0f;
+                Time.timeScale = 0.3f;
             }
             else
             {
@@ -171,6 +171,13 @@ public class CarPlayer : CarMechanics
             }
             shouldFreezeTime = !shouldFreezeTime;
         }
+
+        if (camMove)
+        {
+            CameraPosition();
+        }
+
+        CamBoom();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -187,12 +194,12 @@ public class CarPlayer : CarMechanics
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (camMove)
+        /*if (camMove)
         {
             CameraPosition();
         }
         
-        CamBoom();
+        CamBoom();*/
     }
 
     void ActivateBoost()
