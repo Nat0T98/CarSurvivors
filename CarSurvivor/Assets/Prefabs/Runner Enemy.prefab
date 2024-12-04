@@ -182,8 +182,8 @@ MonoBehaviour:
     type: 3}
   oilSpawnCountMin: 5
   oilSpawnCountMax: 10
-  limbSpawnCountMin: 1
-  limbSpawnCountMax: 3
+  limbSpawnCountMin: 3
+  limbSpawnCountMax: 10
   health: 0
   lifetime: 10
   AttackingRange: 6

@@ -78,41 +78,41 @@ public class CarPlayer : CarMechanics
         UpdateBoostSlider();
         CamShake();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            TriggerShake(0.2f, 0.2f);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    TriggerShake(0.2f, 0.2f);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = spawnPos;
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    transform.position = spawnPos;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (camFlipFlop == false)
-            {
-                currentCamLock = camLockRotObject;
-            }
-            else
-            {
-                currentCamLock = camStillRotObject;
-            }
-            camFlipFlop = !camFlipFlop;
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    if (camFlipFlop == false)
+        //    {
+        //        currentCamLock = camLockRotObject;
+        //    }
+        //    else
+        //    {
+        //        currentCamLock = camStillRotObject;
+        //    }
+        //    camFlipFlop = !camFlipFlop;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Comma))
-        {
-            if (camSmoothSpeed > 0.5f)
-            {
-                camSmoothSpeed -= 0.5f;
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Comma))
+        //{
+        //    if (camSmoothSpeed > 0.5f)
+        //    {
+        //        camSmoothSpeed -= 0.5f;
+        //    }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Period))
+        /*if (Input.GetKeyDown(KeyCode.Period))
         {
             camSmoothSpeed += 0.5f;
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.B))
         {

@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
         }
 
         int limbSpawnCount = Random.Range(limbSpawnCountMin, limbSpawnCountMax);
-        for (int i = 0; i < spawnCount; i++)
+        for (int i = 0; i < limbSpawnCount; i++)
         {
             //Instantiate(limbPrefab, transform.position, Quaternion.identity);
             GameObject limb = ObjectPooler.Instance.SpawnFromPool("RobotLimb", transform.position, Quaternion.identity);

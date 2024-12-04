@@ -552,15 +552,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54461c39747bff44cb88811e10d23c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   oilPrefab: {fileID: 7949151436896390533, guid: e4e04bd5533e8694896b479c1f223242,
     type: 3}
   limbPrefab: {fileID: 8208634493112544181, guid: 2b6bc87b9aa40cb4f9cf17c363a52edd,
     type: 3}
   oilSpawnCountMin: 5
   oilSpawnCountMax: 10
-  limbSpawnCountMin: 1
-  limbSpawnCountMax: 3
+  limbSpawnCountMin: 3
+  limbSpawnCountMax: 10
   health: 0
   lifetime: 10
   firingPos: {fileID: 2757472979737168849}
