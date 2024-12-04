@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +16,15 @@ public class RangedEnemy : Enemy
     [HideInInspector] public bool isInAttackRange;
     [HideInInspector] public bool isInStoppingRange;
     [HideInInspector] public bool hasAttacked;
+
+    public float propRotSpeed = 1f;
+    [Serializable]
+    public struct Props
+    {
+        public GameObject propObj;
+    }
+    public List<Props> props;
+
 
     [Space(10)]
     [Header("NavMesh References")]
@@ -69,6 +80,8 @@ public class RangedEnemy : Enemy
                 AttackPlayer();
             }
         }
+
+        PropSpin();
     }
 
     private void ChasingPlayer()
@@ -117,5 +130,13 @@ public class RangedEnemy : Enemy
         Gizmos.DrawWireSphere(transform.position, StoppingRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, AttackingRange);
+    }
+
+    void PropSpin()
+    {
+        foreach (var prop in props)
+        {
+            prop.propObj.transform.Rotate(Vector3.up, propRotSpeed * Time.deltaTime);
+        }
     }
 }

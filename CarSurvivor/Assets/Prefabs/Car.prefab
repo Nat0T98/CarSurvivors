@@ -123,7 +123,6 @@ Transform:
   - {fileID: 145668660856341628}
   - {fileID: 6378610067806273531}
   - {fileID: 5998429229400515636}
-  - {fileID: 1631468390752068115}
   - {fileID: 710790066380046621}
   - {fileID: 7018332843782650065}
   - {fileID: 5877932205687701345}
@@ -136,6 +135,7 @@ Transform:
   - {fileID: 4280746639726916303}
   - {fileID: 5936348017659692568}
   - {fileID: 864240085690861728}
+  - {fileID: 4813038184047340873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8994958021004434687
@@ -315,17 +315,28 @@ MonoBehaviour:
   car1Body: {fileID: 1170178324927866290}
   car2Body: {fileID: 6424936537615703202}
   car3Body: {fileID: 51146446093783578}
+  groundCheckDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  mainRig: {fileID: 3960241351012570481}
   camStillRotObject: {fileID: 5275671823776584725}
   camLockRotObject: {fileID: 2178058583894489150}
   camLookAtObject: {fileID: 3120677023452796647}
   camSmoothSpeed: 5
+  smoothRot: 1
+  camRotSmoothSpeed: 20
   boomExtraLength: 0
   initialCam: {x: 0, y: 13.4, z: -10.21}
   initialRot: {x: 50.045013, y: 0, z: 0}
   input: 1
-  doIntro: 0
+  doIntro: 1
   introiAttachCamTime: 2
   introTimeAfterCam: 3
+  camMove: 0
+  shakeDuration: 0.5
+  shakeStrength: 1
+  shakeDampingSpeed: 1
 --- !u!114 &7003340251140724500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2334,6 +2345,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3960241351012570481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4813038184047340873}
+  m_Layer: 0
+  m_Name: CamMainRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4813038184047340873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3960241351012570481}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000001134781, y: 0.9238798, z: -0.38268274, w: 0.000002739609}
+  m_LocalPosition: {x: 0, y: 11.01, z: 24.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1631468390752068115}
+  m_Father: {fileID: 6621779595953885363}
+  m_LocalEulerAnglesHint: {x: 45, y: 180, z: 0}
 --- !u!1 &4023887640275534229
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,13 +4062,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6687808437022583727}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42297423, y: -0, z: -0, w: 0.9061417}
-  m_LocalPosition: {x: 0, y: 13.4, z: -10.21}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6621779595953885363}
-  m_LocalEulerAnglesHint: {x: 50.045, y: 0, z: 0}
+  m_Father: {fileID: 4813038184047340873}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2851176053062677709
 Camera:
   m_ObjectHideFlags: 0

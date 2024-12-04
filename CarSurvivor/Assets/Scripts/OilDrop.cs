@@ -16,17 +16,28 @@ public class OilDrop : MonoBehaviour
     public float launchForce = 10f;
     private float time;
     private Vector3 endScale;
+    private Vector3 flatStartScale;
+    private bool alreadyDisabled;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         LaunchDroplet();
+        flatStartScale = oilFlatObj.transform.localScale;
     }
 
     private void OnEnable()
     {
         time = 0f;
+        if (alreadyDisabled)
+        {
+            GetComponent<MeshRenderer>().enabled = true;
+            oilFlatObj.GetComponent<MeshRenderer>().enabled = false;
+            rb.constraints = RigidbodyConstraints.None;
+            oilFlatObj.transform.localScale = flatStartScale;
+            LaunchDroplet();
+        }
     }
 
     private void Update()
@@ -65,6 +76,7 @@ public class OilDrop : MonoBehaviour
             oilFlatObj.transform.localScale = Vector3.Lerp(endScale, new Vector3(0, oilFlatObj.transform.localScale.y, 0), scalar);
             if (time >= lifeTime + dissapearTime)
             {
+                alreadyDisabled = true;
                 gameObject.SetActive(false);
                 //Destroy(gameObject);
             }
@@ -79,5 +91,6 @@ public class OilDrop : MonoBehaviour
         Vector3 completeVec = new Vector3(randX, randY, randZ);
         Vector3 normalizedVec = completeVec.normalized;
         rb.AddForce(normalizedVec * launchForce, ForceMode.Impulse);
+        print("launched");
     }
 }

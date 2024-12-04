@@ -6,7 +6,9 @@ public class MainMenu : MonoBehaviour
     public Canvas MainMenuCanvas;
     public Canvas SettingsCanvas;
     public GameObject cam;
+    public GameObject carMovePoint;
     private MenuCam menuCamScript;
+    private MoveDestMenuTest carMoveScript;
 
     private void Awake()
     {
@@ -18,6 +20,7 @@ public class MainMenu : MonoBehaviour
        MusicManager.GlobalMusicManager.LoopMusic("Menu Music");
        ShowMainMenu();
        menuCamScript = cam.GetComponent<MenuCam>();
+       carMoveScript = carMovePoint.GetComponent<MoveDestMenuTest>();
     }
     private void Update()
     {
@@ -27,12 +30,14 @@ public class MainMenu : MonoBehaviour
     {
         SFX_Manager.GlobalSFXManager.PlaySFX("Play");
         StartCoroutine(menuCamScript.EndMove());
+        carMoveScript.tunnel = true;
         Invoke("LoadEndlessMode", 5); //wait 2 seconds so that SFX can play
     }
     public void TimeRushModeButton()
     {
         MusicManager.GlobalMusicManager.PlaySFX("Play");
         StartCoroutine(menuCamScript.EndMove());
+        carMoveScript.tunnel = true;
         Invoke("LoadTimeRushMode", 5); //wait 2 seconds so that SFX can play
     }
 

@@ -4,8 +4,11 @@ public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100;
     public GameObject oilPrefab;
+    public GameObject limbPrefab;
     public int oilSpawnCountMin = 1;
     public int oilSpawnCountMax = 3;
+    public int limbSpawnCountMin = 1;
+    public int limbSpawnCountMax = 3;
 
     [HideInInspector] public float health;
     [SerializeField] private float lifetime = 10f;
@@ -58,6 +61,13 @@ public class Enemy : MonoBehaviour
             GameObject oil = ObjectPooler.Instance.SpawnFromPool("Oil", transform.position, Quaternion.identity);
            
             //Instantiate(oilPrefab, transform.position, Quaternion.identity);
+        }
+
+        int limbSpawnCount = Random.Range(limbSpawnCountMin, limbSpawnCountMax);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            //Instantiate(limbPrefab, transform.position, Quaternion.identity);
+            GameObject limb = ObjectPooler.Instance.SpawnFromPool("RobotLimb", transform.position, Quaternion.identity);
         }
     }
 }

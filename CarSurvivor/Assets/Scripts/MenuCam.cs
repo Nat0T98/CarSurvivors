@@ -14,6 +14,7 @@ public class MenuCam : MonoBehaviour
     public Vector3 endPos;
     public Quaternion endRot;
     public Vector3 finalPos;
+    public float camRotSmoothSpeed;
 
     public GameObject car;
     private bool shouldLook;
@@ -33,7 +34,10 @@ public class MenuCam : MonoBehaviour
     {
         if (shouldLook)
         {
-            transform.LookAt(car.transform);
+            //transform.LookAt(car.transform);
+
+            Quaternion targetRotation = Quaternion.LookRotation(car.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, camRotSmoothSpeed * Time.deltaTime);
         }
     }
 

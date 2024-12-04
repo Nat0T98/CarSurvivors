@@ -9,6 +9,8 @@ public class MoveDestMenuTest : MonoBehaviour
     private Vector3 startDest;
     private float timer;
     private bool posorneg = true;
+    public Vector3 finalDest;
+    public bool tunnel;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,18 @@ public class MoveDestMenuTest : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (tunnel)
+        {
+            transform.position = finalDest;
+        }
+        else
+        {
+            moveInitial();
+        }
+    }
+
+    void moveInitial()
     {
         if (posorneg)
         {
@@ -30,5 +44,4 @@ public class MoveDestMenuTest : MonoBehaviour
         }
         transform.position = Vector3.Lerp(otherDest, startDest, timer / time);
     }
-
 }

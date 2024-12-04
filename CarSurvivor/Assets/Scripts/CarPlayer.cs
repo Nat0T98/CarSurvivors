@@ -5,6 +5,7 @@ using UnityEngine;
 public class CarPlayer : CarMechanics
 {
     [Header("Camera References")]
+    public GameObject mainRig;
     public GameObject camStillRotObject;
     public GameObject camLockRotObject;
     public GameObject camLookAtObject;
@@ -24,7 +25,13 @@ public class CarPlayer : CarMechanics
     public float introiAttachCamTime = 2f;
     public float introTimeAfterCam = 3f;
     public bool camMove;
-    
+
+    [Header("Camera Shake References")]
+    public float shakeDuration = 0.5f; 
+    public float shakeStrength = 1.0f; 
+    public float shakeDampingSpeed = 0.2f;
+
+    private float shakeTime = 0f; 
 
     //public float camFollowSpeed = 5f;
     //public float camInertia = 1.5f;
@@ -39,10 +46,10 @@ public class CarPlayer : CarMechanics
         base.Start();
         if (GetComponent<Camera>() != null)
         {
-            Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
+            mainRig.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
             print("seygkwygfksuiyghkjsyhghksaghkg");
         }
-        Camera.main.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
+        mainRig.transform.SetParent(null); //DETACHES CAMERA FROM PARENT (THE CAR)
         currentCamLock = camStillRotObject;
 
         if (boostUI != null)
@@ -69,6 +76,12 @@ public class CarPlayer : CarMechanics
         
 
         UpdateBoostSlider();
+        CamShake();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TriggerShake(0.2f, 0.2f);
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -160,6 +173,11 @@ public class CarPlayer : CarMechanics
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        TriggerShake(0.2f, 0.2f);
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -223,16 +241,16 @@ public class CarPlayer : CarMechanics
     void CameraPosition()
     {
         Vector3 desiredPosition = currentCamLock.transform.position;
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, desiredPosition, camSmoothSpeed * Time.deltaTime);
+        mainRig.transform.position = Vector3.Lerp(mainRig.transform.position, desiredPosition, camSmoothSpeed * Time.deltaTime);
         
         if (smoothRot)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(camLookAtObject.transform.position - Camera.main.transform.position);
-            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, targetRotation, camRotSmoothSpeed * Time.deltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(camLookAtObject.transform.position - mainRig.transform.position);
+            mainRig.transform.rotation = Quaternion.Slerp(mainRig.transform.rotation, targetRotation, camRotSmoothSpeed * Time.deltaTime);
         }
         else
         {
-            Camera.main.transform.LookAt(camLookAtObject.transform);
+            mainRig.transform.LookAt(camLookAtObject.transform);
         }
 
 
@@ -286,5 +304,34 @@ public class CarPlayer : CarMechanics
         
         yield return new WaitForSeconds(introTimeAfterCam);
         input = true;
+    }
+
+    void CamShake()
+    {
+        if (shakeTime > 0)
+        {
+            Vector3 shakeOffset = new Vector3(
+                UnityEngine.Random.Range(-1f, 1f),
+                UnityEngine.Random.Range(-1f, 1f),
+                0f
+            ) * shakeStrength;
+
+            Camera.main.transform.localPosition = Vector3.zero + shakeOffset;
+
+            shakeTime -= Time.deltaTime * shakeDampingSpeed;
+
+            if (shakeTime <= 0)
+            {
+                shakeTime = 0f;
+                Camera.main.transform.localPosition = Vector3.zero;
+            }
+        }
+    }
+
+    public void TriggerShake(float duration, float strength)
+    {
+        shakeDuration = duration;
+        shakeStrength = strength;
+        shakeTime = shakeDuration;
     }
 }

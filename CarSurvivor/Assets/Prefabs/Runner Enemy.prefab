@@ -38,6 +38,7 @@ Transform:
   - {fileID: 671253115956102514}
   - {fileID: 4602656689044699404}
   - {fileID: 8818073791506321054}
+  - {fileID: 8196599781053982085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2940150535600777961
@@ -177,8 +178,12 @@ MonoBehaviour:
   maxHealth: 100
   oilPrefab: {fileID: 7949151436896390533, guid: e4e04bd5533e8694896b479c1f223242,
     type: 3}
+  limbPrefab: {fileID: 8208634493112544181, guid: 2b6bc87b9aa40cb4f9cf17c363a52edd,
+    type: 3}
   oilSpawnCountMin: 5
   oilSpawnCountMax: 10
+  limbSpawnCountMin: 1
+  limbSpawnCountMax: 3
   health: 0
   lifetime: 10
   AttackingRange: 6
@@ -187,7 +192,7 @@ MonoBehaviour:
   damageRadius: 5
   isInAttackRange: 0
   ExplosionEffect: {fileID: 2591728779860782847}
-  RunnerPrefab: {fileID: 8154831212953392164}
+  RunnerPrefab: {fileID: 8830429388730548031}
   agent: {fileID: -8148526284554539315}
   player: {fileID: 0}
   whatIsGround:
@@ -5248,6 +5253,111 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7439843764994624565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8523789551770600046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7765298936854748256}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.024422364
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.024422364
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.024422364
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.9942
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.86861
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8455526924929631644, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cfc966a0d54330b44892c53a72a9e98e, type: 2}
+    - target: {fileID: 919132149155446097, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_Name
+      value: SM_RobotTextureddd
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 69faacd391648074cabe0d9d60b157e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69faacd391648074cabe0d9d60b157e5, type: 3}
+--- !u!4 &8196599781053982085 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 69faacd391648074cabe0d9d60b157e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8523789551770600046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8830429388730548031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 69faacd391648074cabe0d9d60b157e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8523789551770600046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9073255825301563765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5311,17 +5421,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: roboramp_Robot1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8063e90e75613e14ba77902d4de3ffd6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8063e90e75613e14ba77902d4de3ffd6, type: 3}
---- !u!1 &8154831212953392164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8063e90e75613e14ba77902d4de3ffd6,
-    type: 3}
-  m_PrefabInstance: {fileID: 9073255825301563765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8818073791506321054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8063e90e75613e14ba77902d4de3ffd6,
