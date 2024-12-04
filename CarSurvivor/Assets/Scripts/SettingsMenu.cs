@@ -22,6 +22,7 @@ public class SettingsMenu : MonoBehaviour
     [Header("Canvas Ref")]
     public Canvas MenuCanvas;
     public Canvas SettingsCanvas;
+    public Canvas CreditsCanvas;
 
     Resolution[] resolutions;
 
@@ -142,6 +143,14 @@ public class SettingsMenu : MonoBehaviour
     {
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         MenuCanvas.gameObject.SetActive(true);
+        SettingsCanvas.gameObject.SetActive(false);
+    }
+
+
+    public void CreditsButton()
+    {
+        SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
+        CreditsCanvas.gameObject.SetActive(true);
         SettingsCanvas.gameObject.SetActive(false);
     }
 
