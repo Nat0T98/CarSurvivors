@@ -15694,6 +15694,11 @@ PrefabInstance:
       propertyPath: MenuCanvas
       value: 
       objectReference: {fileID: 940839051}
+    - target: {fileID: 2281115400282910789, guid: 4475677581527d64fa9a77addfaf93ce,
+        type: 3}
+      propertyPath: CreditsCanvas
+      value: 
+      objectReference: {fileID: 4247984187269403894}
     - target: {fileID: 2304735984751207132, guid: 4475677581527d64fa9a77addfaf93ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15893,6 +15898,12 @@ PrefabInstance:
       addedObject: {fileID: 878384437}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4475677581527d64fa9a77addfaf93ce, type: 3}
+--- !u!223 &4247984187269403894 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1426351345396907108, guid: 4475677581527d64fa9a77addfaf93ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 4247984187269403893}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8589240050090053002
 PrefabInstance:
   m_ObjectHideFlags: 0

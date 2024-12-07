@@ -29,7 +29,6 @@ public class RangedEnemy : Enemy
     [Space(10)]
     [Header("NavMesh References")]
     public NavMeshAgent agent;
-    public GameObject player;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
@@ -39,7 +38,6 @@ public class RangedEnemy : Enemy
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
     }
 

@@ -37,6 +37,7 @@ public class CarMechanics : MonoBehaviour
     public float boostMaxSpeedMulitiplier = 1.25f;
     public float boostAccelerationMult = 1.5f;
     public float boostDecelSpeed = 1f;
+    public float boostUpgradeAdd = 0.5f;
     public float maxBoostAmount;
     public float boostRechargeRate;
     public Slider boostUI;
@@ -57,7 +58,10 @@ public class CarMechanics : MonoBehaviour
 
     [Header("Turret")]
     public GameObject turretMain;
-    private List<GameObject> targetedObjects = new List<GameObject>();
+    public GameObject turretSpinPlate;
+    public float turretSpinSpeed = 1f;
+    public float turretSpinSpeedUpg = 1f;
+    public List<GameObject> targetedObjects = new List<GameObject>();
     public float turretRotSpeed = 1;
     public bool turretActive;
     public float turretFireRateUpgrade = 0.05f;
@@ -237,16 +241,7 @@ public class CarMechanics : MonoBehaviour
             healthUI.value = health;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            health += 99999999f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Upgrades.EnemyPointWorth = 999999;
-            Upgrades.AddUpgradePoints();
-        }
+        
 
         wheelSkidMarks();
         
@@ -322,7 +317,7 @@ public class CarMechanics : MonoBehaviour
     //}
     #endregion
     
-
+    
 
     void HandleMovement()
     {
@@ -585,6 +580,8 @@ public class CarMechanics : MonoBehaviour
             turretMain.transform.rotation = Quaternion.Slerp(turretMain.transform.rotation, targRot, turretRotSpeed * Time.deltaTime);
             //LookAt(nearestEnemy.transform.position);
             GetComponent<Firing>().TurretFire();
+
+            turretSpinPlate.transform.Rotate(Vector3.forward, turretSpinSpeed * Time.deltaTime);
         }
     }
 
@@ -610,6 +607,8 @@ public class CarMechanics : MonoBehaviour
         {
             GetComponent<Firing>().fireRate = turretFireRateLimit;
         }
+
+        turretSpinSpeed += turretSpinSpeedUpg;
     }
 
     private void wheelSkidMarks()

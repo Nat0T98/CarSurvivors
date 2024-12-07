@@ -16,7 +16,6 @@ public class RunnerEnemy : Enemy
 
     [Header("NavMesh References")]
     public NavMeshAgent agent;
-    public GameObject player;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
@@ -27,7 +26,6 @@ public class RunnerEnemy : Enemy
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        player = GameManager.Instance.player;
         agent = gameObject.GetComponent<NavMeshAgent>();
         playerScript = GameManager.Instance.player.GetComponent<CarMechanics>();
     }

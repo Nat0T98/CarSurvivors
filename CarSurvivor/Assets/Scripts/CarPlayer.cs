@@ -78,6 +78,17 @@ public class CarPlayer : CarMechanics
         UpdateBoostSlider();
         CamShake();
 
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            health += 99999999f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Upgrades.EnemyPointWorth = 999999;
+            Upgrades.AddUpgradePoints();
+        }
+
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //    TriggerShake(0.2f, 0.2f);
@@ -159,25 +170,25 @@ public class CarPlayer : CarMechanics
             RechargeBoost();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (shouldFreezeTime == false)
-            {
-                Time.timeScale = 0.3f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
-            shouldFreezeTime = !shouldFreezeTime;
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    if (shouldFreezeTime == false)
+        //    {
+        //        Time.timeScale = 0.3f;
+        //    }
+        //    else
+        //    {
+        //        Time.timeScale = 1f;
+        //    }
+        //    shouldFreezeTime = !shouldFreezeTime;
+        //}
 
-        if (camMove)
-        {
-            CameraPosition();
-        }
+        //if (camMove)
+        //{
+        //    CameraPosition();
+        //}
 
-        CamBoom();
+        //CamBoom();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -194,12 +205,12 @@ public class CarPlayer : CarMechanics
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        /*if (camMove)
+        if (camMove)
         {
             CameraPosition();
         }
-        
-        CamBoom();*/
+
+        CamBoom();
     }
 
     void ActivateBoost()
@@ -242,7 +253,8 @@ public class CarPlayer : CarMechanics
 
     public void BoostUpgrade()
     {
-        currentBoostAmount = maxBoostAmount;
+        maxBoostAmount += boostUpgradeAdd;
+        boostUI.maxValue = maxBoostAmount;
     }
 
     void CameraPosition()

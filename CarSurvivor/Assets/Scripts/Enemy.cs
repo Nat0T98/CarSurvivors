@@ -10,11 +10,15 @@ public class Enemy : MonoBehaviour
     public int limbSpawnCountMin = 1;
     public int limbSpawnCountMax = 3;
 
+    public GameObject player;
+    private CarPlayer playerScr;
+
     [HideInInspector] public float health;
     [SerializeField] private float lifetime = 10f;
     private float lifetimeTimer;
     private UpgradeManager upgradeManager;
     private static bool isQuitting = false;
+    private bool inititOnce = true;
 
     private void OnEnable()
     {
@@ -22,6 +26,7 @@ public class Enemy : MonoBehaviour
         lifetimeTimer = lifetime;
         Debug.Log("Enemy respawned with full health: " + health);
     }
+
 
     private void Update()
     {
@@ -54,6 +59,14 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         if (isQuitting) return;
+
+        if (inititOnce)
+        {
+            player = GameManager.Instance.player;
+            playerScr = player.GetComponent<CarPlayer>();
+        }
+        
+
         int spawnCount = Random.Range(oilSpawnCountMin, oilSpawnCountMax);
         for (int i = 0; i < spawnCount; i++)
         {
@@ -69,6 +82,12 @@ public class Enemy : MonoBehaviour
             //Instantiate(limbPrefab, transform.position, Quaternion.identity);
             GameObject limb = ObjectPooler.Instance.SpawnFromPool("RobotLimb", transform.position, Quaternion.identity);
         }
+
+        if (inititOnce == false && playerScr.targetedObjects.Contains(gameObject))
+        {
+            playerScr.targetedObjects.Remove(gameObject);
+        }
+        inititOnce = false;
     }
 }
 
