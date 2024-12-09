@@ -103,7 +103,7 @@ public class CarMechanics : MonoBehaviour
     public float zLeanStrength = 1f;
     private Vector3 previousVelocity;
     private Vector3 localAccel;
-    private Vector3 smoothedLocalAccel;
+    [HideInInspector] public Vector3 smoothedLocalAccel;
 
 
     [Space(10)]

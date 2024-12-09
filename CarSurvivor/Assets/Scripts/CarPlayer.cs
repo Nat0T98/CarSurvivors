@@ -31,7 +31,9 @@ public class CarPlayer : CarMechanics
     public float shakeStrength = 1.0f; 
     public float shakeDampingSpeed = 0.2f;
 
-    private float shakeTime = 0f; 
+    private float shakeTime = 0f;
+
+    public GameObject hudShakeObj;
 
     //public float camFollowSpeed = 5f;
     //public float camInertia = 1.5f;
@@ -62,6 +64,7 @@ public class CarPlayer : CarMechanics
         {
             StartCoroutine(Intro());
         }
+
     }
 
     
@@ -77,6 +80,7 @@ public class CarPlayer : CarMechanics
 
         UpdateBoostSlider();
         CamShake();
+        UiCanvasShake();
 
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -352,5 +356,10 @@ public class CarPlayer : CarMechanics
         shakeDuration = duration;
         shakeStrength = strength;
         shakeTime = shakeDuration;
+    }
+
+    void UiCanvasShake()
+    {
+        hudShakeObj.transform.localPosition = new Vector3(smoothedLocalAccel.x * 2 * -1, smoothedLocalAccel.z * 1 * -1, 0);
     }
 }
