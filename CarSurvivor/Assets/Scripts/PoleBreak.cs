@@ -9,7 +9,9 @@ public class PoleBreak : MonoBehaviour
     public float timeBeforeShrink = 5f;
     public float shrinkDuration = 2f;
     public bool isMultiObject;
-    
+    public float randLaunchValue = 5;
+    private GameObject hittingObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class PoleBreak : MonoBehaviour
         {
             if (!isShrink)
             {
+                hittingObj = other.gameObject;
                 if (!isMultiObject)
                 {
                     GetComponent<Rigidbody>().isKinematic = false;
@@ -59,13 +62,20 @@ public class PoleBreak : MonoBehaviour
 
     void MultiChild()
     {
+        List<Transform> children = new List<Transform>();
         foreach (Transform child in transform)
         {
-            Rigidbody rb = child.GetComponent<Rigidbody>();
-            if (rb != null)
+            children.Add(child);
+        }
+
+        foreach (Transform child in children)
+        {
+            if (child.GetComponent<Rigidbody>() != null)
             {
+                Rigidbody rb = child.GetComponent<Rigidbody>();
                 rb.isKinematic = false;
                 child.parent = null;
+                LaunchObject(rb);
                 StartCoroutine(ShrinkCor(child.gameObject));
                 //StartCoroutine(ShrinkCor(gameObject));
             }
@@ -76,5 +86,14 @@ public class PoleBreak : MonoBehaviour
                 print("is null");
             }
         }
+    }
+
+    void LaunchObject(Rigidbody rb)
+    {
+        Vector3 velo = hittingObj.GetComponent<Rigidbody>().velocity;
+        float randX = UnityEngine.Random.Range(-randLaunchValue, randLaunchValue);
+        float randY = UnityEngine.Random.Range(-randLaunchValue, randLaunchValue);
+        float randZ = UnityEngine.Random.Range(-randLaunchValue, randLaunchValue);
+        rb.velocity = velo + new Vector3(randX, randY, randZ);
     }
 }
