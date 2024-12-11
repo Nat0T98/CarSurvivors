@@ -37,6 +37,7 @@ public class GameOver : MonoBehaviour
 
     public void PlayAgainButton()
     {
+        GameManager.Instance.upgradePointsRef = 0;
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         SFX_Manager.GlobalSFXManager.driftSource.enabled = true;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
@@ -46,6 +47,7 @@ public class GameOver : MonoBehaviour
 
     public void MainMenuButton()
     {
+        GameManager.Instance.upgradePointsRef = 0;
         SFX_Manager.GlobalSFXManager.PlaySFX("UI_Button");
         GameOverCanvas.SetActive(false);
         Time.timeScale = 1f;

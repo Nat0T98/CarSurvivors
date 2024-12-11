@@ -34,6 +34,8 @@ public class CarPlayer : CarMechanics
     private float shakeTime = 0f;
 
     public GameObject hudShakeObj;
+    public float hudShakeStrX = 1f;
+    public float hudShakeStrY = 1f;
 
     //public float camFollowSpeed = 5f;
     //public float camInertia = 1.5f;
@@ -360,6 +362,6 @@ public class CarPlayer : CarMechanics
 
     void UiCanvasShake()
     {
-        hudShakeObj.transform.localPosition = new Vector3(smoothedLocalAccel.x * 2 * -1, smoothedLocalAccel.z * 1 * -1, 0);
+        hudShakeObj.transform.localPosition = new Vector3(smoothedLocalAccel.x * hudShakeStrX * -1, smoothedLocalAccel.z * hudShakeStrY * -1, 0);
     }
 }
