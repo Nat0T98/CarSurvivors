@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class CarAi : CarMechanics
 {
@@ -221,9 +222,20 @@ public class CarAi : CarMechanics
             if (unstickTime >= unstickTimerMax)
             {
                 unstickTime = 0f;
-                transform.position = firstCorner;
-                transform.rotation = Quaternion.LookRotation(secondCorner - firstCorner);
-                agent.Warp(firstCorner);
+
+                //Vector3 tpLoc;
+                //NavMeshHit hit;
+                //if (NavMesh.SamplePosition(transform.position, out hit, 10f, NavMesh.AllAreas))
+                //{
+                //    tpLoc = hit.position;
+                //}
+                //else
+                //{
+                //    tpLoc = firstCorner;
+                //}
+                transform.position = agent.nextPosition;
+                transform.rotation = Quaternion.LookRotation(firstCorner - transform.position);
+                agent.Warp(transform.position);
                 print("AiCar unstucked");
             }
         }
